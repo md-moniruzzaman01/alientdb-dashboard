@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import DashboardSide from '../Dashboard/DashboardSide';
 import MainNavBar from './Navigationbar/MainNavBar';
 
 
@@ -17,12 +18,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="bashboard-drower" className="drawer-overlay"></label>
-                    <ul className="menu p-4 overflow-y-auto w-80 bg-base-200 text-base-content">
-                       
-                        
-                       <Link to="/"><li><a>Sidebar Item 1</a></li></Link> 
-                       <Link to="/dashboard"><li><a>Sidebar Item 2</a></li></Link> 
-                    </ul>
+                    <DashboardSide></DashboardSide>
 
                 </div>
             </div>

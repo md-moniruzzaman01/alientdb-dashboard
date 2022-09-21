@@ -3,7 +3,7 @@ import avater from "../../../image/avatar.png"
 const MainNavBar = () => {
     return (
         <div>
-            <nav className='w-full md:flex justify-end px-4 py-1 min-h-[60px]'>
+            <nav className='w-full md:flex justify-end px-0 md:px-4 py-1 min-h-[60px]'>
                 <div className="flex items-center justify-between cursor-pointer w-full">
 
 
@@ -14,7 +14,7 @@ const MainNavBar = () => {
                         <h1 className='font-bold text-2xl'>Dashboard</h1>
                     </div>
 
-                    <div className="flex ">
+                    <div className="flex">
                         <div className="input-group  justify-end hidden md:flex ">
                             <input type="text" placeholder="Search…" className="input input-bordered w-96 focus:outline-none" />
                             <button className="btn btn-square bg-slate-300 text-white border-0">
@@ -23,13 +23,13 @@ const MainNavBar = () => {
                         </div>
                     
 
-                    <div className="dropdown dropdown-end flex items-center w-72 justify-end">
+                    <div className="dropdown dropdown-end flex items-center md:w-72 w-auto  justify-end">
 
 
 
-                        <label tabIndex={0} className="flex">
+                        <label tabIndex={0} className="flex ">
 
-                            <div className=" bg-slate-200 relative btn btn-ghost btn-circle avatar">
+                            <div className=" bg-slate-200 relative btn btn-ghost btn-circle avatar ">
 
                                 <img src={avater} className='h-11' alt="Gregg" />
 
@@ -38,7 +38,7 @@ const MainNavBar = () => {
                                 Kousik Ahmed
                             </div>
                         </label>
-                        <div>
+                        <div className=''>
                             <ul tabIndex={0} className="mt-7 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-gray-800">
                                 <li>
                                     <a className="justify-between">
