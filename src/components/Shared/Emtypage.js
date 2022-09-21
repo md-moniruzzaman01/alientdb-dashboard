@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Emtypage = ({childern}) => {
+const Emtypage = ({PageTitle}) => {
     return (
-        <div className='text-4xl text-center my-44'>
-            {childern}
+        <div className='flex justify-center items-center h-full text-4xl font-bold'>
+           <h1>{PageTitle}</h1>
         </div>
     );
 };

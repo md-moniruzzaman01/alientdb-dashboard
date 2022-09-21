@@ -19,7 +19,7 @@ const DashboardSide = () => {
             </div>
             {/* Logo */}
             <div className='border-b border-gray-500 pb-4 mb-4'>
-                <h1 className='text-4xl font-semibold px-4 uppercase'>New<span className='text-red-600'>t</span>ech</h1>
+                <Link  to="/"><h1 className='text-4xl font-semibold px-4 uppercase'>New<span className='text-red-600'>t</span>ech</h1></Link>
             </div>
 
             {/* Search */}
@@ -40,9 +40,9 @@ const DashboardSide = () => {
 
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Add Product</a></li></Link>
-                    <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Product List</a></li></Link>
-                    <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Purchase</a></li></Link>
+                    <Link to="/add-product"><li><a><MdRadioButtonUnchecked/> Add Product</a></li></Link>
+                    <Link to="/product-list"><li><a><MdRadioButtonUnchecked/> Product List</a></li></Link>
+                    <Link to="/product-purches"><li><a><MdRadioButtonUnchecked/> Purchase</a></li></Link>
                 </div>
             </div>
 
@@ -53,8 +53,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-3xl'><GiCardboardBoxClosed /> </span> Order</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Place Order</a></li></Link>
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Order List</a></li></Link>
+                <Link to="/place-order"><li><a><MdRadioButtonUnchecked/> Place Order</a></li></Link>
+                <Link to="/oder-list"><li><a><MdRadioButtonUnchecked/> Order List</a></li></Link>
                 </div>
             </div>
 
@@ -65,8 +65,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-xl'><IoFileTrayStacked /></span> Stock </p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Inventory</a></li></Link>
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Stack Report</a></li></Link>
+                <Link to="/inventory"><li><a><MdRadioButtonUnchecked/> Inventory</a></li></Link>
+                <Link to="/stock-report"><li><a><MdRadioButtonUnchecked/> Stock Report</a></li></Link>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><BsFillCartPlusFill /></span> Warehouse</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Warehouse Report</a></li></Link>
+                <Link to="/warehouse-report"><li><a><MdRadioButtonUnchecked/> Warehouse Report</a></li></Link>
                 </div>
             </div>
 
@@ -88,8 +88,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><FaUsers /></span> Employee</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/> Add Employee</a></li></Link>
-                <Link to="/dashboard"><li><a><MdRadioButtonUnchecked/>Employee List</a></li></Link>
+                <Link to="/add-employee"><li><a><MdRadioButtonUnchecked/> Add Employee</a></li></Link>
+                <Link to="/employee-list"><li><a><MdRadioButtonUnchecked/>Employee List</a></li></Link>
                 </div>
             </div>
 

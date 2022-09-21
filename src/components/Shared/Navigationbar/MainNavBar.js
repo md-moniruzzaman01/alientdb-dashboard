@@ -1,5 +1,5 @@
 import React from 'react';
-import avater from "../../../image/avatar.png"
+import avater from "../../../image/moniruzzaman image.jfif"
 const MainNavBar = () => {
     return (
         <div>
@@ -31,11 +31,11 @@ const MainNavBar = () => {
 
                             <div className=" bg-slate-200 relative btn btn-ghost btn-circle avatar ">
 
-                                <img src={avater} className='h-11' alt="Gregg" />
+                                <img src={avater} className='h-11 rounded-full border-2 border-white' alt="Gregg" />
 
                             </div>
                             <div className="items-center text-primary text-left font-medium hidden md:flex pl-2">
-                                Kousik Ahmed
+                              Moniruzzaman
                             </div>
                         </label>
                         <div className=''>

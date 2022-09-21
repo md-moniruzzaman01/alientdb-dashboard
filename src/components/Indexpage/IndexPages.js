@@ -1,9 +1,11 @@
 import React from 'react';
-import Emtypage from '../Shared/Emtypage';
+import animitedImg from "../../image/221234-P173C4-818-ai.png"
 
 const IndexPages = () => {
     return (
-        <h1>Invoices</h1>
+        <div className='flex justify-center items-center'>
+            <img src={animitedImg} className="max-h-[80vh]" alt="animated ants of under constraction" />
+        </div>
     );
 };
 
