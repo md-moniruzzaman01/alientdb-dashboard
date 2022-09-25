@@ -33,7 +33,7 @@ const DashboardSide = () => {
             </div>
 
             {/* Product */}
-            <div className="collapse collapse-arrow">
+            <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><FaBoxes /> </span> Product</p>
@@ -47,7 +47,7 @@ const DashboardSide = () => {
             </div>
 
             {/* order */}
-            <div className="collapse collapse-arrow">
+            <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-3xl'><GiCardboardBoxClosed /> </span> Order</p>
@@ -59,7 +59,7 @@ const DashboardSide = () => {
             </div>
 
             {/* stack */}
-            <div className="collapse collapse-arrow">
+            <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-xl'><IoFileTrayStacked /></span> Stock </p>
@@ -71,7 +71,7 @@ const DashboardSide = () => {
             </div>
 
             {/* warehouse */}
-            <div className="collapse collapse-arrow">
+            <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><BsFillCartPlusFill /></span> Warehouse</p>
@@ -82,7 +82,7 @@ const DashboardSide = () => {
             </div>
 
             {/* Employee */}
-            <div className="collapse collapse-arrow">
+            <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><FaUsers /></span> Employee</p>
