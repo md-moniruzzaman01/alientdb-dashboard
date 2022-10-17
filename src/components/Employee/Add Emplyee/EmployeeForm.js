@@ -33,6 +33,8 @@ const EmployeeForm = () => {
                     e.target.reset();
                 }else if(data.error){
                     toast(data.error)
+                }else if(data.addEmpoloyee == "ok"){
+                    toast('Employee added succesfully')
                 }
                 else{
                     toast('some think wrong')

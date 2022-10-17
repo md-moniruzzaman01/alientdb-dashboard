@@ -1,16 +1,13 @@
 import React from 'react';
 
-const WareHouseInput = () => {
+const WareHouseInput = ({warehouse}) => {
+    const WarehouseList = warehouse && warehouse.map((wh, i )=> <option key={i}>{wh.WarehouseLocation}</option>)
     return (
         <div className='form-control w-full max-w-xs'>
             <label className="label font-bold">Warehouse</label>
-            <select className="select w-full max-w-xs select-bordered select-info">
-                <option disabled selected>Choose you favorite warehouse..</option>
-                <option>Homer</option>
-                <option>Marge</option>
-                <option>Bart</option>
-                <option>Lisa</option>
-                <option>Maggie</option>
+            <select className="select w-full max-w-xs select-bordered select-info" name='warehouseChose'>
+                <option disabled selected>Choose you warehouse..</option>
+                {WarehouseList}
             </select>
         </div>
     );

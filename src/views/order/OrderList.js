@@ -1,6 +1,5 @@
 import React from 'react';
 import Emtypage from '../../components/Shared/Emtypage';
-
 const OrderList = () => {
     return (
         <div className='page'>

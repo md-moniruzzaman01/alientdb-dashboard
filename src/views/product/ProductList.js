@@ -76,7 +76,6 @@ const ProductList = () => {
 
             })
     }
-    console.log('list of product', productList);
     return (
         <div className='page'>
             <button onClick={Deleteall}>delete all</button>

@@ -55,8 +55,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-3xl'><GiCardboardBoxClosed /> </span> Order</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/place-order"><li><a><MdRadioButtonUnchecked/> Place Order</a></li></Link>
-                <Link to="/oder-list"><li><a><MdRadioButtonUnchecked/> Order List</a></li></Link>
+                <Link to="/place-order"><li><MdRadioButtonUnchecked/> Place Order</li></Link>
+                <Link to="/oder-list"><li><MdRadioButtonUnchecked/> Order List</li></Link>
                 </div>
             </div>
 

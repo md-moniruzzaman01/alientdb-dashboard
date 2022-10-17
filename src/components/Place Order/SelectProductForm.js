@@ -1,29 +1,23 @@
 import React from 'react';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-const SelectProductForm = () => {
+const SelectProductForm = ({inputFields,setInputFields }) => {
 
-    const [inputFields, setInputFields] = useState([
-        { id: uuidv4(), firstName: '', lastName: '' },
-    ]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log("InputFields", inputFields);
-    };
 
     const handleChangeInput = (id, event) => {
         const newInputFields = inputFields.map(i => {
             if (id === i.id) {
-                i[event.target.name] = event.target.value
+                i[event.target.name] = event.target.value;
+            
             }
             return i;
         })
-
         setInputFields(newInputFields);
     }
 
-    const handleAddFields = () => {
+    const handleAddFields = (e) => {
+        e.preventDefault();
         setInputFields([...inputFields, { id: uuidv4(), firstName: '', lastName: '' }])
     }
 
@@ -33,7 +27,7 @@ const SelectProductForm = () => {
         setInputFields(values);
     }
     return (
-        <form onSubmit={handleSubmit} className='my-4'>
+        <div className='my-4'>
 
 
             {
@@ -43,11 +37,11 @@ const SelectProductForm = () => {
 
                                 <div className='form-control w-3/6'>
                                     <label className="label font-bold">Product Name</label>
-                                    <input type="text" placeholder="Product name.." value={inputField.firstName} onChange={event => handleChangeInput(inputField.id, event)} className="input input-bordered rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-400 w-full rounded-none" />
+                                    <input type="text" placeholder="Product name.." name="firstName" value={inputField.firstName} onChange={event => handleChangeInput(inputField.id, event)} className="input input-bordered rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-400 w-full rounded-none" />
                                 </div>
                                 <div className='form-control w-3/6'>
                                     <label className="label font-bold">Quantity</label>
-                                    <input type="text" placeholder="Type Quantity.." value={inputField.lastName} onChange={event => handleChangeInput(inputField.id, event)} className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                                    <input type="text" placeholder="Type Quantity.." name="lastName" value={inputField.lastName} onChange={event => handleChangeInput(inputField.id, event)} className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
                                 </div>
 
                             </div>
@@ -59,8 +53,7 @@ const SelectProductForm = () => {
             <div className='flex justify-end m-4'>
                 <button className='btn btn-secondary' onClick={handleAddFields}>Add</button>
             </div>
-            <button type="submit" className='btn btn-secondary'>Submit</button>
-        </form>
+        </div>
     );
 };
 
