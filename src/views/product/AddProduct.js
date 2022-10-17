@@ -1,6 +1,5 @@
 import React from 'react';
 import { toast } from 'react-toastify';
-import Emtypage from '../../components/Shared/Emtypage';
 
 const AddProduct = () => {
     const AddProductHandle = e => {
@@ -14,7 +13,7 @@ const AddProduct = () => {
 
 
 
-        fetch('http://localhost:5000/add', {
+        fetch('https://warm-cliffs-27985.herokuapp.com/add', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json',

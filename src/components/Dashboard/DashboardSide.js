@@ -5,8 +5,10 @@ import { IoFileTrayStacked } from "react-icons/io5";
 import { FaBoxes, FaUsers } from "react-icons/fa";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { MdRadioButtonUnchecked,MdArrowForwardIos,MdArrowBackIos } from "react-icons/md";
+
 const DashboardSide = () => {
     const [dashboardSideBarSize,setDashboardSideBarSize]= useState(true)
+
     return (
         <ul className={`menu  overflow-y-auto overflow-x-hidden bg-[#343A40] text-white relative ${dashboardSideBarSize ? "w-72 p-4" :"w-4 p-2"} `}>
             {/* side arrow */}
@@ -40,9 +42,9 @@ const DashboardSide = () => {
 
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    <Link to="/add-product"><li><a><MdRadioButtonUnchecked/> Add Product</a></li></Link>
-                    <Link to="/product-list"><li><a><MdRadioButtonUnchecked/> Product List</a></li></Link>
-                    <Link to="/product-purches"><li><a><MdRadioButtonUnchecked/> Purchase</a></li></Link>
+                    <Link to="/add-product"><li><MdRadioButtonUnchecked/> Add Product</li></Link>
+                    <Link to="/product-list"><li><MdRadioButtonUnchecked/> Product List</li></Link>
+                    <Link to="/product-purches"><li><MdRadioButtonUnchecked/> Purchase</li></Link>
                 </div>
             </div>
 
@@ -65,8 +67,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-xl'><IoFileTrayStacked /></span> Stock </p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/inventory"><li><a><MdRadioButtonUnchecked/> Inventory</a></li></Link>
-                <Link to="/stock-report"><li><a><MdRadioButtonUnchecked/> Stock Report</a></li></Link>
+                <Link to="/inventory"><li><MdRadioButtonUnchecked/> Inventory</li></Link>
+                <Link to="/stock-report"><li><MdRadioButtonUnchecked/> Stock Report</li></Link>
                 </div>
             </div>
 
@@ -77,7 +79,7 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><BsFillCartPlusFill /></span> Warehouse</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/warehouse-report"><li><a><MdRadioButtonUnchecked/> Warehouse Report</a></li></Link>
+                <Link to="/warehouse-report"><li><MdRadioButtonUnchecked/> Warehouse Report</li></Link>
                 </div>
             </div>
 
@@ -88,8 +90,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><FaUsers /></span> Employee</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                <Link to="/add-employee"><li><a><MdRadioButtonUnchecked/> Add Employee</a></li></Link>
-                <Link to="/employee-list"><li><a><MdRadioButtonUnchecked/>Employee List</a></li></Link>
+                <Link to="/add-employee"><li><MdRadioButtonUnchecked/> Add Employee</li></Link>
+                <Link to="/employee-list"><li><MdRadioButtonUnchecked/>Employee List</li></Link>
                 </div>
             </div>
 

@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+
+import React from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import ReactPaginate from 'react-paginate';
-import { useQuery } from 'react-query';
-import { toast } from 'react-toastify';
-import { Products } from '../../App';
+import ReactPaginate from 'react-paginate'; import { Products } from '../../App';
+const StackReportPage = () => {
 
-
-const ProductList = () => {
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
@@ -40,46 +38,9 @@ const ProductList = () => {
                 setPageCount(pages)
             })
     }, [])
-    const DeleteProduct = (id) => {
-        fetch(`https://warm-cliffs-27985.herokuapp.com/remove/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                const confarm = window.confirm('Delete this item')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('order placed successfully')
-                        refreshPage()
-                    } else {
-                        toast('order place s unsuccessfully')
-                    }
-                }
 
-            })
-    }
-    const Deleteall = (id) => {
-        fetch(`http://localhost:5000/removeall`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                const confarm = window.confirm('Delete this item')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('order placed successfully')
-                        refreshPage()
-                    } else {
-                        toast('order place s unsuccessfully')
-                    }
-                }
-
-            })
-    }
-    console.log('list of product', productList);
     return (
-        <div className='page'>
-            <button onClick={Deleteall}>delete all</button>
+        <div>
             <div className='flex justify-between items-center'>
                 <p className='text-3xl font-semibold text-gray-800 m-4'>Product List ({productCount})</p>
                 <select onChange={e => setSize(e.target.value)} className="mr-4 select w-20 select-bordered select-sm">
@@ -90,16 +51,18 @@ const ProductList = () => {
                     <option value="150">150</option>
                 </select>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto min-h-[70vh]">
                 <table className="table table-zebra w-full">
 
                     <thead>
                         <tr>
                             <th>SL No</th>
                             <th>Product Name</th>
-                            <th>Unit</th>
                             <th>Brand</th>
-                            <th>functions</th>
+                            <th>Total Purchase</th>
+                            <th>Total Sold</th>
+                            <th>In Stack</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
@@ -107,16 +70,13 @@ const ProductList = () => {
                         {
                             productList && productList.map((prodict, index) => <tr key={prodict._id}>
                                 <th>{index + 1}</th>
-                                <td>{prodict.ProductName}</td>
-                                <td>{prodict.ProductUnit}</td>
-                                <td>{prodict.Brand}</td>
+                                <td>{prodict?.ProductName}</td>
+                                <td>{prodict?.Brand}</td>
+                                <td></td>
+                                <td></td>
+                                <td>{prodict?.Quantity}</td>
+                                
 
-                                <td className=''>
-                                    <div className='w-20'>
-                                        <button className="btn btn-secondary text-white btn-xs">Edit</button>
-                                        <button onClick={() => DeleteProduct(prodict._id)} className="mx-2 btn btn-secondary text-white btn-xs">Delete</button>
-                                    </div>
-                                </td>
 
                             </tr>)
                         }
@@ -152,5 +112,4 @@ const ProductList = () => {
     );
 };
 
-export default ProductList;
-
+export default StackReportPage;

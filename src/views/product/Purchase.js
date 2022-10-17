@@ -1,10 +1,10 @@
 import React from 'react';
-import Emtypage from '../../components/Shared/Emtypage';
+import ProductPurchaceses from '../../components/product/ProductPurchaceses';
 
 const Purchase = () => {
     return (
         <div className='page'>
-            <Emtypage PageTitle="Purches page"/>
+            <ProductPurchaceses />
         </div>
     );
 };
