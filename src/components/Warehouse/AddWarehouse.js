@@ -9,7 +9,7 @@ const AddWarehouse = () => {
         const warehouse = {WarehouseCode,WarehouseLocation}
         
         
-        fetch('http://localhost:5000/add-warehouse', {
+        fetch('https://warm-cliffs-27985.herokuapp.com/add-warehouse', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

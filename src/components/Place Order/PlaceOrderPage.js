@@ -11,9 +11,9 @@ const PlaceOrderPage = () => {
     const [Employee, setEmployee] = useState([])
     const [InvoiceNumber, setInvoiceNumber] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
-        fetch("http://localhost:5000/employee", {}).then(res => res.json()).then(data => setEmployee(data))
-        fetch("http://localhost:5000/countOrder", {}).then(res => res.json()).then(data => setInvoiceNumber(data))
+        fetch("https://warm-cliffs-27985.herokuapp.com/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
+        fetch("https://warm-cliffs-27985.herokuapp.com/employee", {}).then(res => res.json()).then(data => setEmployee(data))
+        fetch("https://warm-cliffs-27985.herokuapp.com/countOrder", {}).then(res => res.json()).then(data => setInvoiceNumber(data))
     }, [])
 
     const InvoiceHandle = (parseInt(InvoiceNumber.count) || 0) + 1;
@@ -25,7 +25,7 @@ const PlaceOrderPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const warehouseChoose = e.target.warehouseChose.value
-        const InChargePerson = e.target.InChargePerson.value
+        const InChargePerson = e.target.InChargePerson.value;
         const orderDetails = {InvoiceHandle,warehouseChoose,InChargePerson, product:inputFields}
         console.log(orderDetails);
     };

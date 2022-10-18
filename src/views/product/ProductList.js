@@ -18,7 +18,7 @@ const ProductList = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        const url = `http://localhost:5000/all?page=${currentPage}&size=${size}`
+        const url = `https://warm-cliffs-27985.herokuapp.com/all?page=${currentPage}&size=${size}`
 
 
         fetch(url, {
@@ -26,11 +26,13 @@ const ProductList = () => {
             .then(res => res.json())
             .then(data => {
                 setProductList(data);
+                console.log('productlist');
             })
     }, [currentPage, size])
 
+  
     useEffect(() => {
-        fetch("http://localhost:5000/countproduct", {
+        fetch("https://warm-cliffs-27985.herokuapp.com/countproduct", {
         })
             .then(res => res.json())
             .then(data => {
@@ -59,7 +61,7 @@ const ProductList = () => {
             })
     }
     const Deleteall = (id) => {
-        fetch(`http://localhost:5000/removeall`, {
+        fetch(`https://warm-cliffs-27985.herokuapp.com/removeall`, {
             method: 'DELETE'
         })
             .then(res => res.json())

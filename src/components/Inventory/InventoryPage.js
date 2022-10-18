@@ -2,20 +2,22 @@ import React from 'react';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import ReactPaginate from 'react-paginate'; import { Products } from '../../App';
+import ReactPaginate from 'react-paginate';
+ import { Products } from '../../App';
 const InventoryPage = () => {
 
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [size, setSize] = useState(100)
-    const { productList, setProductList } = useContext(Products)
+    // const { productList, setProductList } = useContext(Products)
+    const [productList,setProductList]=useState(null)
 
     function refreshPage() {
         window.location.reload(false);
     }
     useEffect(() => {
-        const url = `http://localhost:5000/all?page=${currentPage}&size=${size}`
+        const url = `https://warm-cliffs-27985.herokuapp.com/all?page=${currentPage}&size=${size}`
 
 
         fetch(url, {
@@ -23,11 +25,13 @@ const InventoryPage = () => {
             .then(res => res.json())
             .then(data => {
                 setProductList(data);
+               
             })
     }, [currentPage, size])
+    console.log(productList);
 
     useEffect(() => {
-        fetch("http://localhost:5000/countproduct", {
+        fetch("https://warm-cliffs-27985.herokuapp.com/countproduct", {
         })
             .then(res => res.json())
             .then(data => {
@@ -75,8 +79,8 @@ const InventoryPage = () => {
                                       
                                         <div className="z-40 ">
                                             {
-                                                 prodict.warehouse.map((pd, i)=> {
-                                                  return  <p key={i} >{pd.houseName}</p>
+                                               prodict.warehouse &&  prodict?.warehouse.map((pd, i)=> {
+                                                  return  <p key={i} >{pd?.houseName}</p>
                                                     
                                                 })
                                             }

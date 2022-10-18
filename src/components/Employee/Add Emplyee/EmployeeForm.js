@@ -17,7 +17,7 @@ const EmployeeForm = () => {
 
 
         
-        fetch('http://localhost:5000/add-employee', {
+        fetch('https://warm-cliffs-27985.herokuapp.com/add-employee', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

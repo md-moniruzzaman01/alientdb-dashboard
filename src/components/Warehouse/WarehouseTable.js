@@ -9,7 +9,7 @@ const WarehouseTable = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("http://localhost:5000/warehouse", {
+        fetch("https://warm-cliffs-27985.herokuapp.com/warehouse", {
         })
             .then(res => res.json())
             .then(data => {

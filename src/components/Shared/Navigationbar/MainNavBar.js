@@ -8,10 +8,10 @@ const MainNavBar = () => {
     const { productList, setProductList } = useContext(Products)
     const [searchData, setSearchData]=useState([])
     const Inputsearch = useRef();
-    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch('http://localhost:5000/all').then(res => res.json()));
+    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch('https://warm-cliffs-27985.herokuapp.com/all').then(res => res.json()));
 //    const searchingSystemHandle=()=>{
 //         const searchValue= Inputsearch.current.value;
-//         const url =`http://localhost:5000/product-list?search=${searchValue}`
+//         const url =`https://warm-cliffs-27985.herokuapp.com/product-list?search=${searchValue}`
    
         
 //        if (searchValue) {
