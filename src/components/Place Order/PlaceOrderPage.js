@@ -6,6 +6,7 @@ import PersonInChargeInput from './PersonInChargeInput';
 import SelectProductForm from './SelectProductForm';
 import WareHouseInput from './WareHouseInput';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 const PlaceOrderPage = () => {
     const [warehouse, setWarehouse] = useState([])
     const [Employee, setEmployee] = useState([])
@@ -20,14 +21,33 @@ const PlaceOrderPage = () => {
 
 
     const [inputFields, setInputFields] = useState([
-        { id: uuidv4(), firstName: '', lastName: '' },
+        { id: uuidv4(), ProductName: '', quntity: '' },
     ]);
     const handleSubmit = (e) => {
         e.preventDefault();
         const warehouseChoose = e.target.warehouseChose.value
         const InChargePerson = e.target.InChargePerson.value;
         const orderDetails = {InvoiceHandle,warehouseChoose,InChargePerson, product:inputFields}
-        console.log(orderDetails);
+        fetch('http://localhost:5000/add-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(orderDetails),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+               
+                console.log(data);
+                if (data.acknowledged) {
+                    toast('employee add successfully')
+                    e.target.reset();
+                }
+                else{
+                    toast('some think wrong')
+                }
+            })
+        
     };
 
     return (

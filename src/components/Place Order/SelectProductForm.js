@@ -19,7 +19,7 @@ const SelectProductForm = ({ inputFields, setInputFields }) => {
 
     const handleAddFields = (e) => {
         e.preventDefault();
-        setInputFields([...inputFields, { id: uuidv4(), firstName: '', lastName: '' }])
+        setInputFields([...inputFields, { id: uuidv4(), ProductName: '', quntity: '' }])
     }
 
     const handleRemoveFields = id => {
@@ -32,17 +32,11 @@ const SelectProductForm = ({ inputFields, setInputFields }) => {
 
 
 
-
-
-
-
-
     const onChangeSelectedOption = (e,id) => {
-        const selectedOption = e.value; // <--- you can get value from object directly
-        console.log(selectedOption,id); // <---- this will be selected object not event
+        const selectedOption = e.value;
         const newInputFields = inputFields.map(i => {
             if (id === i.id) {
-                i["firstName"] = selectedOption;
+                i["ProductName"] = selectedOption;
             }
             return i;
         })
@@ -78,15 +72,16 @@ const SelectProductForm = ({ inputFields, setInputFields }) => {
                                     loadOptions={loadOptions}
                                     defaultOptions
                                     onChange={e=> onChangeSelectedOption(e ,inputField.id)}
+                                    
                                 />
                             </div>
                             <div className='form-control w-3/6'>
                                 <label className="label font-bold">Quantity</label>
-                                <input type="text" placeholder="Type Quantity.." name="lastName" value={inputField.lastName} onChange={event => handleChangeInput(inputField.id, event)} className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleChangeInput(inputField.id, event)} className='input h-[38px] input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
                             </div>
 
                         </div>
-                        <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)} className='btn btn-error mt-auto text-white rounded-none rounded-r-lg'>remove</button>
+                        <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)} className='px-4 py-2 bg-slate-400 mt-auto text-white rounded-none rounded-r-lg'>remove</button>
                     </div>
                 ))
             }

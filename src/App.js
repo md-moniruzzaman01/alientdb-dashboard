@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 
 import React, { useState } from "react";
+import Login from "./views/Authontication/Login";
 export const Products = React.createContext();
 
 function App() {
@@ -28,8 +29,8 @@ function App() {
 
         <div >
           <Routes>
+          <Route path="/login" element={<Login/>}/>
             <Route path="/" element={<DashboardLayout />}>
-
               <Route path="/" element={<IndexPage />} />
               <Route path="add-product" element={<AddProduct />} />
               <Route path="product-list" element={<ProductList />} />

@@ -14,6 +14,7 @@ const EmployeeList = () => {
             .then(res => res.json())
             .then(data => {
                 setEmployees(data);
+                console.log(data);
             })
     }, [])
 

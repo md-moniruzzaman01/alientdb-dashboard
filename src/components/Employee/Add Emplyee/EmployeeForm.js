@@ -17,7 +17,7 @@ const EmployeeForm = () => {
 
 
         
-        fetch('https://warm-cliffs-27985.herokuapp.com/add-employee', {
+        fetch('http://localhost:5000/add-employee', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const EmployeeForm = () => {
             .then((data) => {
                
                 console.log(data);
-                if (data.acknowledged) {
+                if (data.status) {
                     toast('employee add successfully')
                     e.target.reset();
                 }else if(data.error){

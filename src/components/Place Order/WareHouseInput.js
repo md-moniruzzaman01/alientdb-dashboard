@@ -5,8 +5,7 @@ const WareHouseInput = ({warehouse}) => {
     return (
         <div className='form-control w-full max-w-xs'>
             <label className="label font-bold">Warehouse</label>
-            <select className="select w-full max-w-xs select-bordered select-info" name='warehouseChose'>
-                <option disabled selected>Choose you warehouse..</option>
+            <select className="select w-full max-w-xs select-bordered select-info" name='warehouseChose' required>
                 {WarehouseList}
             </select>
         </div>
