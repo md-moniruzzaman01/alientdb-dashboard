@@ -1,12 +1,17 @@
 import React from 'react';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
+import { useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
+import { Products } from '../../App';
 import LoadingScreen from '../Shared/LoadingScreen';
 import TopOfPage from '../Shared/TopOfPage';
-import InventoryList from './InventoryList';
-const InventoryPage = () => {
+import ProductList from './ProductList';
+import ProductTable from './ProductTable';
+
+const ProductListPage = () => {
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)
     const [searchPageCount, setSearchPageCount] = useState(0)
@@ -65,7 +70,7 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
             })
     }
      const container = currentContainer ?
-     <InventoryList 
+     <ProductList 
      product={searchData} 
      url={searchURL} 
      DeleteProduct={DeleteProduct} 
@@ -74,7 +79,7 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
      pageCount={searchPageCount} setPageCount={setSearchPageCount}
     productCount={searchProductCount} setProductCount={setSearchProductCount}
       />:
-       <InventoryList 
+       <ProductList 
        product={product} 
        url={url} 
        DeleteProduct={DeleteProduct} 
@@ -91,14 +96,11 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
 
     return (
         <div>
-              <div>
-            <TopOfPage setSize={setSize} pageName="Inventory Page" size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
+            <TopOfPage setSize={setSize} pageName="Product List" size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
             {/* table */}
             {container}
-        </div>
-           
         </div>
     );
 };
 
-export default InventoryPage;
+export default ProductListPage;

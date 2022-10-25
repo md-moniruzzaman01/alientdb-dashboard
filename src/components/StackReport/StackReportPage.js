@@ -1,113 +1,99 @@
-
 import React from 'react';
-import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import ReactPaginate from 'react-paginate'; import { Products } from '../../App';
+import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
+import LoadingScreen from '../Shared/LoadingScreen';
+import TopOfPage from '../Shared/TopOfPage';
+import StackReportList from './StackReportList';
 const StackReportPage = () => {
-
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)
+    const [searchPageCount, setSearchPageCount] = useState(0)
+    const [searchProductCount, setSearchProductCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [size, setSize] = useState(100)
-    const { productList, setProductList } = useContext(Products)
-
+    const [currentContainer, setContainer] = useState(false)
+    const [searchData, setSearchData] = useState([])
+    const [searchURL, setSearchURL] = useState([])
+    const [searchcurrentPage, setSearchCurrentPage] = useState(0)
     function refreshPage() {
         window.location.reload(false);
     }
+
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://warm-cliffs-27985.herokuapp.com/all?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
-        const url = `https://warm-cliffs-27985.herokuapp.com/all?page=${currentPage}&size=${size}`
-
-
-        fetch(url, {
-        })
-            .then(res => res.json())
-            .then(data => {
-                setProductList(data);
-            })
+        refetch()
     }, [currentPage, size])
 
-    useEffect(() => {
-        fetch("https://warm-cliffs-27985.herokuapp.com/countproduct", {
+const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
+
+    const DeleteProduct = (id) => {
+        fetch(`https://warm-cliffs-27985.herokuapp.com/remove/${id}`, {
+            method: 'DELETE'
         })
             .then(res => res.json())
             .then(data => {
-                const count = data.count;
-                setProductCount(count)
-                const pages = Math.ceil(count / size)
-                setPageCount(pages)
+                const confarm = window.confirm('Delete this item')
+                if (confarm) {
+                    if (data.deletedCount > 0) {
+                        toast('order placed successfully')
+                        refreshPage()
+                    } else {
+                        toast('order place s unsuccessfully')
+                    }
+                }
+
             })
-    }, [])
+    }
+    const Deleteall = (id) => {
+        fetch(`https://warm-cliffs-27985.herokuapp.com/removeall`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                const confarm = window.confirm('Delete this item')
+                if (confarm) {
+                    if (data.deletedCount > 0) {
+                        toast('order placed successfully')
+                        refreshPage()
+                    } else {
+                        toast('order place s unsuccessfully')
+                    }
+                }
+
+            })
+    }
+     const container = currentContainer ?
+     <StackReportList 
+     product={searchData} 
+     url={searchURL} 
+     DeleteProduct={DeleteProduct} 
+     size={size} 
+     setCurrentPage={setSearchCurrentPage}
+     pageCount={searchPageCount} setPageCount={setSearchPageCount}
+    productCount={searchProductCount} setProductCount={setSearchProductCount}
+      />:
+       <StackReportList 
+       product={product} 
+       url={url} 
+       DeleteProduct={DeleteProduct} 
+       size={size} 
+       setCurrentPage={setCurrentPage} 
+       pageCount={pageCount} setPageCount={setPageCount}
+       productCount={productCount} setProductCount={setProductCount}
+       />
+
+
+    if (isLoading) {
+        return <LoadingScreen />
+    }
 
     return (
         <div>
-            <div className='flex justify-between items-center'>
-                <p className='text-3xl font-semibold text-gray-800 m-4'>Product List ({productCount})</p>
-                <select onChange={e => setSize(e.target.value)} className="mr-4 select w-20 select-bordered select-sm">
-                    <option value="100">100</option>
-                    <option value="10">10</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                    <option value="150">150</option>
-                </select>
-            </div>
-            <div className="overflow-x-auto min-h-[70vh]">
-                <table className="table table-zebra w-full">
-
-                    <thead>
-                        <tr>
-                            <th>SL No</th>
-                            <th>Product Name</th>
-                            <th>Brand</th>
-                            <th>Total Purchase</th>
-                            <th>Total Sold</th>
-                            <th>In Stack</th>
-                          
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {
-                            productList && productList.map((prodict, index) => <tr key={prodict._id}>
-                                <th>{index + 1}</th>
-                                <td>{prodict?.ProductName}</td>
-                                <td>{prodict?.Brand}</td>
-                                <td></td>
-                                <td></td>
-                                <td>{prodict?.Quantity}</td>
-                                
-
-
-                            </tr>)
-                        }
-                    </tbody>
-
-
-                </table>
-            </div>
-            {/*  pagination */}
-            <div className='flex justify-center mt-5 pb-4'>
-
-                <ReactPaginate
-                    previousLabel={"previous"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={3}
-                    onPageChange={(e) => setCurrentPage(e.selected)}
-                    containerClassName={"btn-group "}
-                    pageClassName={"btn"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"btn"}
-                    previousLinkClassName={"btn"}
-                    nextClassName={"btn"}
-                    nextLinkClassName={"page-link"}
-                    breakClassName={"btn btn-disabled"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"btn btn-secondary"}
-                />
-            </div>
+            <TopOfPage setSize={setSize} pageName="Stack report" size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
+            {/* table */}
+            {container}
         </div>
     );
 };

@@ -20,11 +20,11 @@ module.exports = {
 
           "info": "#3ABFF8",
 
-          "success": "#36D399",
+          "success": "#218838",
 
-          "warning": "#FBBD23",
+          "warning": "#fcc419",
 
-          "error": "#F87272",
+          "error": "#C82333",
         },
       },
     ],

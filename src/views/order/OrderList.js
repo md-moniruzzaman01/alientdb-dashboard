@@ -1,10 +1,9 @@
 import React from 'react';
-import Emtypage from '../../components/Shared/Emtypage';
+import OrderListPage from '../../components/Order List/OrderListPage';
 const OrderList = () => {
     return (
         <div className='page'>
-            
-            <Emtypage PageTitle="Order List Page"/>
+            <OrderListPage/>
         </div>
     );
 };

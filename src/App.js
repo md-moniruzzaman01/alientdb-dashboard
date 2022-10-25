@@ -17,32 +17,38 @@ import { ToastContainer } from "react-toastify";
 
 import React, { useState } from "react";
 import Login from "./views/Authontication/Login";
+import RequireAuth from "./views/Authontication/RequireAuth";
+import LoadingScreen from "./components/Shared/LoadingScreen";
+import InvoicePage from "./components/Invoice/InvoicePage";
 export const Products = React.createContext();
 
 function App() {
 
-  const [productList, setProductList]= useState([])
-
+  const [productList, setProductList] = useState([])
+  const [user, setUser] = useState([])
   return (
     <div>
-      <Products.Provider value={{ productList,setProductList}}>
+      <Products.Provider value={{ user, setUser }}>
 
         <div >
           <Routes>
-          <Route path="/login" element={<Login/>}/>
+            <Route path="/login" element={<Login />} />
+            <Route path="/invoice/:id" element={<RequireAuth><InvoicePage/></RequireAuth>}/>
             <Route path="/" element={<DashboardLayout />}>
-              <Route path="/" element={<IndexPage />} />
-              <Route path="add-product" element={<AddProduct />} />
-              <Route path="product-list" element={<ProductList />} />
-              <Route path="product-purches" element={<Purchase />} />
-              <Route path="place-order" element={<PlaceOrder />} />
-              <Route path="oder-list" element={<OrderList />} />
-              <Route path="inventory" element={<Inventory />} />
-              <Route path="stock-report" element={<StackReport />} />
-              <Route path="warehouse-report" element={<WarehouseReport />} />
-              <Route path="add-employee" element={<AddEmployee />} />
-              <Route path="employee-list" element={<EmployeeList />} />
-              <Route path="*" element={<ErrorPage />} />
+              
+                  <Route path="/" element={<RequireAuth><IndexPage /> </RequireAuth>} />
+                  <Route path="add-product" element={<RequireAuth><AddProduct /></RequireAuth>} />
+                  <Route path="product-list" element={<RequireAuth><ProductList /></RequireAuth>} />
+                  <Route path="product-purches" element={<RequireAuth><Purchase/> </RequireAuth>} />
+                  <Route path="place-order" element={<RequireAuth><PlaceOrder /></RequireAuth>} />
+                  <Route path="oder-list" element={<RequireAuth><OrderList /></RequireAuth>} />
+                  <Route path="inventory" element={<RequireAuth><Inventory /></RequireAuth>} />
+                  <Route path="stock-report" element={<RequireAuth><StackReport /></RequireAuth>} />
+                  <Route path="warehouse-report" element={<RequireAuth><WarehouseReport /></RequireAuth>} />
+                  <Route path="add-employee" element={<RequireAuth><AddEmployee /></RequireAuth>} />
+                  <Route path="employee-list" element={<RequireAuth><EmployeeList /></RequireAuth>} />
+                  <Route path="*" element={<ErrorPage />} />
+              
             </Route>
           </Routes>
           <ToastContainer />

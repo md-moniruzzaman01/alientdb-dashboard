@@ -1,6 +1,19 @@
 import React from 'react';
-
+import { useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Products } from '../../App';
 const Login = () => {
+    const {user, setUser } = useContext(Products)
+    const navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
+
+   const token =  window.localStorage.getItem("token")
+
+   if(token){
+    navigate(from, { replace: true })
+ }
     const handleLogin = (e) => {
             e.preventDefault();
             const username= e.target.username.value;
@@ -16,8 +29,20 @@ const Login = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-
-                    console.log(data);
+                    if (data.status == "OK") {
+                        console.log('login sucess');
+                        setUser(data.user);
+                        window.localStorage.setItem('token',data.data);
+                        
+                    }else if (data.error == 'Invalied password') {
+                        console.log("password is not match");
+                    }else if (data.error == 'Epmloyee not found') {
+                        console.log('user not found');
+                    }else{
+                        console.log('some think wrong plase try again');
+                    }
+                    
+                    
                  
                 })
         }

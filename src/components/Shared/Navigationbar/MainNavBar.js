@@ -4,9 +4,10 @@ import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { Products } from '../../../App';
 import avater from "../../../image/moniruzzaman image.jfif"
-import { FaBell } from "react-icons/fa";
+import { FaBell,FaUserAlt } from "react-icons/fa";
+import { BiUserCircle } from "react-icons/bi";
 const MainNavBar = () => {
-    const { productList, setProductList } = useContext(Products)
+    const { user, setUser } = useContext(Products)
     const [searchData, setSearchData] = useState([])
     const Inputsearch = useRef();
     // const { data: product, isLoading, refetch } = useQuery('product', () => fetch('https://warm-cliffs-27985.herokuapp.com/all').then(res => res.json()));
@@ -25,7 +26,7 @@ const MainNavBar = () => {
     //             setProductList(product)
     //        }
     //    }
-
+    // console.log(user);
     return (
         <div>
             <nav className='w-full md:flex px-0 md:px-4 py-1 min-h-[60px]'>
@@ -47,13 +48,13 @@ const MainNavBar = () => {
                             </button>
                         </div>
 
-                        
 
 
 
-                        
+
+
                         <div className='ml-4 mr-11 relative'>
-                        <button className="btn btn-ghost border border-gray-200 rounded-full text-xl px-3.5"><FaBell /></button>  
+                            <button className="btn btn-ghost border border-gray-200 rounded-full text-xl px-3.5"><FaBell /></button>
                             <sup className="badge badge-primary absolute top-0 right-[-25px]">+99</sup>
                         </div>
                         <div className="dropdown dropdown-end flex items-center  w-auto  justify-end">
@@ -63,19 +64,24 @@ const MainNavBar = () => {
                             <label tabIndex={0} className="flex ">
 
                                 <div className=" bg-slate-200 relative btn btn-ghost btn-circle avatar ">
+                                    <div className="avatar online placeholder">
+                                        <div className="bg-neutral-focus text-neutral-content rounded-full w-11 h-11">
+                                            <span className="text-xl">{user?.name?.slice(0,2)}</span>
+                                        </div>
+                                    </div>
 
-                                    <img src={avater} className='h-11 rounded-full border-2 border-white' alt="Gregg" />
+                                    {/* <img src={avater} className='h-11 rounded-full border-2 border-white' alt="Gregg" /> */}
 
                                 </div>
                                 {/* <div className="items-center text-primary text-left font-medium hidden md:flex pl-2">
-                                    Moniruzzaman
+                                    f
                                 </div> */}
                             </label>
                             <div className=''>
                                 <ul tabIndex={0} className="mt-7 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-gray-800">
                                     <li>
-                                        <a className="justify-between">
-                                            Profile
+                                        <a className='w-full text-center flex justify-center text-xl font-semibold '> 
+                                          {user?.name}
 
                                         </a>
                                     </li>
