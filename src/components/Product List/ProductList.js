@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import PaginationPage from '../Shared/PaginationPage';
 import ProductTable from './ProductTable';
 
-const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount }) => {
+const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount,Deleteall }) => {
     
     useEffect(() => {
         fetch(url, {
@@ -22,6 +22,7 @@ const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProdu
     }, [size,url])
     return (
         <div>
+            <div onClick={()=> Deleteall()}>delete all</div>
             <ProductTable product={product} DeleteProduct={DeleteProduct}/>
             <PaginationPage pageCount={pageCount} productCount={productCount} setCurrentPage={setCurrentPage} size={size}/>
         </div>

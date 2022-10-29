@@ -15,7 +15,7 @@ import ErrorPage from "./views/ErrorPage";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./views/Authontication/Login";
 import RequireAuth from "./views/Authontication/RequireAuth";
 import LoadingScreen from "./components/Shared/LoadingScreen";
@@ -25,10 +25,24 @@ export const Products = React.createContext();
 function App() {
 
   const [productList, setProductList] = useState([])
+  const [dashboardSideBarSize,setDashboardSideBarSize]= useState(true)
   const [user, setUser] = useState([])
+  useEffect(() => {
+    fetch('http://localhost:5000/userData', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({token: window.localStorage.getItem("token")}),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            setUser(data.data);
+        })
+}, [])
   return (
     <div>
-      <Products.Provider value={{ user, setUser }}>
+      <Products.Provider value={{ user, setUser,dashboardSideBarSize,setDashboardSideBarSize }}>
 
         <div >
           <Routes>

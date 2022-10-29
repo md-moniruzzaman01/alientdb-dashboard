@@ -1,11 +1,12 @@
 import React from 'react';
 import { useEffect } from 'react';
-const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentPage,setSearchURL }) => {
-    const searchingSystemHandle = (e) => {
-        
+const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentPage,setSearchURL,URLForsearch }) => {
+    const searchingSystemHandle = (e) => { 
         const searchValue = e.target.value;
-        const url = `http://localhost:5000/product-list?search=${searchValue}&page=${currentPage}&size=${size}`
-        const countURL = `http://localhost:5000/search-count?search=${searchValue}`
+        // const url = `http://localhost:5000/inventory-search?search=${searchValue}&page=${currentPage}&size=${size}`;
+        const url = `http://localhost:5000/${URLForsearch}?search=${searchValue}&page=${currentPage}&size=${size}`;
+        console.log(url);
+        const countURL = `http://localhost:5000/${URLForsearch}-count?search=${searchValue}`
         if (searchValue.length > 1) {
             fetch(url)
                 .then(res => res.json())
@@ -13,7 +14,6 @@ const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentP
                     setSearchData(data);
                     setContainer(true)
                     setSearchURL(countURL);
-                    
                 })
                 
         } else {

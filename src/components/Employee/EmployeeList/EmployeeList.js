@@ -9,7 +9,7 @@ const EmployeeList = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("https://warm-cliffs-27985.herokuapp.com/employee", {
+        fetch("http://localhost:5000/employee", {
         })
             .then(res => res.json())
             .then(data => {
@@ -19,7 +19,7 @@ const EmployeeList = () => {
     }, [])
 
     const DeleteEmpolyee = (id) => {
-        fetch(`https://warm-cliffs-27985.herokuapp.com/remove-employee/${id}`, {
+        fetch(`http://localhost:5000/remove-employee/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

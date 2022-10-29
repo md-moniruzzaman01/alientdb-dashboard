@@ -21,11 +21,11 @@ const StackTable = ({product , DeleteProduct}) => {
                         {
                             product && product.map((prodict, index) => <tr key={prodict._id}>
                                 <th>{index + 1}</th>
-                                <td>{prodict?.ProductName}</td>
+                                <td>{prodict?.Product}</td>
                                 <td>{prodict?.Brand}</td>
                                 <td></td>
                                 <td></td>
-                                <td>{prodict?.Quantity}</td>
+                                <td>{prodict?.qnt}</td>
                                 
 
 

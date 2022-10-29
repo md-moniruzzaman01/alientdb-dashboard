@@ -4,6 +4,7 @@ import { FaGlobe } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
+import { AiFillPrinter } from "react-icons/ai";
 const InvoicePage = () => {
     const { id } = useParams()
     const componentRef = useRef();
@@ -16,20 +17,24 @@ const InvoicePage = () => {
                 setInvoice(data);
             })
     }, [id])
-    const totalQuantity = 0
-
+    console.log(invoice);
     return (
-        <>
+        <div>
         <ReactToPrint
-        trigger={() => <button>Print this out!</button>}
         content={() => componentRef.current}
+        
+         trigger={() =><button className='btn btn-ghost mt-5 border-gray-300  absolute top-0 right-10'><span className='text-2xl mr-2'><AiFillPrinter/></span> Print</button>}
+           
+        
+       
       />
+     
             <div className='p-4 max-w-6xl mx-auto' ref={componentRef}>
                 <h1 className='text-4xl flex justify-center items-center font-semibold my-4'><span className='text-4xl inline-flex mr-2'><FaGlobe /></span> Ali Enterprise</h1>
-                <div className='grid grid-cols-3 gap-5  mt-7 mx-2'>
-                    <p><span className='font-bold text-base'>Customar Name:</span> User</p>
+                <div className='grid grid-cols-3 gap-5  mt-7 mx-auto max-w-6xl'>
+                    <p><span className='font-bold text-base'>Customar Name:</span> {invoice?.customerName}</p>
                     <p><span className='font-bold text-base'>Date:</span> 12/11/2022 </p>
-                    <p><span className='font-bold text-base'>Invoice Id :</span> {invoice?._id}</p>
+                    <p><span className='font-bold text-base'>Invoice Id :</span> {invoice?.InvoiceHandle}</p>
                     <p><span className='font-bold text-base'>Warehouse Name:</span> {invoice?.warehouseChoose}</p>
                     <p><span className='font-bold text-base'>Stuff Name:</span> {invoice?.InChargePerson}</p>
 
@@ -78,7 +83,7 @@ const InvoicePage = () => {
                     </table>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

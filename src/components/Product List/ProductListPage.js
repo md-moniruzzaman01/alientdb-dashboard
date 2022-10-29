@@ -20,21 +20,21 @@ const ProductListPage = () => {
     const [size, setSize] = useState(100)
     const [currentContainer, setContainer] = useState(false)
     const [searchData, setSearchData] = useState([])
-    const [searchURL, setSearchURL] = useState([])
+    const [searchURL, setSearchURL] = useState([]);
     const [searchcurrentPage, setSearchCurrentPage] = useState(0)
     function refreshPage() {
         window.location.reload(false);
     }
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://warm-cliffs-27985.herokuapp.com/all?page=${currentPage}&size=${size}`).then(res => res.json()));
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
         refetch()
+        console.log('product list');
     }, [currentPage, size])
-
-const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
-
+const URLForsearch = 'product-list'
+const url = "http://localhost:5000/countproduct"
     const DeleteProduct = (id) => {
-        fetch(`https://warm-cliffs-27985.herokuapp.com/remove/${id}`, {
+        fetch(`http://localhost:5000/remove/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -52,7 +52,7 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
             })
     }
     const Deleteall = (id) => {
-        fetch(`https://warm-cliffs-27985.herokuapp.com/removeall`, {
+        fetch(`http://localhost:5000/removeall`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -82,7 +82,8 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
        <ProductList 
        product={product} 
        url={url} 
-       DeleteProduct={DeleteProduct} 
+       DeleteProduct={DeleteProduct}
+       Deleteall={Deleteall} 
        size={size} 
        setCurrentPage={setCurrentPage} 
        pageCount={pageCount} setPageCount={setPageCount}
@@ -96,7 +97,7 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
 
     return (
         <div>
-            <TopOfPage setSize={setSize} pageName="Product List" size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
+            <TopOfPage setSize={setSize} pageName="Product List" URLForsearch={URLForsearch} size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
             {/* table */}
             {container}
         </div>

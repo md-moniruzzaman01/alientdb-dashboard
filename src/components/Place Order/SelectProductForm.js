@@ -46,12 +46,8 @@ const SelectProductForm = ({ inputFields, setInputFields }) => {
 
 
     // asyncselect
-
-
-
-
     const loadOptions = async (inputText, callback) => {
-        const response = await fetch(`https://warm-cliffs-27985.herokuapp.com/product-list?search=${inputText}`)
+        const response = await fetch(`http://localhost:5000/product-list?search=${inputText}`)
         const json = await response.json()
         callback(json.map(i => ({ label: i.ProductName, value: i.ProductName })))
     }
@@ -61,8 +57,8 @@ const SelectProductForm = ({ inputFields, setInputFields }) => {
 
             {
                 inputFields.map(inputField => (
-                    <div className='flex'>
-                        <div className='w-11/12 flex' key={inputField.id}>
+                    <div className='flex'  key={inputField.id}>
+                        <div className='w-11/12 flex'>
 
                             <div className='form-control w-3/6'>
                                 <label className="label font-bold">Product Name</label>
@@ -81,13 +77,13 @@ const SelectProductForm = ({ inputFields, setInputFields }) => {
                             </div>
 
                         </div>
-                        <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)} className='px-4 py-2 bg-slate-400 mt-auto text-white rounded-none rounded-r-lg'>remove</button>
+                        <p disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)} className='px-4 py-2 bg-slate-400 mt-auto text-white rounded-none rounded-r-lg'>remove</p>
                     </div>
                 ))
             }
 
-            <div className='flex justify-end m-4'>
-                <button className='btn btn-secondary' onClick={handleAddFields}>Add</button>
+            <div className='flex justify-end my-4'>
+                <p className='btn btn-secondary max-w-[100px]' onClick={handleAddFields}>Add</p>
             </div>
         </div>
     );

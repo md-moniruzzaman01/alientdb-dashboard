@@ -12,9 +12,7 @@ const DashboardLayout = () => {
                 <div className="drawer-content flex flex-col">
                 
                    <MainNavBar></MainNavBar>
-                <Outlet />
-
-
+                      <Outlet />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="bashboard-drower" className="drawer-overlay"></label>

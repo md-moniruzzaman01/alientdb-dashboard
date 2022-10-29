@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Products } from '../../App';
 import LoadingScreen from '../Shared/LoadingScreen';
 import TopOfPage from '../Shared/TopOfPage';
@@ -33,12 +34,33 @@ const OrderListPage = () => {
                 setPageCount(pages)
             })
     }, [size])
+
+    const DeleteOrder = (id) => {
+        fetch(`http://localhost:5000/order-remove/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                const confarm = window.confirm('Delete this item')
+                if (confarm) {
+                    if (data.deletedCount > 0) {
+                        toast('order delete successfully')
+                        refetch()
+                    } else {
+                        toast('order delete unsuccessfully')
+                    }
+                }
+
+            })
+    }
+
     const navigate = useNavigate()
     const ViewInvoiceHandle = (id)=> navigate(`/invoice/${id}`)
 
     if (isLoading) {
         return <LoadingScreen />
     }
+    console.log('order list');
     return (
         <div>
             <TopOfPage setSize={setSize} pageName="Order List"/>
@@ -69,7 +91,7 @@ const OrderListPage = () => {
                                     <div className="z-40 ">
                                       <button className='btn btn-sm btn-success text-base-100 rounded-sm'  onClick={()=>ViewInvoiceHandle(prodict._id)}>view</button>
                                       <button className='btn btn-sm btn-warning rounded-sm'>Edit</button>
-                                      <button className='btn btn-sm btn-error text-base-100 rounded-sm'>Delete</button>
+                                      <button className='btn btn-sm btn-error text-base-100 rounded-sm' onClick={()=> DeleteOrder(prodict._id)} >Delete</button>
                                     </div>
 
                                 </td>

@@ -21,15 +21,15 @@ const StackReportPage = () => {
         window.location.reload(false);
     }
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://warm-cliffs-27985.herokuapp.com/all?page=${currentPage}&size=${size}`).then(res => res.json()));
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/inventory?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
         refetch()
     }, [currentPage, size])
 
-const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
-
+const url = "http://localhost:5000/count-inventory"
+const URLForsearch = 'product-list'
     const DeleteProduct = (id) => {
-        fetch(`https://warm-cliffs-27985.herokuapp.com/remove/${id}`, {
+        fetch(`http://localhost:5000/remove/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -46,24 +46,7 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
 
             })
     }
-    const Deleteall = (id) => {
-        fetch(`https://warm-cliffs-27985.herokuapp.com/removeall`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                const confarm = window.confirm('Delete this item')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('order placed successfully')
-                        refreshPage()
-                    } else {
-                        toast('order place s unsuccessfully')
-                    }
-                }
 
-            })
-    }
      const container = currentContainer ?
      <StackReportList 
      product={searchData} 
@@ -91,7 +74,7 @@ const url = "https://warm-cliffs-27985.herokuapp.com/countproduct"
 
     return (
         <div>
-            <TopOfPage setSize={setSize} pageName="Stack report" size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
+            <TopOfPage setSize={setSize} pageName="Stack report" URLForsearch={URLForsearch} size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
             {/* table */}
             {container}
         </div>

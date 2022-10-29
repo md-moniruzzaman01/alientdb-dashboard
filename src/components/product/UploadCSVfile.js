@@ -18,7 +18,7 @@ const [Uploading, setUploading]=useState(false)
       body: JSON.stringify({ data: csvfile })
     };
     if (csvfile) {
-      fetch('https://warm-cliffs-27985.herokuapp.com/product-upload', requestOptions)
+      fetch('http://localhost:5000/product-upload', requestOptions)
         .then(response => {
           response.json();
           if(response.status == 200){
@@ -31,7 +31,6 @@ const [Uploading, setUploading]=useState(false)
           
         })
         .then(data => {
-          console.log(data)
           e.target.reset();
           
         });

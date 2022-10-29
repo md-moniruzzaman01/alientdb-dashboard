@@ -1,6 +1,5 @@
 import React from 'react';
 const InvoiceInput = ({InvoiceNumber}) => {
-    console.log();
     return (
         <div className='form-control w-full max-w-xs'>
             <label className="label font-bold">Invoice No</label>

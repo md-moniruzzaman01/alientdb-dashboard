@@ -1,10 +1,13 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Products } from '../../App';
 import animitedImg from "../../image/221234-P173C4-818-ai.png"
 
 const IndexPages = () => {
     const { user, setUser } = useContext(Products)
+
+  
     return (
         <div className='flex justify-center items-center'>
             <div className="stats shadow w-full m-4">

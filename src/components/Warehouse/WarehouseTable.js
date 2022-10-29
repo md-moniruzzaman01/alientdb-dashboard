@@ -9,7 +9,7 @@ const WarehouseTable = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("https://warm-cliffs-27985.herokuapp.com/warehouse", {
+        fetch("http://localhost:5000/warehouse", {
         })
             .then(res => res.json())
             .then(data => {
@@ -34,8 +34,8 @@ const WarehouseTable = () => {
                     {
                             warehouseList && warehouseList.map((warehouse, index) => <tr key={warehouse._id}>
                                 <th>{index + 1}</th>
-                                <td>{warehouse.WarehouseCode}</td>
-                                <td>{warehouse.WarehouseLocation}</td>
+                                <td>{warehouse.warehousecode}</td>
+                                <td>{warehouse.warehouseLocation}</td>
                                
                                
 
