@@ -22,7 +22,6 @@ const OrderListPage = () => {
     useEffect(() => {
         refetch()
     }, [currentPage, size])
-  
     useEffect(() => {
         fetch("http://localhost:5000/countOrder", {
         })

@@ -8,11 +8,15 @@ import WareHouseInput from './WareHouseInput';
 import { v4 as uuidv4 } from 'uuid';
 import { useContext } from 'react';
 import { Products } from '../../App';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const PlaceOrderPage = () => {
+    const navigate = useNavigate()
     const [warehouse, setWarehouse] = useState([])
     const [Employee, setEmployee] = useState([])
     const [InvoiceNumber, setInvoiceNumber] = useState([])
     const [ChooseWarehouse, setChoosedWarehouse] = useState('')
+    const [orderBtn, setOrderBtn] = useState(false);
     const { user } = useContext(Products)
     useEffect(() => {
         fetch("http://localhost:5000/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
@@ -22,14 +26,15 @@ const PlaceOrderPage = () => {
 
     const InvoiceHandle = (parseInt(InvoiceNumber.count) || 0) + 1;
     const [inputFields, setInputFields] = useState([
-        { id: uuidv4(), ProductName: '', quntity: '' },
+        { id: uuidv4(), ProductName: '', quntity: '',_id:'' },
     ]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.name
-        const orderDetails = {InvoiceHandle,ChooseWarehouse,InChargePerson,customerName, product:inputFields}
+        const orderDetails = {InvoiceHandle,warehouseChoose:ChooseWarehouse,InChargePerson,customerName, product:inputFields}
         fetch('http://localhost:5000/add-order', {
             method: 'POST',
             headers: {
@@ -39,7 +44,13 @@ const PlaceOrderPage = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data); 
+                if (data?.acknowledged) {
+                    toast('Place order successful')
+                    navigate(`/invoice/${data.insertedId}`)
+
+                }else{
+                    toast('there was error! try again')
+                }
             })
         
     };
@@ -55,8 +66,8 @@ const PlaceOrderPage = () => {
                             <WareHouseInput warehouse={warehouse} setChoosedWarehouse={setChoosedWarehouse} />
                             <PersonInChargeInput Employee={Employee} />
                         </div>
-                        <SelectProductForm inputFields={inputFields} setInputFields={setInputFields} ChooseWarehouse={ChooseWarehouse}/>
-                        <button type="submit" className='btn btn-secondary'>Submit</button>
+                        <SelectProductForm setOrderBtn={setOrderBtn} inputFields={inputFields} setInputFields={setInputFields} ChooseWarehouse={ChooseWarehouse}/>
+                        <button disabled={orderBtn} type="submit" className='btn btn-secondary'>Submit</button>
                     </div>
                 </form>
             </div>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Products } from '../../App';
 const ProductTable = ({product , DeleteProduct}) => {
     const navigate = useNavigate()
     const EditHandleProduct = (id)=> navigate(`/product-edit/${id}`)
+    const {  user } = useContext(Products);
     return (
         <>
         
@@ -15,7 +17,7 @@ const ProductTable = ({product , DeleteProduct}) => {
                             <th>Product Name</th>
                             <th>Unit</th>
                             <th>Brand</th>
-                            <th>functions</th>
+                            {user?.role === "admin" && <th>functions</th>}
                         </tr>
                     </thead>
                     <tbody>
@@ -27,12 +29,12 @@ const ProductTable = ({product , DeleteProduct}) => {
                                 <td>{prodict.Unit}</td>
                                 <td>{prodict.Brand}</td>
 
-                                <td className=''>
+                                {user?.role === "admin" && <td className=''>
                                     <div className='w-20'>
                                         <button className="btn btn-sm btn-success text-base-100 rounded-sm"   onClick={()=>EditHandleProduct(prodict._id)}>Edit</button>
                                         <button onClick={() => DeleteProduct(prodict._id)} className="btn btn-sm btn-error text-base-100 rounded-sm">Delete</button>
                                     </div>
-                                </td>
+                                </td>}
 
                             </tr>)
                         }

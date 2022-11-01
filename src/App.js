@@ -21,6 +21,7 @@ import RequireAuth from "./views/Authontication/RequireAuth";
 import LoadingScreen from "./components/Shared/LoadingScreen";
 import InvoicePage from "./components/Invoice/InvoicePage";
 import ProductEditPage from "./views/product/ProductEditPage";
+import ProductBywarehouse from "./views/Stock/ProductBywarehouse";
 export const Products = React.createContext();
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
                   <Route path="add-product" element={<RequireAuth><AddProduct /></RequireAuth>} />
                   <Route path="product-list" element={<RequireAuth><ProductList /></RequireAuth>} />
                   <Route path="product-edit/:id" element={<RequireAuth><ProductEditPage /></RequireAuth>} />
+                  <Route path="warehouse/:id" element={<RequireAuth><ProductBywarehouse /></RequireAuth>} />
                   <Route path="product-purches" element={<RequireAuth><Purchase/> </RequireAuth>} />
                   <Route path="place-order" element={<RequireAuth><PlaceOrder /></RequireAuth>} />
                   <Route path="oder-list" element={<RequireAuth><OrderList /></RequireAuth>} />

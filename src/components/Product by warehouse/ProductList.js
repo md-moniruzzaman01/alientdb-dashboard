@@ -1,19 +1,16 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useState } from 'react';
-import ReactPaginate from 'react-paginate';
 import PaginationPage from '../Shared/PaginationPage';
-import ProductTable from './ProductTable';
+import WarehouseProductTable from './WarehouseProductTable';
 
-const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount,Deleteall }) => {
-    console.log(product);
+const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount,id }) => {
+    
     useEffect(() => {
         fetch(url, {
         })
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
-                console.log(count);
                 setProductCount(count)
                 const pages = Math.ceil(count / size)
                 setPageCount(pages)
@@ -22,8 +19,7 @@ const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProdu
     }, [size,url])
     return (
         <div>
-            <div onClick={()=> Deleteall()}>delete all</div>
-            <ProductTable product={product} DeleteProduct={DeleteProduct}/>
+            <WarehouseProductTable product={product} id={id}/>
             <PaginationPage pageCount={pageCount} productCount={productCount} setCurrentPage={setCurrentPage} size={size}/>
         </div>
     );

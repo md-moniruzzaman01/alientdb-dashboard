@@ -6,7 +6,7 @@ const RequireAuth = ({ children }) => {
     let location = useLocation();
     const {user, setUser } = useContext(Products);
     const token =  window.localStorage.getItem("token")
-    if( !token){
+    if(!user?.name || !token){
         return <Navigate to="/login" state={{ from: location }} replace />
        
     }

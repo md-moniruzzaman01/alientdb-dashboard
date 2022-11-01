@@ -2,16 +2,37 @@ import React from 'react';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import AsyncSelect from 'react-select/async';
+import { toast } from 'react-toastify';
 
-const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse }) => {
-
-
+const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse,setOrderBtn }) => {
+const [qnt , setqnt]=useState({qnt :0})
+    const fetchProductName = (id)=>{
+      
+        fetch(`http://localhost:5000/find-quantity/${id}?warehouse=${ChooseWarehouse}`)
+        .then(res => res.json())
+        .then(data=>{
+         setqnt(data);
+        })
+    }
+const handleQuantityValue = (id, event)=>{
+    const newInputFields = inputFields.map(i => {
+        const quantityValue =  fetchProductName(i._id) 
+        const quantity = parseInt(qnt.qnt);
+          if (id === i.id) {
+              if ( event.target.value > quantity ) {
+                setOrderBtn(true)
+                toast('quantity invalid ')
+              }else{
+                setOrderBtn(false)
+              }
+          }
+          return i;
+      })
+}
     const handleChangeInput = (id, event) => {
         const newInputFields = inputFields.map(i => {
-            console.log(i);
             if (id === i.id) {
-                i[event.target.name] = event.target.value;
-
+                    i[event.target.name] = event.target.value;
             }
             return i;
         })
@@ -20,7 +41,8 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse }) => 
 
     const handleAddFields = (e) => {
         e.preventDefault();
-        setInputFields([...inputFields, { id: uuidv4(), ProductName: '', quntity: '' }])
+        setInputFields([...inputFields, { id: uuidv4(), ProductName: '', quntity: '', _id:''}])
+        setqnt({qnt :0})
     }
 
     const handleRemoveFields = id => {
@@ -34,10 +56,11 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse }) => 
         const newInputFields = inputFields.map(i => {
             if (id === i.id) {
                 i["ProductName"] = selectedOption;
+                i["_id"] = e.id;
+
             }
             return i;
         })
-        console.log(newInputFields);
         setInputFields(newInputFields);
     };
 
@@ -46,7 +69,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse }) => 
     const loadOptions = async (inputText, callback) => {
         const response = await fetch(`http://localhost:5000/search-product/${ChooseWarehouse}?search=${inputText}`)
         const json = await response.json()
-        callback(json.map(i => ({ label: i.Product, value: i.Product })))
+        callback(json.map(i => ({ label: i.Product, value: i.Product, id: i._id })))
     }
     return (
         <div className='my-4'>
@@ -70,7 +93,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse }) => 
                             </div>
                             <div className='form-control w-3/6'>
                                 <label className="label font-bold">Quantity</label>
-                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleChangeInput(inputField.id, event)} className='input h-[38px] input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleChangeInput(inputField.id, event)} onBlur={event => handleQuantityValue(inputField.id, event)} className='input h-[38px] input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
                             </div>
 
                         </div>
