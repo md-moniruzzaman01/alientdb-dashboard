@@ -17,7 +17,6 @@ const InvoicePage = () => {
                 setInvoice(data);
             })
     }, [id])
-    console.log(invoice);
     return (
         <div>
         <ReactToPrint

@@ -43,7 +43,7 @@ const [Uploading, setUploading]=useState(false)
 
   return (
   
-    <form onSubmit={handleJsonfile}>
+    <form onSubmit={handleJsonfile} className='shadow bg-base-100 p-4'>
       <input type="file" name="csv" accept="*.csv" onChange={(e) => {
         const files = e.target.files;
         if (files) {

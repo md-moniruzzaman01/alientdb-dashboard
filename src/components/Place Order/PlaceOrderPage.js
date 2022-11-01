@@ -6,13 +6,13 @@ import PersonInChargeInput from './PersonInChargeInput';
 import SelectProductForm from './SelectProductForm';
 import WareHouseInput from './WareHouseInput';
 import { v4 as uuidv4 } from 'uuid';
-import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { Products } from '../../App';
 const PlaceOrderPage = () => {
     const [warehouse, setWarehouse] = useState([])
     const [Employee, setEmployee] = useState([])
     const [InvoiceNumber, setInvoiceNumber] = useState([])
+    const [ChooseWarehouse, setChoosedWarehouse] = useState('')
     const { user } = useContext(Products)
     useEffect(() => {
         fetch("http://localhost:5000/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
@@ -21,17 +21,15 @@ const PlaceOrderPage = () => {
     }, [])
 
     const InvoiceHandle = (parseInt(InvoiceNumber.count) || 0) + 1;
-
-
     const [inputFields, setInputFields] = useState([
         { id: uuidv4(), ProductName: '', quntity: '' },
     ]);
     const handleSubmit = (e) => {
         e.preventDefault();
-        const warehouseChoose = e.target.warehouseChose.value
+        
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.name
-        const orderDetails = {InvoiceHandle,warehouseChoose,InChargePerson,customerName, product:inputFields}
+        const orderDetails = {InvoiceHandle,ChooseWarehouse,InChargePerson,customerName, product:inputFields}
         fetch('http://localhost:5000/add-order', {
             method: 'POST',
             headers: {
@@ -41,15 +39,7 @@ const PlaceOrderPage = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-               
-                console.log(data);
-                if (data.acknowledged) {
-                    toast('employee add successfully')
-                    e.target.reset();
-                }
-                else{
-                    toast('some think wrong')
-                }
+                console.log(data); 
             })
         
     };
@@ -62,10 +52,10 @@ const PlaceOrderPage = () => {
                     <div className="card-body px-4 md:px-7 py-0">
                         <div className='grid grid-cols-3 gap-5'>
                             <InvoiceInput InvoiceNumber={InvoiceHandle} />
-                            <WareHouseInput warehouse={warehouse} />
+                            <WareHouseInput warehouse={warehouse} setChoosedWarehouse={setChoosedWarehouse} />
                             <PersonInChargeInput Employee={Employee} />
                         </div>
-                        <SelectProductForm inputFields={inputFields} setInputFields={setInputFields} />
+                        <SelectProductForm inputFields={inputFields} setInputFields={setInputFields} ChooseWarehouse={ChooseWarehouse}/>
                         <button type="submit" className='btn btn-secondary'>Submit</button>
                     </div>
                 </form>

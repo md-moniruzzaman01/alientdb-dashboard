@@ -60,7 +60,6 @@ const OrderListPage = () => {
     if (isLoading) {
         return <LoadingScreen />
     }
-    console.log('order list');
     return (
         <div>
             <TopOfPage setSize={setSize} pageName="Order List"/>

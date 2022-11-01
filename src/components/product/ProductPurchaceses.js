@@ -5,8 +5,8 @@ import UploadCSVfile from './UploadCSVfile';
 const productPurchaceses = () => {
 
     return (
-        <div className=''>
-            <div className='flex justify-between m-4'>
+        <div className='max-w-7xl mx-auto'>
+            <div className='flex justify-between m-4 items-center'>
                 <p className='text-3xl font-semibold text-gray-800 '>Purchase</p>
                 <UploadCSVfile />
             </div>

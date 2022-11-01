@@ -1,8 +1,8 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const ProductTable = ({product , DeleteProduct}) => {
-  console.log(product);
+    const navigate = useNavigate()
+    const EditHandleProduct = (id)=> navigate(`/product-edit/${id}`)
     return (
         <>
         
@@ -29,7 +29,7 @@ const ProductTable = ({product , DeleteProduct}) => {
 
                                 <td className=''>
                                     <div className='w-20'>
-                                        <button className="btn btn-sm btn-success text-base-100 rounded-sm">Edit</button>
+                                        <button className="btn btn-sm btn-success text-base-100 rounded-sm"   onClick={()=>EditHandleProduct(prodict._id)}>Edit</button>
                                         <button onClick={() => DeleteProduct(prodict._id)} className="btn btn-sm btn-error text-base-100 rounded-sm">Delete</button>
                                     </div>
                                 </td>
