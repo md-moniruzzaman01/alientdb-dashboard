@@ -6,14 +6,12 @@ import PaginationPage from '../Shared/PaginationPage';
 import ProductTable from './ProductTable';
 
 const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount,Deleteall }) => {
-    console.log(product);
     useEffect(() => {
         fetch(url, {
         })
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
-                console.log(count);
                 setProductCount(count)
                 const pages = Math.ceil(count / size)
                 setPageCount(pages)
@@ -22,7 +20,7 @@ const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProdu
     }, [size,url])
     return (
         <div>
-            <div onClick={()=> Deleteall()}>delete all</div>
+            <div className='btn btn-sm my-2 btn-ghost' onClick={()=> Deleteall()}>delete all</div>
             <ProductTable product={product} DeleteProduct={DeleteProduct}/>
             <PaginationPage pageCount={pageCount} productCount={productCount} setCurrentPage={setCurrentPage} size={size}/>
         </div>

@@ -22,6 +22,7 @@ import LoadingScreen from "./components/Shared/LoadingScreen";
 import InvoicePage from "./components/Invoice/InvoicePage";
 import ProductEditPage from "./views/product/ProductEditPage";
 import ProductBywarehouse from "./views/Stock/ProductBywarehouse";
+import PurchesEdit from "./views/product/PurchesEdit";
 export const Products = React.createContext();
 
 function App() {
@@ -45,7 +46,6 @@ function App() {
   return (
     <div>
       <Products.Provider value={{ user, setUser,dashboardSideBarSize,setDashboardSideBarSize }}>
-
         <div >
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -56,6 +56,7 @@ function App() {
                   <Route path="add-product" element={<RequireAuth><AddProduct /></RequireAuth>} />
                   <Route path="product-list" element={<RequireAuth><ProductList /></RequireAuth>} />
                   <Route path="product-edit/:id" element={<RequireAuth><ProductEditPage /></RequireAuth>} />
+                  <Route path="purches-product-edit/:id" element={<RequireAuth><PurchesEdit /></RequireAuth>} />
                   <Route path="warehouse/:id" element={<RequireAuth><ProductBywarehouse /></RequireAuth>} />
                   <Route path="product-purches" element={<RequireAuth><Purchase/> </RequireAuth>} />
                   <Route path="place-order" element={<RequireAuth><PlaceOrder /></RequireAuth>} />

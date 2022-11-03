@@ -26,15 +26,20 @@ const PlaceOrderPage = () => {
 
     const InvoiceHandle = (parseInt(InvoiceNumber.count) || 0) + 1;
     const [inputFields, setInputFields] = useState([
-        { id: uuidv4(), ProductName: '', quntity: '',_id:'' },
+        { id: uuidv4(), Product: '', quntity: '',_id:'' },
     ]);
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.name
-        const orderDetails = {InvoiceHandle,warehouseChoose:ChooseWarehouse,InChargePerson,customerName, product:inputFields}
+        const orderDetails = {InvoiceHandle,warehouseChoose:ChooseWarehouse,InChargePerson,customerName, product:inputFields,Date:today}
         fetch('http://localhost:5000/add-order', {
             method: 'POST',
             headers: {

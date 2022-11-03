@@ -60,7 +60,7 @@ const Login = () => {
 
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">username</span>
+                                <span className="label-text">User name or full name</span>
                             </label>
                             <input type="text" placeholder="Type here..." name='username' className="input input-bordered rounded-none rounded-l focus:outline-none focus:ring-1 focus:ring-blue-400" />
                         </div>

@@ -41,7 +41,7 @@ const handleQuantityValue = (id, event)=>{
 
     const handleAddFields = (e) => {
         e.preventDefault();
-        setInputFields([...inputFields, { id: uuidv4(), ProductName: '', quntity: '', _id:''}])
+        setInputFields([...inputFields, { id: uuidv4(), Product: '', quntity: '', _id:''}])
         setqnt({qnt :0})
     }
 
@@ -55,7 +55,7 @@ const handleQuantityValue = (id, event)=>{
         const selectedOption = e.value;
         const newInputFields = inputFields.map(i => {
             if (id === i.id) {
-                i["ProductName"] = selectedOption;
+                i["Product"] = selectedOption;
                 i["_id"] = e.id;
 
             }

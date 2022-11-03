@@ -17,6 +17,7 @@ const ProductTable = ({product , DeleteProduct}) => {
                             <th>Product Name</th>
                             <th>Unit</th>
                             <th>Brand</th>
+                            <th>Remainder</th>
                             {user?.role === "admin" && <th>functions</th>}
                         </tr>
                     </thead>
@@ -28,6 +29,7 @@ const ProductTable = ({product , DeleteProduct}) => {
                                 <td>{prodict.Product}</td>
                                 <td>{prodict.Unit}</td>
                                 <td>{prodict.Brand}</td>
+                                <td className='w-11'>{prodict.remaindquantity}</td>
 
                                 {user?.role === "admin" && <td className=''>
                                     <div className='w-20'>

@@ -10,7 +10,7 @@ const AddProduct = () => {
         const ParchesCost = e.target.cost.value;
         const ProductUnit = e.target.unit.value;
         const remaindquantity = e.target.quantity.value;
-        const product = { ProductName, Brand, ParchesCost, ProductUnit, remaindquantity }
+        const product = { Product:ProductName, Brand, ParchesCost, Unit:ProductUnit, remaindquantity }
 
 
 
@@ -81,7 +81,7 @@ const AddProduct = () => {
                         </div>
 
                         <div className="flex my-4">
-                            <button className="btn btn-secondary px-7 text-base-100">Add product</button>
+                            <input type="submit" className="btn btn-secondary px-7 text-base-100" value="Add product" />
                         </div>
                     </div>
                 </form>

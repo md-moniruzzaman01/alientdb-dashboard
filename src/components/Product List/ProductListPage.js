@@ -1,15 +1,11 @@
 import React from 'react';
-import { useContext } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import { toast } from 'react-toastify';
-import { Products } from '../../App';
 import LoadingScreen from '../Shared/LoadingScreen';
 import TopOfPage from '../Shared/TopOfPage';
 import ProductList from './ProductList';
-import ProductTable from './ProductTable';
 
 const ProductListPage = () => {
     const [pageCount, setPageCount] = useState(0)
@@ -29,7 +25,6 @@ const ProductListPage = () => {
     const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
         refetch()
-        console.log('product list');
     }, [currentPage, size])
 const URLForsearch = 'product-list'
 const url = "http://localhost:5000/countproduct"
@@ -42,10 +37,10 @@ const url = "http://localhost:5000/countproduct"
                 const confarm = window.confirm('Delete this item')
                 if (confarm) {
                     if (data.deletedCount > 0) {
-                        toast('order placed successfully')
-                        refreshPage()
+                        toast('Product delete successfully')
+                        refetch()
                     } else {
-                        toast('order place s unsuccessfully')
+                        toast('Product delete unsuccessfully')
                     }
                 }
 
@@ -60,10 +55,10 @@ const url = "http://localhost:5000/countproduct"
                 const confarm = window.confirm('Delete this item')
                 if (confarm) {
                     if (data.deletedCount > 0) {
-                        toast('order placed successfully')
-                        refreshPage()
+                        toast('Product delete successfully')
+                        refetch()
                     } else {
-                        toast('order place s unsuccessfully')
+                        toast('Product delete unsuccessfully')
                     }
                 }
 

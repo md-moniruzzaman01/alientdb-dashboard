@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+.parches-page .css-b62m3t-container{
+  width: 276px !important;
+  }
+.parches-page.css-1s2u09g-control, .css-319lph-ValueContainer{
+    height: 48px !important;
+  }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
