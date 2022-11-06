@@ -14,7 +14,6 @@ import EmployeeList from "./views/Employee/EmployeeList";
 import ErrorPage from "./views/ErrorPage";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
-
 import React, { useEffect, useState } from "react";
 import Login from "./views/Authontication/Login";
 import RequireAuth from "./views/Authontication/RequireAuth";
@@ -23,6 +22,7 @@ import InvoicePage from "./components/Invoice/InvoicePage";
 import ProductEditPage from "./views/product/ProductEditPage";
 import ProductBywarehouse from "./views/Stock/ProductBywarehouse";
 import PurchesEdit from "./views/product/PurchesEdit";
+import Setting from "./views/Setting";
 export const Products = React.createContext();
 
 function App() {
@@ -66,6 +66,7 @@ function App() {
                   <Route path="warehouse-report" element={<RequireAuth><WarehouseReport /></RequireAuth>} />
                   <Route path="add-employee" element={<RequireAuth><AddEmployee /></RequireAuth>} />
                   <Route path="employee-list" element={<RequireAuth><EmployeeList /></RequireAuth>} />
+                  <Route path="setting" element={<RequireAuth><Setting /></RequireAuth>} />
                   <Route path="*" element={<ErrorPage />} />
               
             </Route>

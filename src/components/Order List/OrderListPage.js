@@ -88,8 +88,8 @@ const OrderListPage = () => {
 
                                     <div className="z-40 ">
                                       <button className='btn btn-sm btn-success text-base-100 rounded-sm'  onClick={()=>ViewInvoiceHandle(prodict._id)}>view</button>
-                                      <button className='btn btn-sm btn-warning rounded-sm'>Edit</button>
-                                      <button className='btn btn-sm btn-error text-base-100 rounded-sm' onClick={()=> DeleteOrder(prodict._id)} >Delete</button>
+                                      {/* <button className='btn btn-sm btn-warning rounded-sm'>Edit</button>
+                                      <button className='btn btn-sm btn-error text-base-100 rounded-sm' onClick={()=> DeleteOrder(prodict._id)} >Delete</button> */}
                                     </div>
 
                                 </td>

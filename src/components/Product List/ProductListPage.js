@@ -23,6 +23,8 @@ const ProductListPage = () => {
     }
 
     const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all?page=${currentPage}&size=${size}`).then(res => res.json()));
+   
+
     useEffect(() => {
         refetch()
     }, [currentPage, size])

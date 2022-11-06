@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { Products } from '../../../App';
 import { FaBell } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
+import { AiFillSetting } from "react-icons/ai";
+import { useNavigate } from 'react-router-dom';
 const MainNavBar = () => {
     const { user, setUser, dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products)
     function refreshPage() {
@@ -13,13 +14,8 @@ const MainNavBar = () => {
         toast('logout from system');
         refreshPage()
     }
-    // <div className='bg-red-400  w-6 h-6 absolute right-0 inset-y-1/2 hidden md:flex items-center justify-center'>
-    //     <p className='pl-2' onClick={() => setDashboardSideBarSize(!dashboardSideBarSize)}>
-    //         {
-    //             dashboardSideBarSize ? <MdArrowBackIos /> : <MdArrowForwardIos />
-    //         }
-    //     </p>
-    // </div>
+    const navigate = useNavigate()
+    const handleSettingBtn= (id)=> navigate(`/setting`)
     return (
         <div>
             <nav className='w-full md:flex px-0 md:px-4 py-1 min-h-[60px]'>
@@ -46,9 +42,9 @@ const MainNavBar = () => {
 
 
 
-
-
-
+                        <div className=' btn btn-ghost border bg-slate-50 rounded-full text-xl px-2.5' onClick={handleSettingBtn}>
+                        <p className='text-3xl'><AiFillSetting/></p>
+                        </div>
                         <div className='ml-4 mr-11 relative'>
                             <button className="btn btn-ghost border border-gray-200 rounded-full text-xl px-3.5"><FaBell /></button>
                             <sup className="badge badge-primary absolute top-0 right-[-25px]">+99</sup>
