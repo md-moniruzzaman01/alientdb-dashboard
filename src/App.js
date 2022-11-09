@@ -23,6 +23,7 @@ import ProductEditPage from "./views/product/ProductEditPage";
 import ProductBywarehouse from "./views/Stock/ProductBywarehouse";
 import PurchesEdit from "./views/product/PurchesEdit";
 import Setting from "./views/Setting";
+import Modal from "./components/Indexpage/Modal";
 export const Products = React.createContext();
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
           <ToastContainer />
         </div>
       </Products.Provider>
+      <Modal/>
     </div>
   );
 }

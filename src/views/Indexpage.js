@@ -4,6 +4,7 @@ const Indexpage = () => {
     return (
         <div className="page">
            <IndexPages/>
+          
         </div>
     );
 };

@@ -31,9 +31,7 @@ const AddProduct = () => {
                     toast('error found')
                     e.target.reset();
                 }
-
             })
-
     }
     return (
         <div className='page px-4 py-2'>

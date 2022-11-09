@@ -20,7 +20,10 @@ const EmployeeList = () => {
 
     const DeleteEmpolyee = (id) => {
         fetch(`http://localhost:5000/remove-employee/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorization:`bearer ${localStorage.getItem('token')}`
+            },
         })
             .then(res => res.json())
             .then(data => {
@@ -31,7 +34,7 @@ const EmployeeList = () => {
                         refreshPage()
                     } else {
                         toast('Some think wrong please try again')
-                        refreshPage()
+                        // refreshPage()
                     }
                 }
 
@@ -59,7 +62,6 @@ const EmployeeList = () => {
                             <td>{emplyee?.EmployeeNumber}</td>
                             <td className=''>
                                     <div className='w-20'>
-                                        <button className="btn btn-secondary text-white btn-xs">Edit</button>
                                         <button onClick={() => DeleteEmpolyee(emplyee._id)} className="mx-2 btn btn-secondary text-white btn-xs">Delete</button>
                                     </div>
                                 </td>

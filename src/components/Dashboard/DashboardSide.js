@@ -9,7 +9,6 @@ import { Products } from '../../App';
 
 const DashboardSide = () => {
     const { dashboardSideBarSize, user } = useContext(Products);
-
     return (
         <ul className={`menu  overflow-y-auto overflow-x-hidden bg-[#343A40] text-white relative ${dashboardSideBarSize ? "w-72 p-4" : "w-72 p-4 md:w-0 md:p-0"} `}>
             {/* side arrow */}
@@ -37,10 +36,11 @@ const DashboardSide = () => {
 
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    {user?.role === "admin" && <Link to="/add-product"><li><MdRadioButtonUnchecked /> Add Product</li></Link>}
+                     <Link to="/add-product"><li><MdRadioButtonUnchecked /> Add Product</li></Link>
 
                     <Link to="/product-list"><li><MdRadioButtonUnchecked /> Product List</li></Link>
-                    {user?.role === "admin" &&  <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>}
+                    <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>
+                    {/* {user?.role === "admin" &&  <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>} */}
                 </div>
             </div>
 
@@ -52,7 +52,8 @@ const DashboardSide = () => {
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
                     <Link to="/place-order"><li><MdRadioButtonUnchecked /> Place Order</li></Link>
-                    {user?.role === "admin" &&  <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>}
+                    <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>
+                    {/* {user?.role === "admin" &&  <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>} */}
                 </div>
             </div>
 
