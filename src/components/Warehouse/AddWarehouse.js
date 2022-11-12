@@ -4,7 +4,9 @@ import { toast } from 'react-toastify';
 const AddWarehouse = () => {
     const handleWarehouseAdding = (e) => {
         e.preventDefault();
-        const WarehouseLocation= e.target.WarehouseLocation.value;
+        const Location= e.target.WarehouseLocation.value;
+        const WarehouseLocation = Location.toUpperCase();
+        console.log(WarehouseLocation);
         const WarehouseCode = e.target.warehouseCode.value;
         const warehouse = {WarehouseCode,WarehouseLocation}
         
@@ -13,13 +15,12 @@ const AddWarehouse = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                authorization:`bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(warehouse),
         })
             .then((response) => response.json())
             .then((data) => {
-               
-                console.log(data);
                 if (data.acknowledged) {
                     toast('warehouse add successfully')
                     e.target.reset();

@@ -1,12 +1,11 @@
 import React from 'react';
-import { useEffect } from 'react';
-const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentPage,setSearchURL,URLForsearch }) => {
+const OrderPage = ({ setSize, pageName, setContainer,setSearchData,size,currentPage,setSearchURL,URLForsearch }) => {
     const searchingSystemHandle = (e) => { 
         const searchValue = e.target.value;
         // const url = `http://localhost:5000/inventory-search?search=${searchValue}&page=${currentPage}&size=${size}`;
         const url = `http://localhost:5000/${URLForsearch}?search=${searchValue}&page=${currentPage}&size=${size}`;
         const countURL = `http://localhost:5000/${URLForsearch}-count?search=${searchValue}`
-        if (searchValue.length > 1) {
+        if (searchValue.length > 0) {
             fetch(url)
                 .then(res => res.json())
                 .then(data => {
@@ -24,7 +23,7 @@ const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentP
 // },[])
     const handleAfterSearch = (e) => {
         const search = e.target.value;
-        if (search.length > 1) {
+        if (search.length > 0) {
             setContainer(true)
         } else {
             setContainer(false)
@@ -59,4 +58,4 @@ const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentP
     );
 };
 
-export default TopOfPage;
+export default OrderPage;
