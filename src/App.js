@@ -24,6 +24,7 @@ import ProductBywarehouse from "./views/Stock/ProductBywarehouse";
 import PurchesEdit from "./views/product/PurchesEdit";
 import Setting from "./views/Setting";
 import Modal from "./components/Indexpage/Modal";
+import { GiVikingLonghouse } from "react-icons/gi";
 export const Products = React.createContext();
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
             setUser(data.data);
+            console.log(data);
         })
 }, [])
   return (

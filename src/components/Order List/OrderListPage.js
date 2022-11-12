@@ -1,26 +1,31 @@
-
 import React from 'react';
-import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Products } from '../../App';
-import LoadingScreen from '../Shared/LoadingScreen';
 import TopOfPage from '../Shared/TopOfPage';
 const OrderListPage = () => {
     const [pageCount, setPageCount] = useState(0)
+    const [product, setProduct] = useState([])
     const [productCount, setProductCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [size, setSize] = useState(100)
     function refreshPage() {
         window.location.reload(false);
     }
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all-order?page=${currentPage}&size=${size}`).then(res => res.json()));
+    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all-order?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
-        refetch()
+        fetch(`http://localhost:5000/all-order?page=${currentPage}&size=${size}`,{
+            headers: {
+                authorization:`bearer ${localStorage.getItem('token')}`
+            },
+        })
+        .then(res => res.json())
+       .then(data=> {
+        setProduct(data)
+       })
     }, [currentPage, size])
     useEffect(() => {
         fetch("http://localhost:5000/countOrder", {
@@ -44,7 +49,7 @@ const OrderListPage = () => {
                 if (confarm) {
                     if (data.deletedCount > 0) {
                         toast('order delete successfully')
-                        refetch()
+                       refreshPage()
                     } else {
                         toast('order delete unsuccessfully')
                     }
@@ -56,9 +61,6 @@ const OrderListPage = () => {
     const navigate = useNavigate()
     const ViewInvoiceHandle = (id)=> navigate(`/invoice/${id}`)
 
-    if (isLoading) {
-        return <LoadingScreen />
-    }
     return (
         <div>
             <TopOfPage setSize={setSize} pageName="Order List"/>

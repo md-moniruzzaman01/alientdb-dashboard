@@ -52,12 +52,15 @@ const Form = () => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(inputFields),
         })
             .then((response) => response.json())
             .then((data) => { 
-                if (data.message) {
+                if (data.message ==='forbidden') {
+                    toast('Authontication fail')
+                }else if(data.message) {
                     toast('Product successfully added')
                 }else{
                     toast('Some think wrong! try again')

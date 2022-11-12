@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Products } from '../../../App';
 import { FaBell } from "react-icons/fa";
 import { toast } from 'react-toastify';
@@ -6,6 +6,8 @@ import { AiFillSetting } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 const MainNavBar = () => {
     const { user, setUser, dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products)
+    const [productCount, setProductCount] = useState(0)
+    const url = "http://localhost:5000/countremainder"
     function refreshPage() {
         window.location.reload(false);
     }
@@ -16,6 +18,15 @@ const MainNavBar = () => {
     }
     const navigate = useNavigate()
     const handleSettingBtn = (id) => navigate(`/setting`)
+    useEffect(() => {
+        fetch(url, {
+        })
+            .then(res => res.json())
+            .then(data => {
+                const count = data.count;
+                setProductCount(count)
+            })
+    }, [])
     return (
         <div>
             <nav className='w-full md:flex px-0 md:px-4 py-1 min-h-[60px]'>
@@ -49,7 +60,7 @@ const MainNavBar = () => {
                             {/* The button to open modal */}
                             <label htmlFor="remainder" className="btn btn-ghost border border-gray-200 rounded-full text-xl px-3.5"><FaBell /></label>
 
-                            <sup className="badge badge-primary absolute top-0 right-[-25px]">+99</sup>
+                            <sup className="badge badge-primary absolute top-0 right-[-25px]">{productCount}</sup>
                         </div>
                         <div className="dropdown dropdown-end flex items-center  w-auto  justify-end">
 

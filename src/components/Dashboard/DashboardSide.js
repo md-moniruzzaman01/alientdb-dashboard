@@ -36,11 +36,11 @@ const DashboardSide = () => {
 
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                     <Link to="/add-product"><li><MdRadioButtonUnchecked /> Add Product</li></Link>
+                {(user?.role === "admin" || user.permissions?.ProductAdd) &&  <Link to="/add-product"><li><MdRadioButtonUnchecked /> Add Product</li></Link>}
 
                     <Link to="/product-list"><li><MdRadioButtonUnchecked /> Product List</li></Link>
-                    <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>
-                    {/* {user?.role === "admin" &&  <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>} */}
+                    {/* <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link> */}
+                    {(user?.role === "admin" || user.permissions?.Purches) &&  <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>}
                 </div>
             </div>
 
@@ -52,7 +52,7 @@ const DashboardSide = () => {
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
                     <Link to="/place-order"><li><MdRadioButtonUnchecked /> Place Order</li></Link>
-                    <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>
+                    {(user?.role === "admin" || user.permissions?.Oderlist) &&  <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>}
                     {/* {user?.role === "admin" &&  <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>} */}
                 </div>
             </div>

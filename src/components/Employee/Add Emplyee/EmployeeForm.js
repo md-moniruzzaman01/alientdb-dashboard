@@ -17,17 +17,16 @@ const EmployeeForm = () => {
             const ProductAdd = true;
             const Purches = true;
             const Oderlist = true;
-            const stockreport = true;
+
             const DeleteProduct = true;
-            permissions = { ProductAdd, Purches, Oderlist, stockreport, DeleteProduct }
+            permissions = { ProductAdd, Purches, Oderlist, DeleteProduct }
         }
         else{
             const ProductAdd = e.target.ProductAdd?.checked;
             const Purches = e.target.purches?.checked;
             const Oderlist = e.target.orderlist?.checked;
-            const stockreport = e.target.stockreport?.checked;
             const DeleteProduct = e.target.deleteProduct?.checked;
-            permissions = { ProductAdd, Purches, Oderlist, stockreport, DeleteProduct }
+            permissions = { ProductAdd, Purches, Oderlist, DeleteProduct }
         }
         const EmployeeUserName = e.target.userName.value;
         const EmployeeNidNumber = e.target.NidNumber.value;
@@ -123,17 +122,11 @@ const EmployeeForm = () => {
                                 <label className='ml-2' htmlFor="order">Order List</label>
                             </div>
                             <div>
-                                <input type="checkbox" id='stock' name="stockreport" value="stockreport" />
-                                <label className='ml-2' htmlFor="stock">Stock report</label>
-                            </div>
-                            <div>
                                 <input type="checkbox" id='deleteProduct' name="deleteProduct" value="deleteProduct" />
                                 <label className='ml-2' htmlFor="deleteProduct">Product delete and edit</label>
                             </div>
                         </div>
                     </div>
-
-
                     }
 
                     <div className="form-control">

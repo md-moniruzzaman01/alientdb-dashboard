@@ -14,7 +14,10 @@ const [Uploading, setUploading]=useState(false)
     e.preventDefault();
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+         'Content-Type': 'application/json',
+         authorization: `bearer ${localStorage.getItem('token')}`
+         },
       body: JSON.stringify({ data: csvfile })
     };
     if (csvfile) {
