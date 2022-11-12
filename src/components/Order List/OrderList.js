@@ -1,16 +1,15 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PaginationPage from '../Shared/PaginationPage';
-import InventoryTable from './InventoryTable';
+import OrderTable from './OrderTable';
 
-const InventoryList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount }) => {
-     
+const OrderList = ({ product, setCurrentPage,size,url, setProductCount,productCount,pageCount,setPageCount }) => {
     useEffect(() => {
         fetch(url, {
         })
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
+                console.log(count);
                 setProductCount(count)
                 const pages = Math.ceil(count / size)
                 setPageCount(pages)
@@ -19,10 +18,10 @@ const InventoryList = ({ product, DeleteProduct, setCurrentPage,size, url,setPro
     }, [size,url])
     return (
         <div>
-            <InventoryTable product={product} DeleteProduct={DeleteProduct}/>
+            <OrderTable product={product}/>
             <PaginationPage pageCount={pageCount} productCount={productCount} setCurrentPage={setCurrentPage} size={size}/>
         </div>
     );
 };
 
-export default InventoryList;
+export default OrderList;

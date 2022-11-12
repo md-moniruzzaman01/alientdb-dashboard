@@ -11,7 +11,7 @@ const AddProductCsvFile = () => {
         e.preventDefault();
       const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', authorization:`bearer ${localStorage.getItem('token')}` },
         body: JSON.stringify({ data: csvfile })
       };
       if (csvfile) {
@@ -29,7 +29,7 @@ const AddProductCsvFile = () => {
           });
   
       } else {
-        console.log('no file found');
+        toast('no file found')
       }
     }
     return (

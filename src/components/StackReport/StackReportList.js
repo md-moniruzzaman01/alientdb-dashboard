@@ -10,7 +10,6 @@ const StackReportList = ({ product, DeleteProduct, setCurrentPage,size, url,setP
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
-                console.log(count);
                 setProductCount(count)
                 const pages = Math.ceil(count / size)
                 setPageCount(pages)

@@ -24,7 +24,7 @@ const PlaceOrderPage = () => {
         fetch("http://localhost:5000/countOrder", {}).then(res => res.json()).then(data => setInvoiceNumber(data))
     }, [])
 
-    const InvoiceHandle = (parseInt(InvoiceNumber.count) || 0) + 1;
+    const InvoiceHandle = ((parseInt(InvoiceNumber.count) || 0) + 1).toString();
     const [inputFields, setInputFields] = useState([
         { id: uuidv4(), Product: '', quntity: '',_id:'' },
     ]);

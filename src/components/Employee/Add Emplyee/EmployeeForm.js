@@ -43,8 +43,6 @@ const EmployeeForm = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-
-                console.log(data);
                 if (data.status) {
                     toast('employee add successfully')
                     e.target.reset();
