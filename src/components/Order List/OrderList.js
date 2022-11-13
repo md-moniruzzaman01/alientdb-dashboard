@@ -5,6 +5,9 @@ import OrderTable from './OrderTable';
 const OrderList = ({ product, setCurrentPage,size,url, setProductCount,productCount,pageCount,setPageCount }) => {
     useEffect(() => {
         fetch(url, {
+            headers: {
+                authorization:`bearer ${localStorage.getItem('token')}`
+            },
         })
             .then(res => res.json())
             .then(data => {

@@ -23,8 +23,11 @@ const Login = () => {
 
         fetch('http://localhost:5000/login', {
             method: 'POST',
+            crossDomain: true,
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify(data),
         })
@@ -34,7 +37,7 @@ const Login = () => {
                     toast('login sucess');
                     setUser(data.user);
                     window.localStorage.setItem('token', data.data);
-                    window.location.href='/'
+                    window.location.href = '/'
 
                 } else if (data.error == 'Invalied password') {
                     toast("password is not match");

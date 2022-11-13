@@ -6,7 +6,11 @@ const OrderPage = ({ setSize, pageName, setContainer,setSearchData,size,currentP
         const url = `http://localhost:5000/${URLForsearch}?search=${searchValue}&page=${currentPage}&size=${size}`;
         const countURL = `http://localhost:5000/${URLForsearch}-count?search=${searchValue}`
         if (searchValue.length > 0) {
-            fetch(url)
+            fetch(url,{
+                headers: {
+                    authorization:`bearer ${localStorage.getItem('token')}`
+                },
+            })
                 .then(res => res.json())
                 .then(data => {
                     setSearchData(data);

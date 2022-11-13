@@ -21,7 +21,7 @@ const EmployeeForm = () => {
             const DeleteProduct = true;
             permissions = { ProductAdd, Purches, Oderlist, DeleteProduct }
         }
-        else{
+        else {
             const ProductAdd = e.target.ProductAdd?.checked;
             const Purches = e.target.purches?.checked;
             const Oderlist = e.target.orderlist?.checked;
@@ -35,9 +35,12 @@ const EmployeeForm = () => {
 
         fetch('http://localhost:5000/add-employee', {
             method: 'POST',
+            crossDomain: true,
             headers: {
-                'Content-Type': 'application/json',
-                authorization:`bearer ${localStorage.getItem('token')}`
+                authorization: `bearer ${localStorage.getItem('token')}`,
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
             },
             body: JSON.stringify(EmployeeData),
         })

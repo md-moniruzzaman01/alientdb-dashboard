@@ -5,7 +5,11 @@ import AsyncSelect from 'react-select/async';
 import { toast } from 'react-toastify';
 
 const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse,setOrderBtn }) => {
+    const [error, setError]=useState(false)
 const [qnt , setqnt]=useState({qnt :0})
+
+    // onBlur={event => handleQuantityValue(inputField.id, event)} 
+const handleQuantityValue = (id, event)=>{
     const fetchProductName = (id)=>{
       
         fetch(`http://localhost:5000/find-quantity/${id}?warehouse=${ChooseWarehouse}`)
@@ -14,16 +18,16 @@ const [qnt , setqnt]=useState({qnt :0})
          setqnt(data);
         })
     }
-const handleQuantityValue = (id, event)=>{
     const newInputFields = inputFields.map(i => {
         const quantityValue =  fetchProductName(i._id) 
         const quantity = parseInt(qnt.qnt);
           if (id === i.id) {
-              if ( event.target.value > quantity ) {
-                setOrderBtn(true)
-                toast('quantity invalid ')
-              }else{
+              if (quantity >= event.target.value) {
                 setOrderBtn(false)
+                setError(false)
+              }else{
+                setOrderBtn(true)
+                setError(true)
               }
           }
           return i;
@@ -39,6 +43,10 @@ const handleQuantityValue = (id, event)=>{
         setInputFields(newInputFields);
     }
 
+    const handleQnt = (id, event)=>{
+        handleChangeInput(id, event);
+        handleQuantityValue(id, event)
+    }
     const handleAddFields = (e) => {
         e.preventDefault();
         setInputFields([...inputFields, { id: uuidv4(), Product: '', quntity: '', _id:''}])
@@ -74,12 +82,12 @@ const handleQuantityValue = (id, event)=>{
     return (
         <div className='my-4'>
 
+            {error? <p className='text-red-600 flex justify-end text-xl font-bold'>Invalid quantity</p>: <p></p>}
 
             {
               ChooseWarehouse.length > 1?  inputFields.map(inputField => (
-                    <div className='flex' key={inputField.id}>
+                  <div className='flex' key={inputField.id}>
                         <div className='w-11/12 flex'>
-
                             <div className='form-control w-3/6'>
                                 <label className="label font-bold">Product Name</label>
                                 {/* <input type="text" placeholder="Product name.." name="firstName" value={inputField.firstName} onChange={event => handleChangeInput(inputField.id, event)} className="input input-bordered rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-400 w-full rounded-none" /> */}
@@ -93,7 +101,7 @@ const handleQuantityValue = (id, event)=>{
                             </div>
                             <div className='form-control w-3/6'>
                                 <label className="label font-bold">Quantity</label>
-                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleChangeInput(inputField.id, event)} onBlur={event => handleQuantityValue(inputField.id, event)} className='input h-[38px] input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleQnt(inputField.id, event)} className={`input h-[38px] input-bordered focus:outline-none focus:ring-1  w-full  rounded-none ${error?'focus:ring-red-600':'focus:ring-blue-400'}`} />
                             </div>
 
                         </div>
