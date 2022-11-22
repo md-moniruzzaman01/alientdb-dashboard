@@ -6,7 +6,16 @@ import { toast } from 'react-toastify';
 const EditProductBox = ({ id }) => {
     const [ProductEdit, setProductEdit]=useState({Product:'',Brand:'',ParchesCost:'',Unit:'',remaindquantity:''})
     useEffect(()=>{
-        fetch(`http://localhost:5000/product/${id}`, {}).then(res => res.json()).then(data => setProductEdit(data));
+        fetch(`http://localhost:5000/product/${id}`, {
+            method: 'GET',
+            headers: {
+                authorization:`bearer ${localStorage.getItem('token')}`
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            setProductEdit(data)
+        });
     },[])
     const HandleEdit = (e)=>{
         setProductEdit({...ProductEdit,[e.target.name]:e.target.value})
@@ -17,6 +26,7 @@ const EditProductBox = ({ id }) => {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
+                authorization:`bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(ProductEdit),
         })
@@ -43,7 +53,7 @@ const EditProductBox = ({ id }) => {
                             <label className="label py-2">
                                 <span className="label-text font-semibold text-lg">Product Name</span>
                             </label>
-                            <input type="text" name="Product" value={ProductEdit.Product} onChange={(e)=>HandleEdit(e)} placeholder="Type product name here...." className="input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400"  required/>
+                            <input type="text" name="Product"  value={ProductEdit.Product} onChange={(e)=>HandleEdit(e)} placeholder="Type product name here...." className="input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400"  required/>
                         </div>
 
                         {/* Brand */}

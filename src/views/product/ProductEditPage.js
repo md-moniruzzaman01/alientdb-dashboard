@@ -4,7 +4,6 @@ import EditProductBox from '../../components/product/Edit/EditProductBox';
 
 const ProductEditPage = () => {
     const { id,warehouse } = useParams()
-    console.log('dfdsfs',id,warehouse);
     return (
         <div className='page px-4 py-2'>
             <EditProductBox id={id}/>

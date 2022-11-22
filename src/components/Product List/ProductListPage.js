@@ -32,7 +32,10 @@ const URLForsearch = 'product-list'
 const url = "http://localhost:5000/countproduct"
     const DeleteProduct = (id) => {
         fetch(`http://localhost:5000/remove/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                authorization:`bearer ${localStorage.getItem('token')}`
+            },
         })
             .then(res => res.json())
             .then(data => {

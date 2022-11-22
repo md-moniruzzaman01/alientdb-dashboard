@@ -12,7 +12,7 @@ const IndexPages = () => {
     return (
         <div>
 
-            <div className='flex justify-center items-center'>
+            {/* <div className='flex justify-center items-center'>
                 <div className="stats shadow w-full m-4">
 
                     <div className="stat">
@@ -49,7 +49,7 @@ const IndexPages = () => {
                     </div>
 
                 </div>
-            </div>
+            </div> */}
             <ShortProductBox />
             
 

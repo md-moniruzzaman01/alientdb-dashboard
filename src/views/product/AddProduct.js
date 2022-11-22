@@ -9,7 +9,7 @@ const AddProduct = () => {
         const Brand = e.target.brand.value;
         const ParchesCost = e.target.cost.value;
         const ProductUnit = e.target.unit.value;
-        const remaindquantity = e.target.quantity.value;
+        const remaindquantity = parseInt(e.target.quantity.value) || 10;
         const product = { Product: ProductName, Brand, ParchesCost, Unit: ProductUnit, remaindquantity }
 
 

@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import LoadingScreen from '../Shared/LoadingScreen';
 import TopOfPage from '../Shared/TopOfPage';
 import ProductList from './ProductList';
-
 const ProductByWarehousePage = ({id}) => {
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)

@@ -35,7 +35,7 @@ const PurchesProductEdit = ({ id }) => {
                 }
             })
     };
-    console.log(ProductEdit);
+    
     // useEffect(() => {
     //     fetch("http://localhost:5000/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
 

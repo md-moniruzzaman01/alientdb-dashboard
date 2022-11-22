@@ -15,7 +15,7 @@ const WarehouseProductTable = ({ product, id }) => {
                             <th>Product Name</th>
                             <th>Brand</th>
                             <th>Quantity</th>
-                            <th>Function</th>
+                            {/* <th>Function</th> */}
 
                         </tr>
                     </thead>
@@ -35,7 +35,8 @@ const WarehouseProductTable = ({ product, id }) => {
 
                                 }
 
-                                <td onClick={()=>ViewInvoiceHandle(prodict._id)}>Edit</td>
+                                {/* <td onClick={()=>ViewInvoiceHandle(prodict._id)}>Edit</td> */}
+                                {/* <td >Edit</td> */}
                             </tr>)
 
                         }
