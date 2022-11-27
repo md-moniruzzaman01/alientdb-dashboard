@@ -14,7 +14,7 @@ const AddProduct = () => {
 
 
 
-        fetch('http://localhost:5000/add', {
+        fetch('https://alientbd-servar.onrender.com/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

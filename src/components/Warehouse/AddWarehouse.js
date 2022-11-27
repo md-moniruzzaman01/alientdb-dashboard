@@ -6,12 +6,11 @@ const AddWarehouse = () => {
         e.preventDefault();
         const Location= e.target.WarehouseLocation.value;
         const WarehouseLocation = Location.toUpperCase();
-        console.log(WarehouseLocation);
         const WarehouseCode = e.target.warehouseCode.value;
         const warehouse = {WarehouseCode,WarehouseLocation}
         
         
-        fetch('http://localhost:5000/add-warehouse', {
+        fetch('https://alientbd-servar.onrender.com/add-warehouse', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

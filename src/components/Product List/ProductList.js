@@ -20,7 +20,7 @@ const ProductList = ({ product, DeleteProduct, setCurrentPage,size, url,setProdu
     }, [size,url])
     return (
         <div>
-            <div className='btn btn-sm my-2 btn-ghost' onClick={()=> Deleteall()}>delete all</div>
+            {/* <div className='btn btn-sm my-2 btn-ghost' onClick={()=> Deleteall()}>delete all</div> */}
             <ProductTable product={product} DeleteProduct={DeleteProduct}/>
             <PaginationPage pageCount={pageCount} productCount={productCount} setCurrentPage={setCurrentPage} size={size}/>
         </div>

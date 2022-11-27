@@ -18,7 +18,6 @@ const StackTable = ({product , DeleteProduct}) => {
                             <th>Total Purchase</th>
                             <th>Total Sold</th>
                             <th>In Stock</th>
-                            <th>Function</th>
                           
                         </tr>
                     </thead>

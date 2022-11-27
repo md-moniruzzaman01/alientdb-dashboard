@@ -21,15 +21,15 @@ const StackReportPage = () => {
         window.location.reload(false);
     }
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/inventory?page=${currentPage}&size=${size}`).then(res => res.json()));
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://alientbd-servar.onrender.com/inventory?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
         refetch()
     }, [currentPage, size])
 
-const url = "http://localhost:5000/count-inventory"
+const url = "https://alientbd-servar.onrender.com/count-inventory"
 const URLForsearch = 'product-list'
     const DeleteProduct = (id) => {
-        fetch(`http://localhost:5000/remove/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/remove/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

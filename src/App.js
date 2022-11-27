@@ -33,7 +33,7 @@ function App() {
   const [dashboardSideBarSize,setDashboardSideBarSize]= useState(true)
   const [user, setUser] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/userData', {
+    fetch('https://alientbd-servar.onrender.com/userData', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

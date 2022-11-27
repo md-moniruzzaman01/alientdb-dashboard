@@ -6,9 +6,9 @@ const Modal = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0)
     const [productCount, setProductCount] = useState(0)
-    const url = "http://localhost:5000/countremainder"
+    const url = "https://alientbd-servar.onrender.com/countremainder"
     useEffect(() => {
-        const url = `http://localhost:5000/remainder?page=${currentPage}`
+        const url = `https://alientbd-servar.onrender.com/remainder?page=${currentPage}`
 
         fetch(url, {
         })

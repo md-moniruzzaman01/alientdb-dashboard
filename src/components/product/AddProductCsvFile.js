@@ -15,7 +15,7 @@ const AddProductCsvFile = () => {
         body: JSON.stringify({ data: csvfile })
       };
       if (csvfile) {
-        fetch('http://localhost:5000/add-product', requestOptions)
+        fetch('https://alientbd-servar.onrender.com/add-product', requestOptions)
           .then(response => response.json())
           .then(data => {
             if (data.status == "Ok") {

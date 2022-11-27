@@ -29,7 +29,7 @@ const WarehouseProductTable = ({ product, id }) => {
                                 {
 
                                     prodict.warehouse.map((pd, i) => {
-                                        return pd.houseName === id && <td key={i}>{pd?.qnt}</td>
+                                        return pd.houseName === id && <td key={i}>{prodict?.qnt}</td>
                                     }
                                     )
 

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const EditProductBox = ({ id }) => {
     const [ProductEdit, setProductEdit]=useState({Product:'',Brand:'',ParchesCost:'',Unit:'',remaindquantity:''})
     useEffect(()=>{
-        fetch(`http://localhost:5000/product/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/product/${id}`, {
             method: 'GET',
             headers: {
                 authorization:`bearer ${localStorage.getItem('token')}`
@@ -22,7 +22,7 @@ const EditProductBox = ({ id }) => {
     }
     const ProductUpdateHandle= (e)=>{
         e.preventDefault();
-        fetch(`http://localhost:5000/product-update/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/product-update/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

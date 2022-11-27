@@ -5,7 +5,6 @@ const ProductTable = ({product , DeleteProduct}) => {
     const navigate = useNavigate()
     const EditHandleProduct = (id)=> navigate(`/product-edit/${id}`)
     const {  user } = useContext(Products);
-    console.log(product);
     return (
         <>
         

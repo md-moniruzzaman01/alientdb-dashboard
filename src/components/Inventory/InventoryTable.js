@@ -1,6 +1,7 @@
 import React from 'react';
 
 const InventoryTable = ({product,DeleteProduct}) => {
+    console.log(product);
     return (
         <div className="overflow-x-auto min-h-[70vh]">
             <table className="table table-zebra w-full">

@@ -12,7 +12,6 @@ const OrderList = ({ product, setCurrentPage,size,url, setProductCount,productCo
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
-                console.log(count);
                 setProductCount(count)
                 const pages = Math.ceil(count / size)
                 setPageCount(pages)

@@ -19,9 +19,9 @@ const PlaceOrderPage = () => {
     const [orderBtn, setOrderBtn] = useState(false);
     const { user } = useContext(Products)
     useEffect(() => {
-        fetch("http://localhost:5000/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
-        fetch("http://localhost:5000/employee", {}).then(res => res.json()).then(data => setEmployee(data))
-        fetch("http://localhost:5000/countOrder", {}).then(res => res.json()).then(data => setInvoiceNumber(data))
+        fetch("https://alientbd-servar.onrender.com/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
+        fetch("https://alientbd-servar.onrender.com/employee", {}).then(res => res.json()).then(data => setEmployee(data))
+        fetch("https://alientbd-servar.onrender.com/countOrder", {}).then(res => res.json()).then(data => setInvoiceNumber(data))
     }, [])
 
     const InvoiceHandle = ((parseInt(InvoiceNumber.count) || 0) + 1).toString();
@@ -40,7 +40,7 @@ const PlaceOrderPage = () => {
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.name
         const orderDetails = {InvoiceHandle,warehouseChoose:ChooseWarehouse,InChargePerson,customerName, product:inputFields,Date:today}
-        fetch('http://localhost:5000/add-order', {
+        fetch('https://alientbd-servar.onrender.com/add-order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

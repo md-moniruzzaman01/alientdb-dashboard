@@ -21,7 +21,7 @@ const Login = () => {
         const password = e.target.password.value;
         const data = { username, password }
 
-        fetch('http://localhost:5000/login', {
+        fetch('https://alientbd-servar.onrender.com/login', {
             method: 'POST',
             crossDomain: true,
             headers: {

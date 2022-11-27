@@ -10,7 +10,7 @@ const WarehouseTable = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("http://localhost:5000/warehouse", {
+        fetch("https://alientbd-servar.onrender.com/warehouse", {
         })
             .then(res => res.json())
             .then(data => {

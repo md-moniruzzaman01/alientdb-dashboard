@@ -21,14 +21,14 @@ const ProductByWarehousePage = ({id}) => {
         window.location.reload(false);
     }
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/product-warehouse/${id}?page=${currentPage}&size=${size}`).then(res => res.json()));
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://alientbd-servar.onrender.com/product-warehouse/${id}?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
         refetch()
     }, [currentPage, size])
 const URLForsearch = 'warehouse-product'
-const url = "http://localhost:5000/countproduct"
+const url = "https://alientbd-servar.onrender.com/countproduct"
     const DeleteProduct = (id) => {
-        fetch(`http://localhost:5000/remove/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/remove/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const MainNavBar = () => {
     const { user, setUser, dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products)
     const [productCount, setProductCount] = useState(0)
-    const url = "http://localhost:5000/countremainder"
+    const url = "https://alientbd-servar.onrender.com/countremainder"
     function refreshPage() {
         window.location.reload(false);
     }

@@ -23,9 +23,9 @@ const OrderListPage = () => {
     function refreshPage() {
         window.location.reload(false);
     }
-    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all-order?page=${currentPage}&size=${size}`).then(res => res.json()));
+    // const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://alientbd-servar.onrender.com/all-order?page=${currentPage}&size=${size}`).then(res => res.json()));
     useEffect(() => {
-        fetch(`http://localhost:5000/all-order?page=${currentPage}&size=${size}`,{
+        fetch(`https://alientbd-servar.onrender.com/all-order?page=${currentPage}&size=${size}`,{
             headers: {
                 authorization:`bearer ${localStorage.getItem('token')}`
             },
@@ -35,10 +35,10 @@ const OrderListPage = () => {
         setProduct(data)
        })
     }, [currentPage, size])
-    const url = "http://localhost:5000/countOrder";
+    const url = "https://alientbd-servar.onrender.com/countOrder";
     const URLForsearch = 'order-search';
     useEffect(() => {
-        fetch("http://localhost:5000/countOrder", {
+        fetch("https://alientbd-servar.onrender.com/countOrder", {
         })
             .then(res => res.json())
             .then(data => {

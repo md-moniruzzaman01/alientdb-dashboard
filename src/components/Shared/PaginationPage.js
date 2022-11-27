@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 const PaginationPage = ({pageCount, productCount, setCurrentPage, size}) => {
-    console.log(pageCount,productCount);
     return (
         <div className="bg-white z-40 sticky sm:flex items-center w-full sm:justify-between bottom-0 right-0 border-t border-gray-200 p-2">
                 <div className="flex items-center mb-2 sm:mb-0">

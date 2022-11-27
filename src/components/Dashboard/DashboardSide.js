@@ -6,7 +6,7 @@ import { FaBoxes, FaUsers } from "react-icons/fa";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { MdRadioButtonUnchecked } from "react-icons/md";
 import { Products } from '../../App';
-
+import LOGO from '../../image/alient_logo.png'
 const DashboardSide = () => {
     const { dashboardSideBarSize, user } = useContext(Products);
     return (
@@ -14,8 +14,8 @@ const DashboardSide = () => {
             {/* side arrow */}
 
             {/* Logo */}
-            <div className='border-b border-gray-500 pb-4 mb-4'>
-                <Link to="/"><h1 className='text-4xl font-semibold px-4 uppercase'>New<span className='text-red-600'>t</span>ech</h1></Link>
+            <div className='flex justify-center items-center'>
+                <Link to="/"><img className='py-2 h-28' src={LOGO} alt="Alientbd Logo" /></Link>
             </div>
 
             {/* Search */}

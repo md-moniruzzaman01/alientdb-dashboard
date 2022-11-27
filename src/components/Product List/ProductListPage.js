@@ -22,16 +22,16 @@ const ProductListPage = () => {
         window.location.reload(false);
     }
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all?page=${currentPage}&size=${size}`).then(res => res.json()));
+    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`https://alientbd-servar.onrender.com/all?page=${currentPage}&size=${size}`).then(res => res.json()));
    
 
     useEffect(() => {
         refetch()
     }, [currentPage, size])
 const URLForsearch = 'product-list'
-const url = "http://localhost:5000/countproduct"
+const url = "https://alientbd-servar.onrender.com/countproduct"
     const DeleteProduct = (id) => {
-        fetch(`http://localhost:5000/remove/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/remove/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization:`bearer ${localStorage.getItem('token')}`
@@ -52,7 +52,7 @@ const url = "http://localhost:5000/countproduct"
             })
     }
     const Deleteall = (id) => {
-        fetch(`http://localhost:5000/removeall`, {
+        fetch(`https://alientbd-servar.onrender.com/removeall`, {
             method: 'DELETE'
         })
             .then(res => res.json())

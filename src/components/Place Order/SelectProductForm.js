@@ -12,7 +12,7 @@ const [qnt , setqnt]=useState({qnt :0})
 const handleQuantityValue = (id, event)=>{
     const fetchProductName = (id)=>{
       
-        fetch(`http://localhost:5000/find-quantity/${id}?warehouse=${ChooseWarehouse}`)
+        fetch(`https://alientbd-servar.onrender.com/find-quantity/${id}?warehouse=${ChooseWarehouse}`)
         .then(res => res.json())
         .then(data=>{
          setqnt(data);
@@ -75,7 +75,7 @@ const handleQuantityValue = (id, event)=>{
 
     // asyncselect 
     const loadOptions = async (inputText, callback) => {
-        const response = await fetch(`http://localhost:5000/search-product/${ChooseWarehouse}?search=${inputText}`)
+        const response = await fetch(`https://alientbd-servar.onrender.com/search-product/${ChooseWarehouse}?search=${inputText}`)
         const json = await response.json()
         callback(json.map(i => ({ label: i.Product, value: i.Product, id: i._id })))
     }

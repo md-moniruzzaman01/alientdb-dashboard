@@ -10,7 +10,7 @@ const InvoicePage = () => {
     const componentRef = useRef();
     const [invoice, setInvoice] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/order/${id}`, {
         })
             .then(res => res.json())
             .then(data => {

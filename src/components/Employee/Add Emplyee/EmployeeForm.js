@@ -33,7 +33,7 @@ const EmployeeForm = () => {
         const EmployeePassword = e.target.password.value;
         const EmployeeData = { EmployeeName, EmployeeNumber, Employeedata, Employeedesignation, EmployeeNidNumber, EmployeeUserName, EmployeePassword, permissions }
 
-        fetch('http://localhost:5000/add-employee', {
+        fetch('https://alientbd-servar.onrender.com/add-employee', {
             method: 'POST',
             crossDomain: true,
             headers: {

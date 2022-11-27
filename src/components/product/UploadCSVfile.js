@@ -21,7 +21,7 @@ const [Uploading, setUploading]=useState(false)
       body: JSON.stringify({ data: csvfile })
     };
     if (csvfile) {
-      fetch('http://localhost:5000/product-upload', requestOptions)
+      fetch('https://alientbd-servar.onrender.com/product-upload', requestOptions)
         .then(response => {
           response.json();
           if(response.status == 200){

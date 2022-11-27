@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentPage,setSearchURL,URLForsearch }) => {
     const searchingSystemHandle = (e) => { 
         const searchValue = e.target.value;
-        // const url = `http://localhost:5000/inventory-search?search=${searchValue}&page=${currentPage}&size=${size}`;
-        const url = `http://localhost:5000/${URLForsearch}?search=${searchValue}&page=${currentPage}&size=${size}`;
-        const countURL = `http://localhost:5000/${URLForsearch}-count?search=${searchValue}`
+        // const url = `https://alientbd-servar.onrender.com/inventory-search?search=${searchValue}&page=${currentPage}&size=${size}`;
+        const url = `https://alientbd-servar.onrender.com/${URLForsearch}?search=${searchValue}&page=${currentPage}&size=${size}`;
+        const countURL = `https://alientbd-servar.onrender.com/${URLForsearch}-count?search=${searchValue}`
         if (searchValue.length > 1) {
             fetch(url)
                 .then(res => res.json())

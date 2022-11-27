@@ -13,7 +13,7 @@ const Setting = () => {
         const NewPassword = e.target.NewPassword.value;
         const userName = user?.name
         const orderDetails = { userName, OldPassword, NewPassword }
-        fetch('http://localhost:5000/change-password', {
+        fetch('https://alientbd-servar.onrender.com/change-password', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

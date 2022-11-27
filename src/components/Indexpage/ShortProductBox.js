@@ -5,7 +5,7 @@ import { useState } from 'react';
 const ShortProductBox = () => {
     const [data, setData] = useState([]);
     useEffect(() => {
-        const url = 'http://localhost:5000/low-qnt'
+        const url = 'https://alientbd-servar.onrender.com/low-qnt'
 
         fetch(url, {
         })
@@ -15,8 +15,8 @@ const ShortProductBox = () => {
             })
 
     }, [])
-    // http://localhost:5000/remainder
-    // http://localhost:5000/countremainder
+    // https://alientbd-servar.onrender.com/remainder
+    // https://alientbd-servar.onrender.com/countremainder
     return (
         <div>
             <div className=" w-full ">

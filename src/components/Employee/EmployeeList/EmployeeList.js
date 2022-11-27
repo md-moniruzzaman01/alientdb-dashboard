@@ -9,17 +9,16 @@ const EmployeeList = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("http://localhost:5000/employee", {
+        fetch("https://alientbd-servar.onrender.com/employee", {
         })
             .then(res => res.json())
             .then(data => {
                 setEmployees(data);
-                console.log(data);
             })
     }, [])
 
     const DeleteEmpolyee = (id) => {
-        fetch(`http://localhost:5000/remove-employee/${id}`, {
+        fetch(`https://alientbd-servar.onrender.com/remove-employee/${id}`, {
             method: 'DELETE',
             headers: {
                 authorization:`bearer ${localStorage.getItem('token')}`
