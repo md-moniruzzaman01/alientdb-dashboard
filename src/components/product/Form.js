@@ -34,7 +34,6 @@ const Form = () => {
         const selectedOption = e.value;
         const newInputFields = inputFields.map(i => {
             if (id === i.id) {
-                console.log(e.brand);
                 i["Product"] = selectedOption;
                 i["brand"] = e.brand;
 
@@ -93,7 +92,7 @@ const Form = () => {
                                 />
                             <input type="text" name='discribtion' value={inputField.discribtion} onChange={event => handleChangeInput(inputField.id, event)} placeholder="Discribtion.." className={InputStyle} />
                             <input type="text" name='qnt' value={inputField.qnt} onChange={event => handleChangeInput(inputField.id, event)} placeholder="Quantity..." className={InputStyle} />
-                            <input type="text" name='brandt' value={inputField.brand}   placeholder="Brand"  className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  md:w-20 my-2 lg:my-0 rounded-none' />
+                            <input type="text" name='brand' value={inputField.brand}   placeholder="Brand"  className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  md:w-20 my-2 lg:my-0 rounded-none' />
                             {/* <input type="text" name='ParchesCost' value={inputField.ParchesCost} onChange={event => handleChangeInput(inputField.id, event)} placeholder="Purchase Cost.." className={InputStyle} /> */}
                             <select name='warehouse' value={inputField.warehouse} onChange={event => handleChangeInput(inputField.id, event)} className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400  w-full  md:w-32 lg:w-52 my-2 lg:my-0 rounded-none'>
                                 <option selected >Choose warehouse</option>

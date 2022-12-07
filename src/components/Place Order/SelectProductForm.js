@@ -49,7 +49,7 @@ const handleQuantityValue = (id, event)=>{
     }
     const handleAddFields = (e) => {
         e.preventDefault();
-        setInputFields([...inputFields, { id: uuidv4(), Product: '', quntity: '', _id:''}])
+        setInputFields([...inputFields, { id: uuidv4(), Product: '',brand:'', quntity: '', _id:''}])
         setqnt({qnt :0})
     }
 
@@ -65,6 +65,7 @@ const handleQuantityValue = (id, event)=>{
             if (id === i.id) {
                 i["Product"] = selectedOption;
                 i["_id"] = e.id;
+                i["brand"] = e.brand;
 
             }
             return i;
@@ -77,7 +78,7 @@ const handleQuantityValue = (id, event)=>{
     const loadOptions = async (inputText, callback) => {
         const response = await fetch(`https://alientbd-servar.onrender.com/search-product/${ChooseWarehouse}?search=${inputText}`)
         const json = await response.json()
-        callback(json.map(i => ({ label: i.Product, value: i.Product, id: i._id })))
+        callback(json.map(i => ({ label: i.Product, value: i.Product, id: i._id,brand:i.Brand  })))
     }
     return (
         <div className='my-4'>
@@ -99,9 +100,13 @@ const handleQuantityValue = (id, event)=>{
 
                                 />
                             </div>
-                            <div className='form-control w-3/6'>
+                            <div className='form-control w-3/12'>
+                                <label className="label font-bold">Brand</label>
+                                <input type="text" name='brand' value={inputField.brand}   placeholder="Brand"  className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                            </div>
+                            <div className='form-control w-3/12'>
                                 <label className="label font-bold">Quantity</label>
-                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleQnt(inputField.id, event)} className={`input h-[38px] input-bordered focus:outline-none focus:ring-1  w-full  rounded-none ${error?'focus:ring-red-600':'focus:ring-blue-400'}`} />
+                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleQnt(inputField.id, event)} className={`input  input-bordered focus:outline-none focus:ring-1  w-full  rounded-none ${error?'focus:ring-red-600':'focus:ring-blue-400'}`} />
                             </div>
 
                         </div>
