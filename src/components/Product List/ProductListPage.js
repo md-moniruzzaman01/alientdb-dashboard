@@ -10,94 +10,70 @@ import ProductList from './ProductList';
 const ProductListPage = () => {
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)
-    const [searchPageCount, setSearchPageCount] = useState(0)
-    const [searchProductCount, setSearchProductCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [size, setSize] = useState(100)
-    const [currentContainer, setContainer] = useState(false)
-    const [searchData, setSearchData] = useState([])
-    const [searchURL, setSearchURL] = useState([]);
-    const [searchcurrentPage, setSearchCurrentPage] = useState(0)
-    function refreshPage() {
-        window.location.reload(false);
-    }
+    const [searchInput, setSearchInput] = useState({})
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/all?page=${currentPage}&size=${size}`).then(res => res.json()));
-   
+
+    const { data, isLoading, refetch } = useQuery('product', () =>
+        fetch(`http://localhost:5000/api/product?search=${searchInput}&page=${currentPage}&limit=${size}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data?.success) {
+                    const product = data.data;
+                    const count = data.count
+                    setProductCount(count)
+                    const pages = Math.ceil(count / size)
+                    setPageCount(pages)
+                    return { product, count, error: false }
+                } else {
+                    return { product: [], count: 0, error: data.data }
+                }
+
+            })
+    );
 
     useEffect(() => {
         refetch()
-    }, [currentPage, size])
-const URLForsearch = 'product-list'
-const url = "http://localhost:5000/countproduct"
-    const DeleteProduct = (id) => {
-        fetch(`http://localhost:5000/remove/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                const confarm = window.confirm('Delete this item')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('Product delete successfully')
-                        refetch()
-                    } else {
-                        toast('Product delete unsuccessfully')
-                    }
-                }
+    }, [currentPage, size,searchInput])
+    // const DeleteProduct = (id) => {
+    //     fetch(`http://localhost:5000/remove/${id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             authorization: `bearer ${localStorage.getItem('token')}`
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             const confarm = window.confirm('Delete this item')
+    //             if (confarm) {
+    //                 if (data.deletedCount > 0) {
+    //                     toast('Product delete successfully')
+    //                     refetch()
+    //                 } else {
+    //                     toast('Product delete unsuccessfully')
+    //                 }
+    //             }
 
-            })
-    }
-    const Deleteall = (id) => {
-        fetch(`http://localhost:5000/removeall`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                const confarm = window.confirm('Delete this item')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('Product delete successfully')
-                        refetch()
-                    } else {
-                        toast('Product delete unsuccessfully')
-                    }
-                }
+    //         })
+    // }
 
-            })
-    }
-    
-     const container = currentContainer ?
-     <ProductList 
-     product={searchData} 
-     url={searchURL} 
-     DeleteProduct={DeleteProduct} 
-     size={size} 
-     setCurrentPage={setSearchCurrentPage}
-     pageCount={searchPageCount} setPageCount={setSearchPageCount}
-    productCount={searchProductCount} setProductCount={setSearchProductCount}
-      />:
-       <ProductList 
-       product={product} 
-       url={url} 
-       DeleteProduct={DeleteProduct}
-       Deleteall={Deleteall} 
-       size={size} 
-       setCurrentPage={setCurrentPage} 
-       pageCount={pageCount} setPageCount={setPageCount}
-       productCount={productCount} setProductCount={setProductCount}
-       />
 
 
     if (isLoading) {
         return <LoadingScreen />
     }
-
     return (
         <div>
-            <TopOfPage setSize={setSize} pageName="Product List" URLForsearch={URLForsearch} size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
+            <TopOfPage setSize={setSize} pageName="Product List"     setSearchInput={setSearchInput} setCurrentPage={setCurrentPage}/>
             {/* table */}
-            {container}
+            <ProductList
+            product={data.product}
+            size={size}
+            pageCount={pageCount} 
+            productCount={productCount} 
+            setCurrentPage={setCurrentPage}
+        />
         </div>
     );
 };

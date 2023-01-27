@@ -6,7 +6,7 @@ const WareHouseInput = ({warehouse,setChoosedWarehouse}) => {
         <div className='form-control w-full max-w-xs'>
             <label className="label font-bold">Warehouse</label>
             <select onClick={(e)=>setChoosedWarehouse(e.target.value)} className="select w-full max-w-xs select-bordered select-info" name='warehouseChose'>
-            <option disabled selected >Choose You warehouse</option>
+            <option disabled  >Choose You warehouse</option>
                 {WarehouseList}
             </select>
         </div>

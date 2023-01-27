@@ -21,7 +21,7 @@ const [Uploading, setUploading]=useState(false)
       body: JSON.stringify({ data: csvfile })
     };
     if (csvfile) {
-      fetch('http://localhost:5000/product-upload', requestOptions)
+      fetch('http://localhost:5000/api/upload/product', requestOptions)
         .then(response => {
           response.json();
           if(response.status == 200){

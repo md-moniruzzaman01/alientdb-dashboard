@@ -1,6 +1,7 @@
 import React from 'react';
 
-const InventoryTable = ({product,DeleteProduct}) => {
+const InventoryTable = ({product}) => {
+
     return (
         <div className="overflow-x-auto min-h-[70vh]">
             <table className="table table-zebra w-full">
@@ -17,7 +18,7 @@ const InventoryTable = ({product,DeleteProduct}) => {
                 <tbody>
 
                     {
-                        product && product.map((prodict, index) => <tr key={prodict._id}>
+                        product && product.map((prodict, index) => <tr key={index}>
                             <th>{index + 1}</th>
                             <td>{prodict?.Product}</td>
                             <td>{prodict?.Brand}</td>

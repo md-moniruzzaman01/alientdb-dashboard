@@ -9,64 +9,32 @@ import StackReportList from './StackReportList';
 const StackReportPage = () => {
     const [pageCount, setPageCount] = useState(0)
     const [productCount, setProductCount] = useState(0)
-    const [searchPageCount, setSearchPageCount] = useState(0)
-    const [searchProductCount, setSearchProductCount] = useState(0)
     const [currentPage, setCurrentPage] = useState(0)
     const [size, setSize] = useState(100)
-    const [currentContainer, setContainer] = useState(false)
-    const [searchData, setSearchData] = useState([])
-    const [searchURL, setSearchURL] = useState([])
-    const [searchcurrentPage, setSearchCurrentPage] = useState(0)
-    function refreshPage() {
-        window.location.reload(false);
-    }
+    const [searchInput, setSearchInput] = useState({})
 
-    const { data: product, isLoading, refetch } = useQuery('product', () => fetch(`http://localhost:5000/inventory?page=${currentPage}&size=${size}`).then(res => res.json()));
-    useEffect(() => {
-        refetch()
-    }, [currentPage, size])
 
-const url = "http://localhost:5000/count-inventory"
-const URLForsearch = 'product-list'
-    const DeleteProduct = (id) => {
-        fetch(`http://localhost:5000/remove/${id}`, {
-            method: 'DELETE'
-        })
+    const { data, isLoading, refetch } = useQuery('product', () =>
+        fetch(`http://localhost:5000/api/product/inventory?search=${searchInput}&page=${currentPage}&limit=${size}`)
             .then(res => res.json())
             .then(data => {
-                const confarm = window.confirm('Delete this item')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('order placed successfully')
-                        refreshPage()
-                    } else {
-                        toast('order place s unsuccessfully')
-                    }
+                if (data?.success) {
+                    const product = data.data;
+                    const count = data.count
+                    setProductCount(count)
+                    const pages = Math.ceil(count / size)
+                    setPageCount(pages)
+                    return { product, count, error: false }
+                } else {
+                    return { product: [], count: 0, error: data.data }
                 }
 
             })
-    }
+    );
 
-     const container = currentContainer ?
-     <StackReportList 
-     product={searchData} 
-     url={searchURL} 
-     DeleteProduct={DeleteProduct} 
-     size={size} 
-     setCurrentPage={setSearchCurrentPage}
-     pageCount={searchPageCount} setPageCount={setSearchPageCount}
-    productCount={searchProductCount} setProductCount={setSearchProductCount}
-      />:
-       <StackReportList 
-       product={product} 
-       url={url} 
-       DeleteProduct={DeleteProduct} 
-       size={size} 
-       setCurrentPage={setCurrentPage} 
-       pageCount={pageCount} setPageCount={setPageCount}
-       productCount={productCount} setProductCount={setProductCount}
-       />
-
+    useEffect(() => {
+        refetch()
+    }, [currentPage, size, searchInput])
 
     if (isLoading) {
         return <LoadingScreen />
@@ -74,9 +42,15 @@ const URLForsearch = 'product-list'
 
     return (
         <div>
-            <TopOfPage setSize={setSize} pageName="Stack report" URLForsearch={URLForsearch} size={size} setSearchURL={setSearchURL} currentPage={searchcurrentPage} setSearchData={setSearchData} currentContainer={currentContainer} setContainer={setContainer} />
+            <TopOfPage setSize={setSize} pageName="stack report" setSearchInput={setSearchInput} setCurrentPage={setCurrentPage} />
             {/* table */}
-            {container}
+            <StackReportList
+                product={data.product}
+                size={size}
+                pageCount={pageCount}
+                productCount={productCount}
+                setCurrentPage={setCurrentPage}
+            />
         </div>
     );
 };

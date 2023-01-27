@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Papa from "papaparse";
 import { toast } from 'react-toastify';
-import LoadingScreen from '../Shared/LoadingScreen';
 const AddProductCsvFile = () => {
     const [csvfile, setCsvFile] = useState(null)
     const inputField = useRef(null)
@@ -15,15 +14,10 @@ const AddProductCsvFile = () => {
         body: JSON.stringify({ data: csvfile })
       };
       if (csvfile) {
-        fetch('http://localhost:5000/add-product', requestOptions)
+        fetch('http://localhost:5000/api/upload', requestOptions)
           .then(response => response.json())
           .then(data => {
-            if (data.status == "Ok") {
-                toast('Product added successfully')
-            } 
-            else {
-                toast('Product added error')
-            }
+           console.log(data);
             e.target.reset();
             
           });

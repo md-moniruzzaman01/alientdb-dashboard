@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Products } from '../../App';
 
 const StackTable = ({product , DeleteProduct}) => {
-console.log(product);
+
 
     return (
         <div className="overflow-x-auto min-h-[70vh]">

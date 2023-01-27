@@ -4,45 +4,42 @@ import { v4 as uuidv4 } from 'uuid';
 import AsyncSelect from 'react-select/async';
 import { toast } from 'react-toastify';
 
-const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse,setOrderBtn }) => {
-const [qnt , setqnt]=useState({qnt :0})
-    const fetchProductName = (id)=>{
-      
-        fetch(`http://localhost:5000/find-quantity/${id}?warehouse=${ChooseWarehouse}`)
-        .then(res => res.json())
-        .then(data=>{
-         setqnt(data);
+const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOrderBtn }) => {
+    const [error, setError] = useState(false)
+    const [qnt, setqnt] = useState({ qnt: 0 })
+    const handleQuantityValue = (id, event) => {
+        const newInputFields = inputFields.map(i => {
+            const quantity = parseInt(qnt);
+            if (id === i.id) {
+                if (quantity >= event.target.value && event.target.value > 0 ) {
+                    setOrderBtn(false)
+                    setError(false)
+                } else {
+                    setOrderBtn(true)
+                    setError(true)
+                }
+            }
+            return i;
         })
     }
-const handleQuantityValue = (id, event)=>{
-    const newInputFields = inputFields.map(i => {
-        const quantityValue =  fetchProductName(i._id) 
-        const quantity = parseInt(qnt.qnt);
-          if (id === i.id) {
-              if ( event.target.value > quantity ) {
-                setOrderBtn(true)
-                toast('quantity invalid ')
-              }else{
-                setOrderBtn(false)
-              }
-          }
-          return i;
-      })
-}
     const handleChangeInput = (id, event) => {
         const newInputFields = inputFields.map(i => {
             if (id === i.id) {
-                    i[event.target.name] = event.target.value;
+                i[event.target.name] = event.target.value;
             }
             return i;
         })
         setInputFields(newInputFields);
     }
 
+    const handleQnt = (id, event) => {
+        handleChangeInput(id, event);
+        handleQuantityValue(id, event)
+    }
     const handleAddFields = (e) => {
         e.preventDefault();
-        setInputFields([...inputFields, { id: uuidv4(), Product: '', quntity: '', _id:''}])
-        setqnt({qnt :0})
+        setInputFields([...inputFields, { id: uuidv4(), Product: '', brand: '', quntity: '', _id: '' }])
+        setqnt({ qnt: 0 })
     }
 
     const handleRemoveFields = id => {
@@ -57,29 +54,41 @@ const handleQuantityValue = (id, event)=>{
             if (id === i.id) {
                 i["Product"] = selectedOption;
                 i["_id"] = e.id;
+                i["brand"] = e.brand;
 
             }
             return i;
         })
         setInputFields(newInputFields);
+
+        fetchProductName(e.id)
     };
 
+    const fetchProductName = (id) => {
+        fetch(`http://localhost:5000/api/utils/quantity/${id}?warehouse=${ChooseWarehouse}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setqnt(data?.data?.qnt);
+                }else{
+                    toast(data.data)
+                }
+            })
+    }
 
-    // asyncselect 
+    // asyncselect
     const loadOptions = async (inputText, callback) => {
-        const response = await fetch(`http://localhost:5000/search-product/${ChooseWarehouse}?search=${inputText}`)
+        const response = await fetch(`http://localhost:5000/api/utils/search-product/${ChooseWarehouse}?search=${inputText}`)
         const json = await response.json()
-        callback(json.map(i => ({ label: i.Product, value: i.Product, id: i._id })))
+        callback(json.data.map(i => ({ label: i.Product + ' _ Brand - ' + i.Brand, value: i.Product, id: i._id, brand: i.Brand })))
     }
     return (
         <div className='my-4'>
-
-
+            {error && <p className='text-red-600 flex justify-end text-xl font-bold'>Invalid quantity</p>}
             {
-              ChooseWarehouse.length > 1?  inputFields.map(inputField => (
+                ChooseWarehouse.length > 1 ? inputFields.map(inputField => (
                     <div className='flex' key={inputField.id}>
                         <div className='w-11/12 flex'>
-
                             <div className='form-control w-3/6'>
                                 <label className="label font-bold">Product Name</label>
                                 {/* <input type="text" placeholder="Product name.." name="firstName" value={inputField.firstName} onChange={event => handleChangeInput(inputField.id, event)} className="input input-bordered rounded-l-lg focus:outline-none focus:ring-1 focus:ring-blue-400 w-full rounded-none" /> */}
@@ -91,15 +100,19 @@ const handleQuantityValue = (id, event)=>{
 
                                 />
                             </div>
-                            <div className='form-control w-3/6'>
+                            <div className='form-control w-3/12'>
+                                <label className="label font-bold">Brand</label>
+                                <input type="text" name='brand' value={inputField.brand} placeholder="Brand" className='input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                            </div>
+                            <div className='form-control w-3/12'>
                                 <label className="label font-bold">Quantity</label>
-                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleChangeInput(inputField.id, event)} onBlur={event => handleQuantityValue(inputField.id, event)} className='input h-[38px] input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  rounded-none' />
+                                <input type="number" placeholder="Type Quantity.." name="quntity" value={inputField.quntity} onChange={event => handleQnt(inputField.id, event)} className={`input  input-bordered focus:outline-none focus:ring-1  w-full  rounded-none ${error ? 'focus:ring-red-600' : 'focus:ring-blue-400'}`} />
                             </div>
 
                         </div>
-                        <p disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)} className='px-4 py-2 bg-slate-400 mt-auto text-white rounded-none rounded-r-lg'>remove</p>
+                        <p disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)} className='px-3 py-2.5 mb-0.5 text-xl font-semibold bg-slate-400 mt-auto text-white rounded-none rounded-r-lg'>remove</p>
                     </div>
-                )):''
+                )) : ''
             }
 
             <div className='flex justify-end my-4'>

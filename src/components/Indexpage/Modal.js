@@ -6,40 +6,35 @@ const Modal = () => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0)
     const [productCount, setProductCount] = useState(0)
-    const url = "http://localhost:5000/countremainder"
     useEffect(() => {
-        const url = `http://localhost:5000/remainder?page=${currentPage}`
+        const url = `http://localhost:5000/api/utils/remainder?page=${currentPage}`
 
         fetch(url, {
         })
             .then(res => res.json())
             .then(data => {
-                setData(data);
+                if (data?.success) {
+                    setData(data.data);
+                    const count = data.count;
+                    setProductCount(count)
+                    const pages = Math.ceil(count / 10)
+                    setPageCount(pages)
+                }
+
             })
 
 
     }, [currentPage])
-    useEffect(() => {
-        fetch(url, {
-        })
-            .then(res => res.json())
-            .then(data => {
-                const count = data.count;
-                setProductCount(count)
-                const pages = Math.ceil(count / 10)
-                setPageCount(pages)
-            })
-    }, [])
     return (
-        <div>
+        <div >
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="remainder" className="modal-toggle" />
             <div className="modal">
-
+                <div className="modal-action ">
+                    <label htmlFor="remainder" className="btn btn-ghost text-4xl text-red-600"><AiOutlineCloseCircle /></label>
+                </div>
                 <div className="modal-box w-11/12 max-w-5xl">
-                    <div className="modal-action">
-                        <label htmlFor="remainder" className="btn btn-ghost text-4xl"><AiOutlineCloseCircle /></label>
-                    </div>
+
                     <div>
                         <div className=" w-full ">
                             {/* <!-- Top Sales Card --> */}
@@ -51,18 +46,18 @@ const Modal = () => {
                                 <div className="flow-root">
                                     <ul role="list" className="divide-y divide-gray-200">
                                         {
-                                            data && data.map((dt,i) => <li key={i} className="py-3 sm:py-4">
-                                                <div className="flex items-center space-x-4">
+                                            data && data.map((dt,) => <li key={dt._id} className="py-3 sm:py-4">
+                                                <div className="flex itms-center space-x-4">
                                                     <div className="flex-1 min-w-0">
                                                         <p className="text-sm font-medium text-gray-900 truncate">
-                                                            {dt?.Product}
+                                                            {dt?.doc?.Product}
                                                         </p>
                                                         <p className="text-sm text-gray-500 truncate">
-                                                            Brand: {dt?.Brand}
+                                                            Brand: {dt?.doc?.Brand}
                                                         </p>
                                                     </div>
                                                     <div className="inline-flex items-center  font-semibold ">
-                                                        Available Quantity: <p className='text-red-700 ml-2'>{dt?.qnt}</p>
+                                                        Available Quantity: <p className='text-red-700 ml-2'>{dt?.doc?.qnt || 0}</p>
                                                     </div>
                                                 </div>
                                             </li>

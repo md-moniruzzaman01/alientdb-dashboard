@@ -6,16 +6,25 @@ import { FaBoxes, FaUsers } from "react-icons/fa";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { MdRadioButtonUnchecked } from "react-icons/md";
 import { Products } from '../../App';
-
+import LOGO from '../../image/alient_logo.png'
+import useAdmin from '../../hooks/useAdmin';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import LoadingScreen2 from '../Shared/LoadingScreen2';
 const DashboardSide = () => {
-    const { dashboardSideBarSize, user } = useContext(Products);
+    const { dashboardSideBarSize } = useContext(Products);
+    const [user] = useAuthState(auth);
+    const [admin, power, adminLoading] = useAdmin(user);
+    if (adminLoading) {
+        return <LoadingScreen2></LoadingScreen2>
+    }
     return (
         <ul className={`menu  overflow-y-auto overflow-x-hidden bg-[#343A40] text-white relative ${dashboardSideBarSize ? "w-72 p-4" : "w-72 p-4 md:w-0 md:p-0"} `}>
             {/* side arrow */}
 
             {/* Logo */}
-            <div className='border-b border-gray-500 pb-4 mb-4'>
-                <Link to="/"><h1 className='text-4xl font-semibold px-4 uppercase'>New<span className='text-red-600'>t</span>ech</h1></Link>
+            <div className='flex justify-center items-center'>
+                <Link to="/"><img className='py-2 h-28' src={LOGO} alt="Alientbd Logo" /></Link>
             </div>
 
             {/* Search */}
@@ -36,11 +45,9 @@ const DashboardSide = () => {
 
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                {(user?.role === "admin" || user.permissions?.ProductAdd) &&  <Link to="/add-product"><li><MdRadioButtonUnchecked /> Add Product</li></Link>}
-
-                    <Link to="/product-list"><li><MdRadioButtonUnchecked /> Product List</li></Link>
-                    {/* <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link> */}
-                    {(user?.role === "admin" || user.permissions?.Purches) &&  <Link to="/product-purches"><li><MdRadioButtonUnchecked /> Purchase</li></Link>}
+                    {(admin || power.ProductAdd) && <Link to="/add-product"><li><a><MdRadioButtonUnchecked /> Add Product</a></li></Link>}
+                    <Link to="/product-list"><li><a><MdRadioButtonUnchecked />Product List</a></li></Link>
+                    {(admin  || power.purches) && <Link to="/product-purches"><li><a><MdRadioButtonUnchecked /> Purchase</a></li></Link>}
                 </div>
             </div>
 
@@ -51,9 +58,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-3xl'><GiCardboardBoxClosed /> </span> Order</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    <Link to="/place-order"><li><MdRadioButtonUnchecked /> Place Order</li></Link>
-                    {(user?.role === "admin" || user.permissions?.Oderlist) &&  <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>}
-                    {/* {user?.role === "admin" &&  <Link to="/oder-list"><li><MdRadioButtonUnchecked /> Order List</li></Link>} */}
+                    <Link to="/place-order"><li><a><MdRadioButtonUnchecked /> Place Order</a></li></Link>
+                    {(admin  || power?.Oderlist) &&  <Link to="/oder-list"><li><a><MdRadioButtonUnchecked /> Order List<a></a></a></li></Link>}
                 </div>
             </div>
 
@@ -64,8 +70,8 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-xl'><IoFileTrayStacked /></span> Stock </p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    <Link to="/inventory"><li><MdRadioButtonUnchecked /> Inventory</li></Link>
-                    <Link to="/stock-report"><li><MdRadioButtonUnchecked /> Stock Report</li></Link>
+                    <Link to="/inventory"><li><a><MdRadioButtonUnchecked /> Inventory</a></li></Link>
+                    <Link to="/stock-report"><li><a><MdRadioButtonUnchecked /> Stock Report</a></li></Link>
                 </div>
             </div>
 
@@ -76,20 +82,20 @@ const DashboardSide = () => {
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><BsFillCartPlusFill /></span> Warehouse</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    <Link to="/warehouse-report"><li><MdRadioButtonUnchecked /> Warehouse Report</li></Link>
+                    <Link to="/warehouse-report"><li><a><MdRadioButtonUnchecked /> Warehouse Report</a></li></Link>
                 </div>
             </div>
 
             {/* Employee */}
-            {user?.role === "admin" &&   <div className="collapse overflow-visible collapse-arrow">
+          { admin  && <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><FaUsers /></span> Employee</p>
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
-                    
-                <Link to="/add-employee"><li><MdRadioButtonUnchecked /> Add Employee</li></Link>
-                    <Link to="/employee-list"><li><MdRadioButtonUnchecked />Employee List</li></Link>
+
+                    <Link to="/add-employee"><li><a><MdRadioButtonUnchecked /> Add Employee</a></li></Link>
+                    <Link to="/employee-list"><li><a><MdRadioButtonUnchecked />Employee List</a></li></Link>
                 </div>
             </div>}
 

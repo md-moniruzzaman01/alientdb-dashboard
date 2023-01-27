@@ -3,20 +3,8 @@ import { useEffect } from 'react';
 import PaginationPage from '../Shared/PaginationPage';
 import InventoryTable from './InventoryTable';
 
-const InventoryList = ({ product, DeleteProduct, setCurrentPage,size, url,setProductCount,productCount,pageCount,setPageCount }) => {
+const InventoryList = ({ product, DeleteProduct, setCurrentPage,size,productCount,pageCount}) => {
      
-    useEffect(() => {
-        fetch(url, {
-        })
-            .then(res => res.json())
-            .then(data => {
-                const count = data.count;
-                setProductCount(count)
-                const pages = Math.ceil(count / size)
-                setPageCount(pages)
-            })
-            
-    }, [size,url])
     return (
         <div>
             <InventoryTable product={product} DeleteProduct={DeleteProduct}/>

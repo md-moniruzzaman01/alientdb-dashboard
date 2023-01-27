@@ -9,37 +9,36 @@ const EmployeeList = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("http://localhost:5000/employee", {
+        fetch("http://localhost:5000/api/employee", {
         })
             .then(res => res.json())
             .then(data => {
-                setEmployees(data);
-                console.log(data);
+                setEmployees(data.data);
             })
     }, [])
 
-    const DeleteEmpolyee = (id) => {
-        fetch(`http://localhost:5000/remove-employee/${id}`, {
-            method: 'DELETE',
-            headers: {
-                authorization:`bearer ${localStorage.getItem('token')}`
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                const confarm = window.confirm('Delete this Employee')
-                if (confarm) {
-                    if (data.deletedCount > 0) {
-                        toast('Employee removed')
-                        refreshPage()
-                    } else {
-                        toast('Some think wrong please try again')
-                        // refreshPage()
-                    }
-                }
+    // const DeleteEmpolyee = (id) => {
+    //     fetch(`http://localhost:5000/remove-employee/${id}`, {
+    //         method: 'DELETE',
+    //         headers: {
+    //             authorization:`bearer ${localStorage.getItem('token')}`
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             const confarm = window.confirm('Delete this Employee')
+    //             if (confarm) {
+    //                 if (data.deletedCount > 0) {
+    //                     toast('Employee removed')
+    //                     refreshPage()
+    //                 } else {
+    //                     toast('Some think wrong please try again')
+    //                     // refreshPage()
+    //                 }
+    //             }
 
-            })
-    }
+    //         })
+    // }
 
     return (
         <div>
@@ -51,6 +50,8 @@ const EmployeeList = () => {
                             <th></th>
                             <th>Name</th>
                             <th>phone</th>
+                            <th>Email</th>
+                            <th>Designation</th>
                             <th>function</th>
                         </tr>
                     </thead>
@@ -58,11 +59,13 @@ const EmployeeList = () => {
                       {
                         Employees && Employees.map((emplyee,index)=> <tr key={emplyee._id}>
                             <th>{index + 1}</th>
-                            <td>{emplyee?.EmployeeName}</td>
-                            <td>{emplyee?.EmployeeNumber}</td>
+                            <td>{emplyee?.fullName}</td>
+                            <td>{emplyee?.phoneNumber}</td>
+                            <td>{emplyee?.Email}</td>
+                            <td>{emplyee?.designation}</td>
                             <td className=''>
                                     <div className='w-20'>
-                                        <button onClick={() => DeleteEmpolyee(emplyee._id)} className="mx-2 btn btn-secondary text-white btn-xs">Delete</button>
+                                        {/* <button onClick={() => DeleteEmpolyee(emplyee._id)} className="mx-2 btn btn-secondary text-white btn-xs">Delete</button> */}
                                     </div>
                                 </td>
                         </tr>)

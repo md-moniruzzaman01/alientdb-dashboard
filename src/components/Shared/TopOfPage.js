@@ -1,34 +1,14 @@
 import React from 'react';
 import { useEffect } from 'react';
-const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentPage,setSearchURL,URLForsearch }) => {
-    const searchingSystemHandle = (e) => { 
-        const searchValue = e.target.value;
-        // const url = `http://localhost:5000/inventory-search?search=${searchValue}&page=${currentPage}&size=${size}`;
-        const url = `http://localhost:5000/${URLForsearch}?search=${searchValue}&page=${currentPage}&size=${size}`;
-        const countURL = `http://localhost:5000/${URLForsearch}-count?search=${searchValue}`
-        if (searchValue.length > 1) {
-            fetch(url)
-                .then(res => res.json())
-                .then(data => {
-                    setSearchData(data);
-                    setContainer(true)
-                    setSearchURL(countURL);
-                })
-                
-        } else {
-            setContainer(false)
-        }
-    }
-// useEffect(()=>{
-   
-// },[])
+const TopOfPage = ({ setSize, pageName,setSearchInput ,setCurrentPage}) => {
+
     const handleAfterSearch = (e) => {
         const search = e.target.value;
-        if (search.length > 1) {
-            setContainer(true)
-        } else {
-            setContainer(false)
+        setSearchInput(search)
+        if (search.length == 1) {
+            setCurrentPage(0)
         }
+         
     }
 
     return (
@@ -49,7 +29,7 @@ const TopOfPage = ({ setSize, pageName, setContainer,setSearchData,size,currentP
                 <div className="sm:pr-3 mb-4 sm:mb-0">
                     <label htmlFor="products-search" className="sr-only">Search</label>
                     <div className="mt-1 relative sm:w-64 xl:w-96">
-                        <input type="search" onBlur={e => handleAfterSearch(e)} onChange={e => searchingSystemHandle(e)} name="search" id="products-search" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Search for products" />
+                        <input type="search" onChange={e => handleAfterSearch(e)}  name="search" id="products-search" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5" placeholder="Search for products" />
                     </div>
                 </div>
 

@@ -4,29 +4,45 @@ import { FaBell } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { AiFillSetting } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import LoadingScreen2 from '../LoadingScreen2';
+import Reload from '../../utils/functions/Reload';
 const MainNavBar = () => {
-    const { user, setUser, dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products)
+    const {  dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products);
+    const [user] = useAuthState(auth);
+    console.log(user?.displayName);
+    const [signOut, loading, error] = useSignOut(auth);
+    const navigate = useNavigate()
     const [productCount, setProductCount] = useState(0)
-    const url = "http://localhost:5000/countremainder"
-    function refreshPage() {
-        window.location.reload(false);
-    }
+    const url = "http://localhost:5000/api/utils/remainder"
+
+   
     const LogOut = () => {
         window.localStorage.removeItem('token');
         toast('logout from system');
-        refreshPage()
+        signOut()
+        Reload()
     }
-    const navigate = useNavigate()
+    
     const handleSettingBtn = (id) => navigate(`/setting`)
     useEffect(() => {
         fetch(url, {
         })
             .then(res => res.json())
             .then(data => {
-                const count = data.count;
-                setProductCount(count)
+                if (data.success) {
+                    const count = data.count;
+                    setProductCount(count)
+                }else{
+                    toast(data.data)
+                }
+               
             })
     }, [])
+    if (loading) {
+        return <LoadingScreen2/>
+    }
     return (
         <div>
             <nav className='w-full md:flex px-0 md:px-4 py-1 min-h-[60px]'>
@@ -71,7 +87,7 @@ const MainNavBar = () => {
                                 <div className=" bg-slate-200 relative btn btn-ghost btn-circle avatar ">
                                     <div className="avatar online placeholder">
                                         <div className="bg-neutral-focus text-neutral-content rounded-full w-11 h-11">
-                                            <span className="text-xl">{user?.name?.slice(0, 2)}</span>
+                                            <span className="text-xl">{user?.displayName?.slice(0, 2)}</span>
                                         </div>
                                     </div>
 
@@ -86,7 +102,7 @@ const MainNavBar = () => {
                                 <ul tabIndex={0} className="mt-7 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-gray-800">
                                     <li>
                                         <a className='w-full text-center flex justify-center text-xl font-semibold '>
-                                            {user?.name}
+                                            {user?.displayName}
 
                                         </a>
                                     </li>

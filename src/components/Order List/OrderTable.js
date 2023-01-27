@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const OrderTable = ({product}) => {
+const OrderTable = ({orders}) => {
     const navigate = useNavigate()
     const ViewInvoiceHandle = (id) => navigate(`/invoice/${id}`)
     return (
@@ -21,17 +21,17 @@ const OrderTable = ({product}) => {
                     <tbody>
 
                         {
-                            product && product.map((prodict, index) => <tr key={prodict._id}>
-                                <th>{prodict?.InvoiceHandle}</th>
+                            orders && orders.map((order, index) => <tr key={order._id}>
+                                <th>{order?.InvoiceHandle}</th>
                                 <td>12/11/2022</td>
-                                <td>{prodict?.warehouseChoose}</td>
-                                <td>{prodict?.InChargePerson}</td>
+                                <td>{order?.warehouseChoose}</td>
+                                <td>{order?.InChargePerson}</td>
                                 
                                 <td>
 
 
                                     <div className="z-40 ">
-                                      <button className='btn btn-sm btn-success text-base-100 rounded-sm'  onClick={()=>ViewInvoiceHandle(prodict._id)}>view</button>
+                                      <button className='btn btn-sm btn-success text-base-100 rounded-sm'  onClick={()=>ViewInvoiceHandle(order._id)}>view</button>
                                       {/* <button className='btn btn-sm btn-warning rounded-sm'>Edit</button>
                                       <button className='btn btn-sm btn-error text-base-100 rounded-sm' onClick={()=> DeleteOrder(prodict._id)} >Delete</button> */}
                                     </div>
