@@ -11,6 +11,8 @@ import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import useGetFetch from '../../hooks/useGetFetch';
+import Notification from '../Shared/Notification';
+
 const PlaceOrderPage = () => {
     const navigate = useNavigate()
     const [InvoiceNumber, setInvoiceNumber] = useState(0)
@@ -18,24 +20,27 @@ const PlaceOrderPage = () => {
     const [orderBtn, setOrderBtn] = useState(false);
     const [user, loading, error] = useAuthState(auth);
 
-    const  [warehouse,setWarehouse, warehouseError, warehouseState]=  useGetFetch("http://localhost:5000/api/warehouse");
-    const  [Employee,setEmployee, userError,userState]=  useGetFetch("http://localhost:5000/api/user");
+    const [fetchData, setFetchData] = useState(null)
+    let Alart;
+  
+    const [warehouse, setWarehouse, warehouseError, warehouseState] = useGetFetch("http://localhost:5000/api/warehouse");
+    const [Employee, setEmployee, userError, userState] = useGetFetch("http://localhost:5000/api/user");
 
     useEffect(() => {
         fetch("http://localhost:5000/api/order", {})
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                setInvoiceNumber(data.count)
-            }else{
-                toast(data.message)
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setInvoiceNumber(data.count)
+                } else {
+                    toast(data.message)
+                }
+            })
     }, [])
 
     const InvoiceHandle = ((parseInt(InvoiceNumber) || 0) + 1).toString();
     const [inputFields, setInputFields] = useState([
-        { id: uuidv4(), Product: '', quntity: 0,_id:'' },
+        { id: uuidv4(), Product: '', quntity: 0, _id: '' },
     ]);
 
     var today = new Date();
@@ -46,9 +51,10 @@ const PlaceOrderPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.displayName
-        const orderDetails = {InvoiceHandle,warehouseChoose:ChooseWarehouse,InChargePerson,customerName, product:inputFields,Date:today}
+        const orderDetails = { InvoiceHandle, warehouseChoose: ChooseWarehouse, InChargePerson, customerName, product: inputFields, Date: today }
         fetch('http://localhost:5000/api/order', {
             method: 'POST',
             headers: {
@@ -58,11 +64,31 @@ const PlaceOrderPage = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-           console.log(data);
+                if(data.success){
+                    setInputFields([{ id: uuidv4(), Product: '', quntity: 0, _id: '' },])
+                }
+                setFetchData(data)
             })
-        
+
     };
 
+    if (fetchData?.success) {
+        Alart = <Notification
+          status='open'
+          veriant='success'
+          IsReload = {false}
+          title="success"
+          message={fetchData?.message}
+        />
+        navigate(`/invoice/${fetchData?.data?.insertedId}`)
+      } else if (fetchData?.success === false) {
+        Alart = <Notification
+          status='open'
+          veriant='false'
+          title="Error found"
+          message={fetchData?.message}
+        />
+      }
     return (
         <div className='bg-white min-h-[50vh] max-w-7xl mx-auto rounded' >
             <div className='m-4'>
@@ -76,13 +102,14 @@ const PlaceOrderPage = () => {
                         </div>
                         {userError && <p className='text-red-600 font-bold'>{userError}</p>}
                         {warehouseError && <p className='text-red-600 font-bold'>{warehouseError}</p>}
-                        <SelectProductForm setOrderBtn={setOrderBtn} inputFields={inputFields} setInputFields={setInputFields} ChooseWarehouse={ChooseWarehouse}/>
-                        <button disabled={orderBtn} type="submit" className='btn btn-secondary'>Submit</button>
+                        <SelectProductForm setOrderBtn={setOrderBtn}  inputFields={inputFields} setInputFields={setInputFields} ChooseWarehouse={ChooseWarehouse} />
+                        <button disabled={orderBtn} type="submit" className='btn btn-error'>Submit</button>
                     </div>
                 </form>
             </div>
+            {Alart}
         </div>
     );
 };
-
+ 
 export default PlaceOrderPage;

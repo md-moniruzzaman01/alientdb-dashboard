@@ -13,19 +13,13 @@ const OrderListPage = () => {
     const [size, setSize] = useState(100)
     const [searchInput, setSearchInput] = useState({})
 
-    // const [pageCount, setPageCount] = useState(0)
-    // const [product, setProduct] = useState([])
-    // const [productCount, setProductCount] = useState(0)
-    // const [searchPageCount, setSearchPageCount] = useState(0)
-    // const [searchProductCount, setSearchProductCount] = useState(0)
-    // const [currentPage, setCurrentPage] = useState(0)
-    // const [size, setSize] = useState(100)
-    // const [currentContainer, setContainer] = useState(false)
-    // const [searchData, setSearchData] = useState([])
-    // const [searchURL, setSearchURL] = useState([])
-    // const [searchcurrentPage, setSearchCurrentPage] = useState(0)
     const { data, isLoading, refetch } = useQuery('order', () =>
-        fetch(`http://localhost:5000/api/order?search=${searchInput}&page=${currentPage}&size=${size}`)
+        fetch(`http://localhost:5000/api/order?search=${searchInput}&page=${currentPage}&size=${size}`,{
+                    method: 'GET',
+                    headers: {
+                        authorization:`bearer ${localStorage.getItem('token')}`
+                    },
+                })
             .then(res => res.json())
             .then(data=>{
                 if (data?.success) {
@@ -42,26 +36,12 @@ const OrderListPage = () => {
     );
     useEffect(() => {
         refetch()
-    }, [currentPage, size,searchInput])
+    }, [currentPage,size,searchInput])
 
     if (isLoading) {
         return <LoadingScreen/>
     }
-    // useEffect(() => {
-    //     fetch(`http://localhost:5000/all-order?page=${currentPage}&size=${size}`, {
-    //         headers: {
-    //             authorization: `bearer ${localStorage.getItem('token')}`
-    //         },
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //         })
-    // }, [currentPage, size])
-
-
-console.log(data.order);
-
+  
 
     return (
         <div>

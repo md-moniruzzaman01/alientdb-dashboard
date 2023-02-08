@@ -5,18 +5,34 @@ import { useParams } from 'react-router-dom';
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import { AiFillPrinter } from "react-icons/ai";
+import Notification from '../Shared/Notification';
 const InvoicePage = () => {
     const { id } = useParams()
     const componentRef = useRef();
     const [invoice, setInvoice] = useState([])
+    const [fetchData, setFetchData] = useState(null)
+    let Alart;
     useEffect(() => {
-        fetch(`http://localhost:5000/order/${id}`, {
+        fetch(`http://localhost:5000/api/order/${id}`, {
         })
             .then(res => res.json())
             .then(data => {
-                setInvoice(data);
+                if(data?.success){
+                    setInvoice(data.data)
+                }else{
+                    setFetchData(data)
+                }
             })
     }, [id])
+    if (fetchData?.success === false) {
+        Alart = <Notification
+          status='open'
+          veriant='false'
+          title="Error found"
+          message={fetchData?.message}
+        />
+      }
+
     return (
         <div>
             <ReactToPrint
@@ -73,6 +89,7 @@ const InvoicePage = () => {
                 </div>
             </div>
             </div>
+            {Alart}
         </div>
     );
 };

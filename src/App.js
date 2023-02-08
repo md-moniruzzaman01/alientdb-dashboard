@@ -25,26 +25,14 @@ import PurchesEdit from "./views/product/PurchesEdit";
 import Setting from "./views/Setting";
 import Modal from "./components/Indexpage/Modal";
 import { GiVikingLonghouse } from "react-icons/gi";
+import EmployeeDetails from "./views/Employee/EmployeeDetails";
 export const Products = React.createContext();
 
 function App() {
 
   const [productList, setProductList] = useState([])
   const [dashboardSideBarSize,setDashboardSideBarSize]= useState(true)
-// const [user, setUser] = useState([])
-//   useEffect(() => {
-//     fetch('http://localhost:5000/userData', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({token: window.localStorage.getItem("token")}),
-//     })
-//         .then((response) => response.json())
-//         .then((data) => {
-//             setUser(data.data);
-//         })
-// }, [])
+
   return (
     <div>
       <Products.Provider value={{dashboardSideBarSize,setDashboardSideBarSize }}>
@@ -67,6 +55,7 @@ function App() {
                   <Route path="stock-report" element={<RequireAuth><StackReport /></RequireAuth>} />
                   <Route path="warehouse-report" element={<RequireAuth><WarehouseReport /></RequireAuth>} />
                   <Route path="add-employee" element={<AddEmployee />} />
+                  <Route path="employee/:id" element={<RequireAuth><EmployeeDetails /></RequireAuth>} />
                   <Route path="employee-list" element={<RequireAuth><EmployeeList /></RequireAuth>} />
                   <Route path="setting" element={<RequireAuth><Setting /></RequireAuth>} />
                   <Route path="*" element={<ErrorPage />} />

@@ -11,11 +11,10 @@ import Reload from '../../utils/functions/Reload';
 const MainNavBar = () => {
     const {  dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products);
     const [user] = useAuthState(auth);
-    console.log(user?.displayName);
     const [signOut, loading, error] = useSignOut(auth);
     const navigate = useNavigate()
     const [productCount, setProductCount] = useState(0)
-    const url = "http://localhost:5000/api/utils/remainder"
+    const url = "http://localhost:5000/api/utils/"
 
    
     const LogOut = () => {

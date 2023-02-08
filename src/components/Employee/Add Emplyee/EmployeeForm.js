@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import "react-datepicker/dist/react-datepicker.css";
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignOut, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import { useForm } from "react-hook-form";
 import LoadingScreen2 from '../../Shared/LoadingScreen2';
 import { useEffect } from 'react';
+import Notification from '../../Shared/Notification';
 
 const EmployeeForm = () => {
     // const [startDate, setStartDate] = useState(new Date());
     const [Isadmin, setAdmin] = useState(true);
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [signOut, SignOutloading, SignOuterror] = useSignOut(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
-
+    const [fetchData, setFetchData] = useState(null)
+    let Alart;
     const handleChange = (e) => {
         const Employeedesignation = e.target.value;
         if (Employeedesignation === 'admin') {
@@ -27,9 +30,26 @@ const EmployeeForm = () => {
             console.log(user);
         }
     }, [user])
-    if (loading || updating) {
+    if (loading || updating || SignOutloading) {
         return <LoadingScreen2 />
     }
+
+    if (fetchData?.success) {
+        Alart = <Notification
+          status='open'
+          veriant='success'
+          title="success"
+          message={fetchData?.message}
+        />
+      } else if (fetchData?.success === false) {
+        Alart = <Notification
+          status='open'
+          veriant='false'
+          title="Error found"
+          message={fetchData?.message}
+        />
+      }
+
     let signInError;
     if (error) {
         const errorlength = error?.message.length || 102
@@ -40,6 +60,7 @@ const EmployeeForm = () => {
     async function createFirebaseLogin(data) {
         await createUserWithEmailAndPassword(data.Email, data.password)
         await updateProfile({ displayName: data.fullName })
+        await signOut()
     }
 
 
@@ -55,17 +76,7 @@ const EmployeeForm = () => {
             })
                 .then(res => res.json())
                 .then(datajson => {
-                    console.log(datajson);
-                    if (datajson.status === "success") {
-                        toast("account has been created")
-                    }
-                    else if (datajson.status === "fail") {
-                        toast(datajson.message)
-
-                    } else {
-                        toast("try again or contact to developer")
-                    }
-
+                    setFetchData(datajson)
                 })
         
 
@@ -241,7 +252,7 @@ const EmployeeForm = () => {
                                 message: "password is missing"
                             },
                             minLength: {
-                                value: 7,
+                                value: 6,
                                 message: 'Must be a 6 characters or longer'
                             }
                         })}
@@ -259,7 +270,7 @@ const EmployeeForm = () => {
                     </div>
                 </div>
             </form>
-
+{Alart}
         </div>
 
     );

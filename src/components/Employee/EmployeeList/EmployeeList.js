@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const EmployeeList = () => {
@@ -52,22 +53,24 @@ const EmployeeList = () => {
                             <th>phone</th>
                             <th>Email</th>
                             <th>Designation</th>
-                            <th>function</th>
                         </tr>
                     </thead>
                     <tbody>
                       {
                         Employees && Employees.map((emplyee,index)=> <tr key={emplyee._id}>
                             <th>{index + 1}</th>
-                            <td>{emplyee?.fullName}</td>
+                            <td>
+                            <Link to={`/employee/${emplyee._id}`}>{emplyee?.fullName}</Link>
+                            </td>
                             <td>{emplyee?.phoneNumber}</td>
                             <td>{emplyee?.Email}</td>
                             <td>{emplyee?.designation}</td>
-                            <td className=''>
+                            {/* <td className=''>
                                     <div className='w-20'>
-                                        {/* <button onClick={() => DeleteEmpolyee(emplyee._id)} className="mx-2 btn btn-secondary text-white btn-xs">Delete</button> */}
+                                      
                                     </div>
-                                </td>
+                                </td> */}
+                                  {/* <button onClick={() => DeleteEmpolyee(emplyee._id)} className="mx-2 btn btn-secondary text-white btn-xs">Delete</button> */}
                         </tr>)
                       }
                         

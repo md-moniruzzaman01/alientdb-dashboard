@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ReactPaginate from 'react-paginate';
+import Notification from '../Shared/Notification';
 const Modal = () => {
     const [pageCount, setPageCount] = useState(0)
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(0)
     const [productCount, setProductCount] = useState(0)
+
+    const [fetchData, setFetchData] = useState(null)
+    let Alart;
+
     useEffect(() => {
-        const url = `http://localhost:5000/api/utils/remainder?page=${currentPage}`
+        const url = `http://localhost:5000/api/utils?page=${currentPage}`
 
         fetch(url, {
         })
-            .then(res => res.json())
+            .then(res => {
+                if(res.status === 429){
+                    setFetchData({success:false,message:"To many request from this ip"})
+                }else{
+                    setFetchData(null)
+                }
+              return  res.json()
+            })
             .then(data => {
                 if (data?.success) {
                     setData(data.data);
@@ -19,20 +31,29 @@ const Modal = () => {
                     setProductCount(count)
                     const pages = Math.ceil(count / 10)
                     setPageCount(pages)
+                } else {
+                    setFetchData(data)
                 }
 
             })
 
 
     }, [currentPage])
+
+    if (fetchData?.success === false) {
+        Alart = <Notification
+            status='open'
+            veriant='false'
+            title="Error found"
+            message={fetchData?.message}
+        />
+    }
     return (
         <div >
             {/* Put this part before </body> tag */}
             <input type="checkbox" id="remainder" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-action ">
-                    <label htmlFor="remainder" className="btn btn-ghost text-4xl text-red-600"><AiOutlineCloseCircle /></label>
-                </div>
+
                 <div className="modal-box w-11/12 max-w-5xl">
 
                     <div>
@@ -66,6 +87,7 @@ const Modal = () => {
                                     </ul>
 
                                 </div>
+                                {Alart}
                             </div>
 
                             {/* Pagination */}
@@ -102,6 +124,9 @@ const Modal = () => {
 
                         </div>
                     </div>
+                </div>
+                <div className="modal-action ">
+                    <label htmlFor="remainder" className="btn btn-ghost text-4xl text-red-600"><AiOutlineCloseCircle /></label>
                 </div>
             </div>
         </div>

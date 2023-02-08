@@ -5,7 +5,7 @@ import CheckSvg from './CheckSvg';
 import ErrorSvg from './ErrorSvg';
 import LoadingSvg from './LoadingSvg';
 
-const Notification = ({ status, veriant, title, message }) => {
+const Notification = ({ status, veriant, title, message,IsReload=true }) => {
     const [open, setopen] = useState(false)
     let container;
     useEffect(() => {
@@ -26,7 +26,9 @@ const Notification = ({ status, veriant, title, message }) => {
 
   const closeHandle =()=> {
     setopen(!open)
-    window.location.reload(false);
+    if (IsReload) {
+        window.location.reload(false);
+    }
   }
     return (
         <div>

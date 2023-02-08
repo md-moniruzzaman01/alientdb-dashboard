@@ -11,7 +11,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOr
         const newInputFields = inputFields.map(i => {
             const quantity = parseInt(qnt);
             if (id === i.id) {
-                if (quantity >= event.target.value && event.target.value > 0 ) {
+                if (quantity >= event.target.value && event.target.value > 0) {
                     setOrderBtn(false)
                     setError(false)
                 } else {
@@ -70,7 +70,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOr
             .then(data => {
                 if (data.success) {
                     setqnt(data?.data?.qnt);
-                }else{
+                } else {
                     toast(data.data)
                 }
             })
@@ -84,7 +84,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOr
     }
     return (
         <div className='my-4'>
-            {error && <p className='text-red-600 flex justify-end text-xl font-bold'>Invalid quantity</p>}
+
             {
                 ChooseWarehouse.length > 1 ? inputFields.map(inputField => (
                     <div className='flex' key={inputField.id}>
@@ -114,10 +114,10 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOr
                     </div>
                 )) : ''
             }
-
             <div className='flex justify-end my-4'>
-                <p className='btn btn-secondary max-w-[100px]' onClick={handleAddFields}>Add</p>
+                <p className='btn btn-success max-w-[100px]' onClick={handleAddFields}>Add</p>
             </div>
+            {error && <p className='text-red-600 flex justify-center text-lg font-bold'>Invalid quantity</p>}
         </div>
     );
 };

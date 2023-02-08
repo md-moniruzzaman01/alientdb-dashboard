@@ -2,8 +2,12 @@ import React  from 'react';
 import { toast } from 'react-toastify';
 import AddProductCsvFile from '../../components/product/AddProductCsvFile';
 import { useForm} from "react-hook-form";
+import Notification from '../../components/Shared/Notification';
+import { useState } from 'react';
 const AddProduct = () => {
 
+    const [fetchData, setFetchData] = useState(null)
+    let Alart;
 
     const { register, formState: { errors }, handleSubmit} = useForm();
     const onSubmit = (data) => {
@@ -17,14 +21,27 @@ const AddProduct = () => {
         })
             .then((response) => response.json())
             .then((data) => {
+                setFetchData(data)
              
-                if (data?.success) {
-                    toast('Product add successfully')
-                } else {
-                    toast(data.data)
-                }
             })
     };
+
+
+    if (fetchData?.success) {
+        Alart = <Notification
+            status='open'
+            veriant='success'
+            title="success"
+            message={fetchData?.message}
+        />
+    } else if (fetchData?.success === false) {
+        Alart = <Notification
+            status='open'
+            veriant='false'
+            title="Error found"
+            message={fetchData?.message}
+        />
+    }
 
     return (
         <div className='page px-4 py-2'>
@@ -70,17 +87,12 @@ const AddProduct = () => {
                                         value: true,
                                         message: "Brand is required"
                                     },
-                                    pattern: {
-                                        value: /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
-                                        message: 'Provide a valid brand name'
-                                    }
                                 })}
                                 placeholder="Type brand name here.."
                                 className="input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400"
                             />
                             <label className="label">
                                 {errors.Brand?.type === 'required' && <span className="label-text text-red-500">{errors.Brand?.message}</span>}
-                                {errors.Brand?.type === 'pattern' && <span className="label-text text-red-500">{errors.Brand?.message}</span>}
                             </label>
                         </div>
 
@@ -155,12 +167,12 @@ const AddProduct = () => {
                         </div>
 
                         <div className="flex my-4">
-                            <input type="submit" className="btn btn-secondary px-7 text-base-100" value="Add product" />
+                            <input type="submit" className="btn btn-error px-7 text-base-100" value="Add product" />
                         </div>
                     </div>
                 </form>
             </div>
-
+{Alart}
         </div>
     );
 };
