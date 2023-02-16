@@ -13,17 +13,23 @@ const InvoicePage = () => {
     const [fetchData, setFetchData] = useState(null)
     let Alart;
     useEffect(() => {
-        fetch(`http://localhost:5000/api/order/${id}`, {
+        fetch(`https://alientbd-version-2.onrender.com/api/order/${id}`, {
+            method: 'GET',
+                    headers: {
+                        authorization:`bearer ${localStorage.getItem('tmtoken')}`
+                    },
         })
             .then(res => res.json())
             .then(data => {
+                console.log('invoice data',data)
                 if(data?.success){
                     setInvoice(data.data)
                 }else{
                     setFetchData(data)
                 }
             })
-    }, [id])
+            console.log('invoice')
+    }, [])
     if (fetchData?.success === false) {
         Alart = <Notification
           status='open'

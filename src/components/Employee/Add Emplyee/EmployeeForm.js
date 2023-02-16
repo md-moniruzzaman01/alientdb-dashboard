@@ -66,7 +66,7 @@ const EmployeeForm = () => {
 
     const onSubmit = async (data) => {
        await createFirebaseLogin(data)
-         await   fetch("http://localhost:5000/api/employee", {
+         await   fetch("https://alientbd-version-2.onrender.com/api/employee", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

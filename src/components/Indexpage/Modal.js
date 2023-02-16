@@ -12,7 +12,7 @@ const Modal = () => {
     let Alart;
 
     useEffect(() => {
-        const url = `http://localhost:5000/api/utils?page=${currentPage}`
+        const url = `https://alientbd-version-2.onrender.com/api/utils?page=${currentPage}`
 
         fetch(url, {
         })

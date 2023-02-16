@@ -7,15 +7,16 @@ const useAdmin = (user) => {
     useEffect( () =>{
         const email = user?.email;
         if(email){
-            fetch(`http://localhost:5000/api/user/${email}`, {
+            fetch(`https://alientbd-version-2.onrender.com/api/user/${email}`, {
                 method:'GET',
                 headers: {
                     'content-type': 'application/json',
-                    // authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    authorization: `Bearer ${localStorage.getItem('tmtoken')}`
                 }
             })
             .then(res=>res.json())
             .then(data => {
+                console.log("useAdmin",data);
                 if (data.success) {
                     setAdmin(data.admin);
                     setpower(data.power); 

@@ -17,7 +17,7 @@
 
 
 // export const GetFetch = async(url) => {
-//  const data=await fetch('http://localhost:5000/countOrder')
+//  const data=await fetch('https://alientbd-version-2.onrender.com/countOrder')
 //  .then(res=>res.json()).then(data=> {
 //     return data
 //  })
@@ -27,7 +27,7 @@
 
 
 // export async function getStaticProps() {
-//     const bannerres = await fetch('http://localhost:5000/banner')
+//     const bannerres = await fetch('https://alientbd-version-2.onrender.com/banner')
 //     const banner = await bannerres.json()
 //     return {
 //       props: {
@@ -42,7 +42,7 @@
 // const GetFetch = (url) => {
 // const [data, setData]= useState([])
 
-// fetch('http://localhost:5000/countOrder')
+// fetch('https://alientbd-version-2.onrender.com/countOrder')
 //  .then(res=>res.json()).then(data=>{
 //     setData(data)
 //  })
@@ -55,7 +55,7 @@
 //     async function getFetchValue(url) {
 //      setState("LOADING")
 //          try {
-//              const response=await fetch('http://localhost:5000/countOrder')
+//              const response=await fetch('https://alientbd-version-2.onrender.com/countOrder')
 //              const data= await response.json()
 //              setData(data)
 //              setState("SUCCESS")

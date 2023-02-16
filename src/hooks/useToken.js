@@ -5,10 +5,9 @@ const useToken = user => {
     const [token, setToken] = useState('');
     useEffect(() => {
         const email = user?.user?.email;
-        console.log(email);
         const currentUser = { email: email };
         if (email) {
-            fetch(`http://localhost:5000/api/user/${email}`, {
+            fetch(`https://alientbd-version-2.onrender.com/api/user/${email}`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -17,10 +16,10 @@ const useToken = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    console.log("useToken",data);
                     if (data.success) {
                         const accessToken = data.data;
-                        localStorage.setItem('token', accessToken);
+                        localStorage.setItem('tmtoken', accessToken);
                         setToken(accessToken);
                     }else{
                         toast(data?.message)
@@ -34,3 +33,7 @@ const useToken = user => {
 }
 
 export default useToken;
+
+
+
+

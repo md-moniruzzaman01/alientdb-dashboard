@@ -9,7 +9,13 @@ const useGetFetch = (url) => {
 
     useEffect(() => {
         setState("LOADING")
-        fetch(url)
+        fetch(url,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin' : '*',
+                authorization: `bearer ${localStorage.getItem('tmtoken')}`
+              },
+        })
             .then(res => res.json()).then(data => {
                 if (data.success) {
                     setData(data.data)

@@ -12,7 +12,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import LoadingScreen2 from '../Shared/LoadingScreen2';
 const DashboardSide = () => {
-    const { dashboardSideBarSize } = useContext(Products);
+    const { dashboardSideBarSize, copyright } = useContext(Products);
     const [user] = useAuthState(auth);
     const [admin, power, adminLoading] = useAdmin(user);
     if (adminLoading) {
@@ -47,7 +47,7 @@ const DashboardSide = () => {
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
                     {(admin || power.ProductAdd) && <Link to="/add-product"><li><a><MdRadioButtonUnchecked /> Add Product</a></li></Link>}
                     <Link to="/product-list"><li><a><MdRadioButtonUnchecked />Product List</a></li></Link>
-                    {(admin  || power.purches) && <Link to="/product-purches"><li><a><MdRadioButtonUnchecked /> Purchase</a></li></Link>}
+                    {(admin || power.purches) && <Link to="/product-purches"><li><a><MdRadioButtonUnchecked /> Purchase</a></li></Link>}
                 </div>
             </div>
 
@@ -59,7 +59,7 @@ const DashboardSide = () => {
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
                     <Link to="/place-order"><li><a><MdRadioButtonUnchecked /> Place Order</a></li></Link>
-                    {(admin  || power?.Oderlist) &&  <Link to="/oder-list"><li><a><MdRadioButtonUnchecked /> Order List<a></a></a></li></Link>}
+                    {(admin || power?.Oderlist) && <Link to="/oder-list"><li><a><MdRadioButtonUnchecked /> Order List<a></a></a></li></Link>}
                 </div>
             </div>
 
@@ -87,7 +87,7 @@ const DashboardSide = () => {
             </div>
 
             {/* Employee */}
-          { admin  && <div className="collapse overflow-visible collapse-arrow">
+            {admin && <div className="collapse overflow-visible collapse-arrow">
                 <input type="checkbox" className="peer" />
                 <div className="collapse-title  peer-checked:bg-gray-700 ">
                     <p className='flex items-center font-semibold text-lg'><span className='mr-3 text-2xl'><FaUsers /></span> Employee</p>
@@ -98,7 +98,8 @@ const DashboardSide = () => {
                     <Link to="/employee-list"><li><a><MdRadioButtonUnchecked />Employee List</a></li></Link>
                 </div>
             </div>}
-
+            <p className='mt-auto test-sm text-center'>&#169; {copyright}</p>
+            
         </ul>
     );
 };

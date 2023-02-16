@@ -65,7 +65,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOr
     };
 
     const fetchProductName = (id) => {
-        fetch(`http://localhost:5000/api/utils/quantity/${id}?warehouse=${ChooseWarehouse}`)
+        fetch(`https://alientbd-version-2.onrender.com/api/utils/quantity/${id}?warehouse=${ChooseWarehouse}`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
@@ -78,7 +78,7 @@ const SelectProductForm = ({ inputFields, setInputFields, ChooseWarehouse, setOr
 
     // asyncselect
     const loadOptions = async (inputText, callback) => {
-        const response = await fetch(`http://localhost:5000/api/utils/search-product/${ChooseWarehouse}?search=${inputText}`)
+        const response = await fetch(`https://alientbd-version-2.onrender.com/api/utils/search-product/${ChooseWarehouse}?search=${inputText}`)
         const json = await response.json()
         callback(json.data.map(i => ({ label: i.Product + ' _ Brand - ' + i.Brand, value: i.Product, id: i._id, brand: i.Brand })))
     }

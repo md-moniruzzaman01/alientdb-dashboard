@@ -15,7 +15,7 @@ const StackReportPage = () => {
 
 
     const { data, isLoading, refetch } = useQuery('product', () =>
-        fetch(`http://localhost:5000/api/product/inventory?search=${searchInput}&page=${currentPage}&limit=${size}`)
+        fetch(`https://alientbd-version-2.onrender.com/api/product/inventory?search=${searchInput}&page=${currentPage}&limit=${size}`)
             .then(res => res.json())
             .then(data => {
                 if (data?.success) {
@@ -45,7 +45,7 @@ const StackReportPage = () => {
             <TopOfPage setSize={setSize} pageName="stack report" setSearchInput={setSearchInput} setCurrentPage={setCurrentPage} />
             {/* table */}
             <StackReportList
-                product={data.product}
+                product={data?.product}
                 size={size}
                 pageCount={pageCount}
                 productCount={productCount}

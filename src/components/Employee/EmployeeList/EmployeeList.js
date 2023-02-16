@@ -10,7 +10,7 @@ const EmployeeList = () => {
         window.location.reload(false);
     }
     useEffect(() => {
-        fetch("http://localhost:5000/api/employee", {
+        fetch("https://alientbd-version-2.onrender.com/api/employee", {
         })
             .then(res => res.json())
             .then(data => {
@@ -19,10 +19,10 @@ const EmployeeList = () => {
     }, [])
 
     // const DeleteEmpolyee = (id) => {
-    //     fetch(`http://localhost:5000/remove-employee/${id}`, {
+    //     fetch(`https://alientbd-version-2.onrender.com/remove-employee/${id}`, {
     //         method: 'DELETE',
     //         headers: {
-    //             authorization:`bearer ${localStorage.getItem('token')}`
+    //             authorization:`bearer ${localStorage.getItem('tmtoken')}`
     //         },
     //     })
     //         .then(res => res.json())

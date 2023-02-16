@@ -15,7 +15,7 @@ const InventoryPage = () => {
 
 
     const { data, isLoading, refetch } = useQuery('product', () =>
-        fetch(`http://localhost:5000/api/product/inventory?search=${searchInput}&page=${currentPage}&limit=${size}`)
+        fetch(`https://alientbd-version-2.onrender.com/api/product/inventory?search=${searchInput}&page=${currentPage}&limit=${size}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -47,7 +47,7 @@ const InventoryPage = () => {
                 <TopOfPage setSize={setSize} pageName="Inventory Page"      setSearchInput={setSearchInput} setCurrentPage={setCurrentPage} />
                 {/* table */}
                 <InventoryList
-                   product={data.product}
+                   product={data?.product}
                    size={size}
                    pageCount={pageCount} 
                    productCount={productCount} 
