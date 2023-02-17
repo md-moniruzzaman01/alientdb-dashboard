@@ -10,16 +10,14 @@ const AddProductCsvFile = () => {
         e.preventDefault();
       const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', authorization:`bearer ${localStorage.getItem('tmtoken')}` },
+        headers: { 'Content-Type': 'application/json', authorization:`Bearer ${localStorage.getItem('tmtoken')}` },
         body: JSON.stringify({ data: csvfile })
       };
       if (csvfile) {
-        fetch('https://alientbd-version-2.onrender.com/api/upload', requestOptions)
+        fetch('http://localhost:5000/api/upload', requestOptions)
           .then(response => response.json())
           .then(data => {
-           console.log(data);
             e.target.reset();
-            
           });
   
       } else {

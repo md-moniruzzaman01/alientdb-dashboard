@@ -25,11 +25,6 @@ const EmployeeForm = () => {
             setAdmin(true)
         }
     }
-    useEffect(() => {
-        if (user) {
-            console.log(user);
-        }
-    }, [user])
     if (loading || updating || SignOutloading) {
         return <LoadingScreen2 />
     }
@@ -66,7 +61,7 @@ const EmployeeForm = () => {
 
     const onSubmit = async (data) => {
        await createFirebaseLogin(data)
-         await   fetch("https://alientbd-version-2.onrender.com/api/employee", {
+         await   fetch("http://localhost:5000/api/employee", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

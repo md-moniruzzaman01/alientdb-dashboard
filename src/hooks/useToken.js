@@ -7,7 +7,7 @@ const useToken = user => {
         const email = user?.user?.email;
         const currentUser = { email: email };
         if (email) {
-            fetch(`https://alientbd-version-2.onrender.com/api/user/${email}`, {
+            fetch(`http://localhost:5000/api/user/${email}`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -16,7 +16,6 @@ const useToken = user => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log("useToken",data);
                     if (data.success) {
                         const accessToken = data.data;
                         localStorage.setItem('tmtoken', accessToken);

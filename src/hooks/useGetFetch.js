@@ -13,7 +13,7 @@ const useGetFetch = (url) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin' : '*',
-                authorization: `bearer ${localStorage.getItem('tmtoken')}`
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
               },
         })
             .then(res => res.json()).then(data => {

@@ -14,7 +14,7 @@ const ProductByWarehousePage = ({warehouseLocation}) => {
     const [searchInput, setSearchInput] = useState({})
 
     const {data, isLoading, refetch } = useQuery('product', () => 
-    fetch(`https://alientbd-version-2.onrender.com/api/warehouse/${warehouseLocation}?search=${searchInput}&page=&limit=${size}`)
+    fetch(`http://localhost:5000/api/warehouse/${warehouseLocation}?search=${searchInput}&page=&limit=${size}`)
     .then(res => res.json())
             .then(data => {
                 if (data?.success) {
@@ -36,7 +36,7 @@ const ProductByWarehousePage = ({warehouseLocation}) => {
     }, [currentPage, size,searchInput])
 
     // const DeleteProduct = (id) => {
-    //     fetch(`https://alientbd-version-2.onrender.com/remove/${id}`, {
+    //     fetch(`http://localhost:5000/remove/${id}`, {
     //         method: 'DELETE'
     //     })
     //         .then(res => res.json())

@@ -11,11 +11,11 @@ const AddProduct = () => {
 
     const { register, formState: { errors }, handleSubmit} = useForm();
     const onSubmit = (data) => {
-        fetch('https://alientbd-version-2.onrender.com/api/product', {
+        fetch('http://localhost:5000/api/product', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('tmtoken')}`
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
             },
             body: JSON.stringify(data),
         })

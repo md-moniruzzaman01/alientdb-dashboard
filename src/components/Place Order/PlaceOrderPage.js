@@ -23,14 +23,13 @@ const PlaceOrderPage = () => {
     const [fetchData, setFetchData] = useState(null)
     let Alart;
   
-    const [warehouse, setWarehouse, warehouseError, warehouseState] = useGetFetch("https://alientbd-version-2.onrender.com/api/warehouse");
-    const [Employee, setEmployee, userError, userState] = useGetFetch("https://alientbd-version-2.onrender.com/api/user");
+    const [warehouse, setWarehouse, warehouseError, warehouseState] = useGetFetch("http://localhost:5000/api/warehouse");
+    const [Employee, setEmployee, userError, userState] = useGetFetch("http://localhost:5000/api/user");
 
     useEffect(() => {
-        fetch("https://alientbd-version-2.onrender.com/api/order/count", {})
+        fetch("http://localhost:5000/api/order/count", {})
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.success) {
                     setInvoiceNumber(data.data[0].count)
                 } else {
@@ -56,7 +55,7 @@ const PlaceOrderPage = () => {
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.displayName
         const orderDetails = { InvoiceHandle, warehouseChoose: ChooseWarehouse, InChargePerson, customerName, product: inputFields, Date: today }
-        fetch('https://alientbd-version-2.onrender.com/api/order', {
+        fetch('http://localhost:5000/api/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

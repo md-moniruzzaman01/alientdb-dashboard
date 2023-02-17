@@ -14,10 +14,10 @@ const OrderListPage = () => {
     const [searchInput, setSearchInput] = useState({})
 
     const { data, isLoading, refetch } = useQuery('order', () =>
-        fetch(`https://alientbd-version-2.onrender.com/api/order?search=${searchInput}&page=${currentPage}&size=${size}`,{
+        fetch(`http://localhost:5000/api/order?search=${searchInput}&page=${currentPage}&size=${size}`,{
                     method: 'GET',
                     headers: {
-                        authorization:`bearer ${localStorage.getItem('tmtoken')}`
+                        authorization:`Bearer ${localStorage.getItem('tmtoken')}`
                     },
                 })
             .then(res => res.json())

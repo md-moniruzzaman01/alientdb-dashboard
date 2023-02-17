@@ -14,7 +14,7 @@ const MainNavBar = () => {
     const [signOut, loading, error] = useSignOut(auth);
     const navigate = useNavigate()
     const [productCount, setProductCount] = useState(0)
-    const url = "https://alientbd-version-2.onrender.com/api/utils/"
+    const url = "http://localhost:5000/api/utils/"
 
    
     const LogOut = () => {

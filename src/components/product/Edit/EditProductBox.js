@@ -13,10 +13,10 @@ const EditProductBox = ({ id }) => {
     const [fetchData, setFetchData] = useState(null)
     let Alart;
     useEffect(() => {
-        fetch(`https://alientbd-version-2.onrender.com/api/product/${id}`, {
+        fetch(`http://localhost:5000/api/product/${id}`, {
             method: 'GET',
             headers: {
-                authorization: `bearer ${localStorage.getItem('tmtoken')}`
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
             },
         })
             .then(res => {
@@ -44,11 +44,11 @@ const EditProductBox = ({ id }) => {
         setProductEdit({ ...ProductEdit, [e.target.name]: e.target.value })
     }
     const ProductUpdateHandle = (data) => {
-        fetch(`https://alientbd-version-2.onrender.com/api/product/${id}`, {
+        fetch(`http://localhost:5000/api/product/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('tmtoken')}`
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
             },
             body: JSON.stringify(data),
         })

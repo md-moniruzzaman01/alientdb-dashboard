@@ -16,7 +16,7 @@ const ProductListPage = () => {
 const [product,setProduct]=useState([])
 
     const { data, isLoading, refetch } = useQuery('product', () =>
-        fetch(`https://alientbd-version-2.onrender.com/api/product?search=${searchInput}&page=${currentPage}&limit=${size}`)
+        fetch(`http://localhost:5000/api/product?search=${searchInput}&page=${currentPage}&limit=${size}`)
             .then(res => res.json())
             .then(data => {
                 if (data?.success) {
