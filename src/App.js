@@ -36,7 +36,7 @@ function App() {
   const [dashboardSideBarSize, setDashboardSideBarSize] = useState(true)
 
   const { data, isLoading, refetch } = useQuery('company', () =>
-    fetch(`http://localhost:5000/`)
+    fetch(`https://alientbd-version-2.onrender.com/`)
       .then(res => {
         if (res.status === 200) {
           setIsServerLive(true)

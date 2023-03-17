@@ -23,11 +23,11 @@ const PlaceOrderPage = () => {
     const [fetchData, setFetchData] = useState(null)
     let Alart;
   
-    const [warehouse, setWarehouse, warehouseError, warehouseState] = useGetFetch("http://localhost:5000/api/warehouse");
-    const [Employee, setEmployee, userError, userState] = useGetFetch("http://localhost:5000/api/user");
+    const [warehouse, setWarehouse, warehouseError, warehouseState] = useGetFetch("https://alientbd-version-2.onrender.com/api/warehouse");
+    const [Employee, setEmployee, userError, userState] = useGetFetch("https://alientbd-version-2.onrender.com/api/user");
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/order/count", {})
+        fetch("https://alientbd-version-2.onrender.com/api/order/count", {})
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
@@ -38,7 +38,6 @@ const PlaceOrderPage = () => {
             })
     }, [])
 
-    const InvoiceHandle = ((parseInt(InvoiceNumber) || 0) + 1).toString();
     const [inputFields, setInputFields] = useState([
         { id: uuidv4(), Product: '', quntity: 0, _id: '' },
     ]);
@@ -51,37 +50,42 @@ const PlaceOrderPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        console.log('warehouse',ChooseWarehouse);
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.displayName
-        const orderDetails = { InvoiceHandle, warehouseChoose: ChooseWarehouse, InChargePerson, customerName, product: inputFields, Date: today }
-        fetch('http://localhost:5000/api/order', {
+        const orderDetails = { InvoiceHandle:InvoiceNumber, warehouseChoose: ChooseWarehouse, InChargePerson, customerName, product: inputFields, Date: today }
+        console.log(orderDetails);
+        fetch('https://alientbd-version-2.onrender.com/api/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
             },
             body: JSON.stringify(orderDetails),
         })
             .then((response) => response.json())
             .then((data) => {
-                if(data.success){
-                    setInputFields([{ id: uuidv4(), Product: '', quntity: 0, _id: '' },])
-                }
-                setFetchData(data)
+                console.log(data);
+                // if(data.success){
+                //     navigate(`/invoice/${fetchData?.data?.insertedId}`)
+                //     // setInputFields([{ id: uuidv4(), Product: '', quntity: 0, _id: '' },])
+                // }
+                // setFetchData(data)
             })
 
     };
 
-    if (fetchData?.success) {
-        Alart = <Notification
-          status='open'
-          veriant='success'
-          IsReload = {false}
-          title="success"
-          message={fetchData?.message}
-        />
-        navigate(`/invoice/${fetchData?.data?.insertedId}`)
-      } else if (fetchData?.success === false) {
+    // if (fetchData?.success) {
+    //     Alart = <Notification
+    //       status='open'
+    //       veriant='success'
+    //       IsReload = {false}
+    //       title="success"
+    //       message={fetchData?.message}
+    //     />
+    //     navigate(`/invoice/${fetchData?.data?.insertedId}`)
+    //   } else 
+      if (fetchData?.success === false) {
         Alart = <Notification
           status='open'
           veriant='false'
@@ -96,7 +100,7 @@ const PlaceOrderPage = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="card-body px-4 md:px-7 py-0">
                         <div className='grid grid-cols-3 gap-5'>
-                            <InvoiceInput InvoiceNumber={InvoiceHandle} />
+                            <InvoiceInput InvoiceNumber={InvoiceNumber} />
                             <WareHouseInput warehouse={warehouse} setChoosedWarehouse={setChoosedWarehouse} />
                             <PersonInChargeInput Employee={Employee} />
                         </div>

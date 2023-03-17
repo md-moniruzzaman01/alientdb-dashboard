@@ -18,13 +18,13 @@ const Form = () => {
 
     // asyncselect  product loading
     const loadOptions = async (inputText, callback) => {
-        const response = await fetch(`http://localhost:5000/api/product?search=${inputText}`)
+        const response = await fetch(`https://alientbd-version-2.onrender.com/api/product?search=${inputText}`)
         const json = await response.json()
         callback(json.data.map(i => ({ label: i.Product + " _Brand - " + i.Brand, value: i.Product, id: i._id, brand: i.Brand })))
     }
     // lis of warehouse 
     useEffect(() => {
-        fetch("http://localhost:5000/api/warehouse", {})
+        fetch("https://alientbd-version-2.onrender.com/api/warehouse", {})
             .then(res => res.json())
             .then(data => {
                 if (data?.success) {
@@ -72,7 +72,7 @@ const Form = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/api/upload/purches', {
+        fetch('https://alientbd-version-2.onrender.com/api/upload/purches', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

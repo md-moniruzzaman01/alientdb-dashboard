@@ -7,7 +7,7 @@ const useAdmin = (user) => {
     useEffect( () =>{
         const email = user?.email;
         if(email){
-            fetch(`http://localhost:5000/api/user/${email}`, {
+            fetch(`https://alientbd-version-2.onrender.com/api/user/${email}`, {
                 method:'GET',
                 headers: {
                     'content-type': 'application/json',

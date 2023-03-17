@@ -60,21 +60,30 @@ const EmployeeForm = () => {
 
 
     const onSubmit = async (data) => {
-       await createFirebaseLogin(data)
-         await   fetch("http://localhost:5000/api/employee", {
+       
+         await   fetch("https://alientbd-version-2.onrender.com/api/employee", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('tmtoken')}`
                 },
                 body: JSON.stringify({ data: data })
 
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 200) {
+                         createFirebaseLogin(data)
+                        return res.json()
+                    }else{
+                        console.log('res error',res.status ,res)
+                    }
+                    
+                })
                 .then(datajson => {
                     setFetchData(datajson)
                 })
         
-
+          
 
     };
 

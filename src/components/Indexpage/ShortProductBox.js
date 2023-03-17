@@ -9,7 +9,7 @@ const ShortProductBox = () => {
     const [pageCount, setPageCount] = useState(0);
     const [CurrentPage, setCurrentPage] = useState(0);
     useEffect(() => {
-        const url = `http://localhost:5000/api/product/low-qnt?page=${CurrentPage}`
+        const url = `https://alientbd-version-2.onrender.com/api/product/low-qnt?page=${CurrentPage}`
 
         fetch(url, {
         })

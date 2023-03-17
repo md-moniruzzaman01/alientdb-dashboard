@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
 
  const DeleteProduct = (id) => {
-    fetch(`http://localhost:5000/api/product/${id}`, {
+    fetch(`https://alientbd-version-2.onrender.com/api/product/${id}`, {
         method: 'DELETE',
         headers: {
             authorization: `Bearer ${localStorage.getItem('tmtoken')}`

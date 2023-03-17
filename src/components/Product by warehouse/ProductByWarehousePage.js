@@ -14,7 +14,7 @@ const ProductByWarehousePage = ({warehouseLocation}) => {
     const [searchInput, setSearchInput] = useState({})
 
     const {data, isLoading, refetch } = useQuery('product', () => 
-    fetch(`http://localhost:5000/api/warehouse/${warehouseLocation}?search=${searchInput}&page=&limit=${size}`)
+    fetch(`https://alientbd-version-2.onrender.com/api/warehouse/${warehouseLocation}?search=${searchInput}&page=&limit=${size}`)
     .then(res => res.json())
             .then(data => {
                 if (data?.success) {
@@ -35,46 +35,6 @@ const ProductByWarehousePage = ({warehouseLocation}) => {
         refetch()
     }, [currentPage, size,searchInput])
 
-    // const DeleteProduct = (id) => {
-    //     fetch(`http://localhost:5000/remove/${id}`, {
-    //         method: 'DELETE'
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             const confarm = window.confirm('Delete this item')
-    //             if (confarm) {
-    //                 if (data.deletedCount > 0) {
-    //                     toast('product delete successfull')
-    //                     refreshPage()
-    //                 } else {
-    //                     toast('product delete unsuccess')
-    //                 }
-    //             }
-
-    //         })
-    // }
-
-    
-    //  const container = currentContainer ?
-    //  <ProductList 
-    //  product={searchData} 
-    //  url={searchURL} 
-    //  DeleteProduct={DeleteProduct} 
-    //  size={size} 
-    //  setCurrentPage={setSearchCurrentPage}
-    //  pageCount={searchPageCount} setPageCount={setSearchPageCount}
-    // productCount={searchProductCount} setProductCount={setSearchProductCount}
-    //   />:
-    //    <ProductList 
-    //    product={product} 
-    //    url={url} 
-    //    warehouseLocation={warehouseLocation}
-    //    DeleteProduct={DeleteProduct}
-    //    size={size} 
-    //    setCurrentPage={setCurrentPage} 
-    //    pageCount={pageCount} setPageCount={setPageCount}
-    //    productCount={productCount} setProductCount={setProductCount}
-    //    />
 
 
     if (isLoading) {

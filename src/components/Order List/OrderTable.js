@@ -23,7 +23,7 @@ const OrderTable = ({orders}) => {
                         {
                             orders && orders.map((order, index) => <tr key={order._id}>
                                 <th>{order?.InvoiceHandle}</th>
-                                <td>12/11/2022</td>
+                                <td>{order?.Date}</td>
                                 <td>{order?.warehouseChoose}</td>
                                 <td>{order?.InChargePerson}</td>
                                 

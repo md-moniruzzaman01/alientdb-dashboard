@@ -8,7 +8,7 @@ const EmployeeDetails = () => {
     const [fetchData, setFetchData] = useState(null)
     let Alart;
     useEffect(() => {
-        fetch(`http://localhost:5000/api/employee/${id}`, {
+        fetch(`https://alientbd-version-2.onrender.com/api/employee/${id}`, {
         })
             .then(res => res.json())
             .then(data => {

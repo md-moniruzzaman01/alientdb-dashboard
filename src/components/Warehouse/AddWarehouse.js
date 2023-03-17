@@ -14,11 +14,11 @@ const AddWarehouse = () => {
         const warehouseLocation = data.warehouseLocation.trim().toUpperCase()
         const warehousecode = data.warehousecode.trim()
         const warehouseData = { warehousecode, warehouseLocation }
-        fetch('http://localhost:5000/api/warehouse', {
+        fetch('https://alientbd-version-2.onrender.com/api/warehouse', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // authorization: `Bearer ${localStorage.getItem('tmtoken')}`
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
             },
             body: JSON.stringify(warehouseData),
         })

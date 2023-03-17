@@ -46,7 +46,7 @@ const DashboardSide = () => {
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
                     {(admin || power.ProductAdd) && <Link to="/add-product"><li><a><MdRadioButtonUnchecked /> Add Product</a></li></Link>}
-                    <Link to="/product-list"><li><a><MdRadioButtonUnchecked />Product List</a></li></Link>
+                    {admin && <Link to="/product-list"><li><a><MdRadioButtonUnchecked />Product List</a></li></Link>}
                     {(admin || power.purches) && <Link to="/product-purches"><li><a><MdRadioButtonUnchecked /> Purchase</a></li></Link>}
                 </div>
             </div>
@@ -59,7 +59,7 @@ const DashboardSide = () => {
                 </div>
                 <div className="collapse-content  peer-checked:bg-gray-700 ">
                     <Link to="/place-order"><li><a><MdRadioButtonUnchecked /> Place Order</a></li></Link>
-                    {(admin || power?.Oderlist) && <Link to="/oder-list"><li><a><MdRadioButtonUnchecked /> Order List<a></a></a></li></Link>}
+                    {(admin || power?.orderlist) && <Link to="/oder-list"><li><a><MdRadioButtonUnchecked /> Order List<a></a></a></li></Link>}
                 </div>
             </div>
 

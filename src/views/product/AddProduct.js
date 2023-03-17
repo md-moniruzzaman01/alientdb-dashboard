@@ -11,7 +11,7 @@ const AddProduct = () => {
 
     const { register, formState: { errors }, handleSubmit} = useForm();
     const onSubmit = (data) => {
-        fetch('http://localhost:5000/api/product', {
+        fetch('https://alientbd-version-2.onrender.com/api/product', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

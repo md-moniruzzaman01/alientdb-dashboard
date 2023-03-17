@@ -6,7 +6,7 @@ const PurchesProductEdit = ({ id }) => {
     const InputStyle = "input input-bordered focus:outline-none focus:ring-1 focus:ring-blue-400 w-full  md:w-28 lg:w-32 xl:w-44  my-2 lg:my-0 rounded-none";
     const [ProductEdit, setProductEdit] = useState([{ id: uuidv4(), Product: '', discribtion: '', warehouse: [] },]);
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`, {}).then(res => res.json()).then(data => {
+        fetch(`https://alientbd-version-2.onrender.com/product/${id}`, {}).then(res => res.json()).then(data => {
             setProductEdit(data)
             setWarehouse(data[0]?.warehouse);
 
@@ -19,10 +19,11 @@ const PurchesProductEdit = ({ id }) => {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/purches-update', {
+        fetch('https://alientbd-version-2.onrender.com/purches-update', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('tmtoken')}`
             },
             body: JSON.stringify(ProductEdit),
         })
@@ -37,10 +38,10 @@ const PurchesProductEdit = ({ id }) => {
     };
     
     // useEffect(() => {
-    //     fetch("http://localhost:5000/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
+    //     fetch("https://alientbd-version-2.onrender.com/warehouse", {}).then(res => res.json()).then(data => setWarehouse(data));
 
     // }, [])
-    // http://localhost:5000/
+    // https://alientbd-version-2.onrender.com/
     const WarehouseList = warehouse && warehouse.map((wh, i) => <option key={i}>{wh.houseName}</option>);
     return (
         <form onSubmit={handleSubmit} className='w-full max-w-6xl mx-auto'>

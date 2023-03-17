@@ -14,7 +14,7 @@ const OrderListPage = () => {
     const [searchInput, setSearchInput] = useState({})
 
     const { data, isLoading, refetch } = useQuery('order', () =>
-        fetch(`http://localhost:5000/api/order?search=${searchInput}&page=${currentPage}&size=${size}`,{
+        fetch(`https://alientbd-version-2.onrender.com/api/order?search=${searchInput}&page=${currentPage}&size=${size}`,{
                     method: 'GET',
                     headers: {
                         authorization:`Bearer ${localStorage.getItem('tmtoken')}`
@@ -47,7 +47,7 @@ const OrderListPage = () => {
         <div>
             <OrderPage setSize={setSize} pageName="Order list" setSearchInput={setSearchInput} setCurrentPage={setCurrentPage} />
             <OrderList
-             orders={data.order}
+             orders={data?.order}
                 size={size}
                 pageCount={pageCount}
                 productCount={productCount}

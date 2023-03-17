@@ -8,7 +8,7 @@ import reloadPage from '../utils/functions/Reload';
 const WarehouseTable = () => {
     const [warehouseList, setWarehouseList] = useState([])
     useEffect(() => {
-        fetch("http://localhost:5000/api/warehouse", {
+        fetch("https://alientbd-version-2.onrender.com/api/warehouse", {
         })
             .then(res => res.json())
             .then(data => {

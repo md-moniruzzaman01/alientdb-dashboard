@@ -9,21 +9,21 @@ import auth from '../../../firebase.init';
 import LoadingScreen2 from '../LoadingScreen2';
 import Reload from '../../utils/functions/Reload';
 const MainNavBar = () => {
-    const {  dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products);
+    const { dashboardSideBarSize, setDashboardSideBarSize } = useContext(Products);
     const [user] = useAuthState(auth);
     const [signOut, loading, error] = useSignOut(auth);
     const navigate = useNavigate()
     const [productCount, setProductCount] = useState(0)
-    const url = "http://localhost:5000/api/utils/"
+    const url = "https://alientbd-version-2.onrender.com/api/utils/"
 
-   
-    const LogOut = () => {
-        window.localStorage.removeItem('token');
-        toast('logout from system');
-        signOut()
+
+    const LogOut = async () => {
+        await window.localStorage.removeItem('token');
+        await signOut()
         Reload()
+        toast('logout from system');
     }
-    
+
     const handleSettingBtn = (id) => navigate(`/setting`)
     useEffect(() => {
         fetch(url, {
@@ -33,14 +33,14 @@ const MainNavBar = () => {
                 if (data.success) {
                     const count = data.count;
                     setProductCount(count)
-                }else{
+                } else {
                     toast(data.data)
                 }
-               
+
             })
     }, [])
     if (loading) {
-        return <LoadingScreen2/>
+        return <LoadingScreen2 />
     }
     return (
         <div>

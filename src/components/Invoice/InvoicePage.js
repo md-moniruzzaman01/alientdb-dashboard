@@ -13,7 +13,7 @@ const InvoicePage = () => {
     const [fetchData, setFetchData] = useState(null)
     let Alart;
     useEffect(() => {
-        fetch(`http://localhost:5000/api/order/${id}`, {
+        fetch(`https://alientbd-version-2.onrender.com/api/order/${id}`, {
             method: 'GET',
                     headers: {
                         authorization:`Bearer ${localStorage.getItem('tmtoken')}`

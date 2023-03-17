@@ -14,7 +14,7 @@ const AddProductCsvFile = () => {
         body: JSON.stringify({ data: csvfile })
       };
       if (csvfile) {
-        fetch('http://localhost:5000/api/upload', requestOptions)
+        fetch('https://alientbd-version-2.onrender.com/api/upload', requestOptions)
           .then(response => response.json())
           .then(data => {
             e.target.reset();
