@@ -50,11 +50,9 @@ const PlaceOrderPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('warehouse',ChooseWarehouse);
         const InChargePerson = e.target.InChargePerson.value;
         const customerName = user?.displayName
         const orderDetails = { InvoiceHandle:InvoiceNumber, warehouseChoose: ChooseWarehouse, InChargePerson, customerName, product: inputFields, Date: today }
-        console.log(orderDetails);
         fetch('https://alientbd-version-2.onrender.com/api/order', {
             method: 'POST',
             headers: {
@@ -65,27 +63,21 @@ const PlaceOrderPage = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
-                // if(data.success){
-                //     navigate(`/invoice/${fetchData?.data?.insertedId}`)
-                //     // setInputFields([{ id: uuidv4(), Product: '', quntity: 0, _id: '' },])
-                // }
-                // setFetchData(data)
+                setFetchData(data)
             })
 
     };
 
-    // if (fetchData?.success) {
-    //     Alart = <Notification
-    //       status='open'
-    //       veriant='success'
-    //       IsReload = {false}
-    //       title="success"
-    //       message={fetchData?.message}
-    //     />
-    //     navigate(`/invoice/${fetchData?.data?.insertedId}`)
-    //   } else 
-      if (fetchData?.success === false) {
+    if (fetchData?.success) {
+        Alart = <Notification
+          status='open'
+          veriant='success'
+          IsReload = {false}
+          title="success"
+          message={fetchData?.message}
+        />
+        navigate(`/invoice/${fetchData?.data?.insertedId}`)
+      } else if (fetchData?.success === false) {
         Alart = <Notification
           status='open'
           veriant='false'

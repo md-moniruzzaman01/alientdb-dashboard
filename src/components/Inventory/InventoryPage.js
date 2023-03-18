@@ -18,7 +18,6 @@ const InventoryPage = () => {
         fetch(`https://alientbd-version-2.onrender.com/api/product/inventory?search=${searchInput}&page=${currentPage}&limit=${size}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data?.success) {
                     const product = data.data;
                     const count = data.count

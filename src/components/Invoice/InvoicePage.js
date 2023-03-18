@@ -21,14 +21,13 @@ const InvoicePage = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('invoice data',data)
                 if(data?.success){
                     setInvoice(data.data)
                 }else{
                     setFetchData(data)
                 }
             })
-            console.log('invoice')
+           
     }, [])
     if (fetchData?.success === false) {
         Alart = <Notification

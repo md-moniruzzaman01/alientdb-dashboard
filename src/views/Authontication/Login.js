@@ -31,9 +31,7 @@ const Login = () => {
         signInWithEmailAndPassword(data.Email,data.password)
     };
 
-if(user){
-    console.log(user);
-}
+
 if( loading){
 return <LoadingScreen2/>
 }
